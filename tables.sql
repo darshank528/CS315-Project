@@ -160,7 +160,7 @@ CREATE Table Staff (
 CREATE Table Staff_Contact(
 	Contact bigint PRIMARY KEY,
 	ID int,
-	foreign key(ID) references Staff
+	foreign key(ID) references Staff on delete set null
 );
 
 CREATE Table Tracks (
