@@ -1,0 +1,12 @@
+insert into dishes values (1,'indian','starter','100','samosa');
+insert into dishes values (2,'indian','starter','90','bhaji');
+insert into dishes values (3,'chinese','starter','120','spring roll');
+insert into dishes values (4,'chinese','starter','120','momos');
+insert into dishes values (5,'chinese','starter','110','manchurian');
+insert into dishes values (6,'indian','main','250','paneer butter masala');
+insert into dishes values (7,'chinese','main','250','hakka noodles');
+insert into dishes values (8,'indian','starter','170','paneer chilli');
+insert into dishes values (9,'indian','main','420','tandoori chicken');
+insert into dishes values (10,'indian','dessert','200','jalebi');
+insert into dishes values (11,'indian','dessert','200','gulab jamun');
+insert into dishes values (12,'indian','dessert','200','kheer');
