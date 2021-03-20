@@ -110,50 +110,76 @@ with open("staff.sql",'w') as file:
 		else:
 			mn = np.random.choice(m_name)
 
-		s = "'%s','%s','%s','%s','%s','%s'" % (str(i+1),fn,mn,sn, sex, str(age))
+		exp = str(int(np.random.uniform(0,age-18,1)))
+		sal = 0
+		occ = 0
+		tcdm = 1
+		role = "unspecified"
+		if(i<num_owners):
+			role = "owner"
+		elif(num_owners<=i and i<num_owners+num_managers):
+			role = "manager"
+			sal = np.random.choice([20000, 40000, 50000, 100000, 150000, 200000])
+		elif(num_owners+num_managers<=i and i<num_owners+num_managers+num_receptionists):
+			role = "receptionist"
+			sal = np.random.choice([10000, 20000, 30000, 400000, 50000])
+		elif(num_owners+num_managers+num_receptionists<=i and i<num_owners+num_managers+num_receptionists+num_waiters):
+			role = "waiter"
+			sal = np.random.choice([5000,7000,10000,15000,20000,30000])
+		elif(num_owners+num_managers+num_receptionists+num_waiters<=i and i<num_owners+num_managers+num_receptionists+num_waiters+num_chefs):
+			role = "chef"
+			tcdm = int(np.random.normal(5000, 1000, 1))
+			sal = np.random.choice([20000, 40000, 50000, 100000, 150000, 200000])
+			if sal<100000:
+				exp = str(int(np.random.uniform(1,5,1)))
+			else:
+				exp = str(int(np.random.uniform(5,10,1)))
+
+
+		s = "'%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s'" % (str(i+1),fn,mn,sn, sex, str(age),str(sal),str(exp),str(occ),str(tcdm),role)
 		sql = sql1+ "staff" + sql2 + s + sql3
 		file.write(sql)
 
-cum = num_owners
-with open("owners.sql",'w') as file:
-	for i in range(cum):
-		sql = sql1 + "owners" + sql2 + str(i+1) + sql3
-		file.write(sql)
+# cum = num_owners
+# with open("owners.sql",'w') as file:
+# 	for i in range(cum):
+# 		sql = sql1 + "owners" + sql2 + str(i+1) + sql3
+# 		file.write(sql)
 
-with open("receptionist.sql",'w') as file:
-	for i in range(cum,cum+num_receptionists):
-		sal = np.random.choice([10000, 20000, 30000, 400000, 50000])
-		sql = sql1 + "receptionist" + sql2 + str(i+1) + ',' + str(sal) + sql3
-		file.write(sql)
+# with open("receptionist.sql",'w') as file:
+# 	for i in range(cum,cum+num_receptionists):
+# 		sal = np.random.choice([10000, 20000, 30000, 400000, 50000])
+# 		sql = sql1 + "receptionist" + sql2 + str(i+1) + ',' + str(sal) + sql3
+# 		file.write(sql)
 
-cum = cum+num_receptionists
+# cum = cum+num_receptionists
 
-#FOR Chef
-with open("chef.sql",'w') as file:
-	for i in range(cum, cum+num_chefs):
-		sal = np.random.choice([20000, 40000, 50000, 100000, 150000, 200000])
-		if sal<100000:
-			exp = str(int(np.random.uniform(1,5,1)))
-		else:
-			exp = str(int(np.random.uniform(5,10,1)))
-		exp = '\'' + exp + '\''
-		sal = '\'' + str(sal) + '\''
-		tcdm = int(np.random.normal(5000, 1000, 1))
-		#tcdm = np.where(tcdm>0 && tcdm<10000, tcdm, 5000)
-		tcdm = '\'' + str(tcdm) + '\''
-		sql = sql1 + "chef" + sql2 + str(i+1) + ',' + str(sal) +',' + exp + ',' + tcdm +sql3
-		file.write(sql)
+# #FOR Chef
+# with open("chef.sql",'w') as file:
+# 	for i in range(cum, cum+num_chefs):
+# 		sal = np.random.choice([20000, 40000, 50000, 100000, 150000, 200000])
+# 		if sal<100000:
+# 			exp = str(int(np.random.uniform(1,5,1)))
+# 		else:
+# 			exp = str(int(np.random.uniform(5,10,1)))
+# 		exp = '\'' + exp + '\''
+# 		sal = '\'' + str(sal) + '\''
+# 		tcdm = int(np.random.normal(5000, 1000, 1))
+# 		#tcdm = np.where(tcdm>0 && tcdm<10000, tcdm, 5000)
+# 		tcdm = '\'' + str(tcdm) + '\''
+# 		sql = sql1 + "chef" + sql2 + str(i+1) + ',' + str(sal) +',' + exp + ',' + tcdm +sql3
+# 		file.write(sql)
 
-cum = cum+num_chefs
+# cum = cum+num_chefs
 
-with open("waiter.sql",'w') as file:
-	for i in range(cum,cum + num_waiters):
-		sal = np.random.choice([5000,7000,10000,15000,20000,30000])
-		occupied = 0
-		sql = sql1 + "waiter" + sql2 + str(i+1) + ',' + str(sal) + sql3
-		file.write(sql)
+# with open("waiter.sql",'w') as file:
+# 	for i in range(cum,cum + num_waiters):
+# 		sal = np.random.choice([5000,7000,10000,15000,20000,30000])
+# 		occupied = 0
+# 		sql = sql1 + "waiter" + sql2 + str(i+1) + ',' + str(sal) + sql3
+# 		file.write(sql)
 
-cum = cum + num_waiters
+# cum = cum + num_waiters
 
 with open("staff_contact.sql",'w') as file:
 	for i in range(num_staff):
@@ -165,6 +191,7 @@ with open("staff_contact.sql",'w') as file:
 		contact = '{}{}{}'.format(first, second, last)
 		contact = '\'' + contact + '\''
 		sql = sql1 + "staff_contact" + sql2 + contact + ',' + str(i+1)
+		file.write(sql)
 
 
 
