@@ -1,0 +1,12 @@
+samosa,indian,starter,100
+bhaji,indian,starter,90
+spring roll,chinese,starter,120
+momos,chinese,starter,120
+manchurian,chinese,starter,110
+paneer butter masala,indian,main,250
+hakka noodles,chinese,main,250
+paneer chilli,indian,starter,170
+tandoori chicken,indian,main,420
+jalebi,indian,dessert,200
+gulab jamun,indian,dessert,200
+kheer,indian,dessert,200

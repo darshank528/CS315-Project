@@ -8,7 +8,7 @@ DROP TABLE IF EXISTS Dishes;
 DROP TABLE IF EXISTS Ingredients;
 DROP TABLE IF EXISTS Manager;
 DROP TABLE IF EXISTS Non_waiting_customer;
-DROP TABLE IF EXISTS Order;
+DROP TABLE IF EXISTS Orders;
 DROP TABLE IF EXISTS Owners;
 DROP TABLE IF EXISTS Pay_By;
 DROP TABLE IF EXISTS Payment;
@@ -35,6 +35,19 @@ CREATE Table Chef (
 	TCDM int CHECK(TCDM>=1)
 );
 
+CREATE Table Dishes (
+	dish_ID int PRIMARY KEY,
+	cuisine varchar(50),
+	Category varchar(50),
+	cost int,
+	Name varchar(50)
+);
+
+CREATE Table Ingredients (
+	Ingredient_ID int PRIMARY KEY,
+	Quality int
+);
+
 CREATE Table Contains (
 	Ingredient_ID int CHECK(Ingredient_ID>=1),
 	dish_ID int CHECK(dish_ID>=1),
@@ -58,9 +71,9 @@ CREATE Table Cooks (
 -- );
 CREATE Table Customers (
 	ID int PRIMARY KEY CHECK(ID>=1),
-	name.FN varchar(100),
-	name.MN varchar(100),
-	name.LN varchar(100),
+	FN varchar(100),
+	MN varchar(100),
+	SN varchar(100),
 	gender varchar(20),
 	Age int,
 	Order_Frequency int
@@ -72,18 +85,15 @@ CREATE Table Customers_Contact(
 	foreign key(ID) references Customers on delete set null
 );
 
-CREATE Table Dishes (
-	dish_ID int PRIMARY KEY,
-	cuisine varchar(50),
-	Category varchar(50),
-	cost int,
-	Name varchar(50)
+
+
+CREATE Table Payment (
+	Bill_ID int PRIMARY KEY,
+	Work_Date Date,
+	Discount_offered varchar(4)
+
 );
 
-CREATE Table Ingredients (
-	Ingredient_ID int PRIMARY KEY,
-	Quality int
-);
 
 CREATE Table Manager (
 	ID int PRIMARY KEY,
@@ -96,7 +106,7 @@ CREATE Table Non_waiting_customer (
 	Payment_Method varchar(20)
 );
 
-CREATE Table Order (
+CREATE Table Orders (
 	ID int,
 	Dish_ID int,
 	Work_Date Date,
@@ -118,21 +128,21 @@ CREATE Table Pay_By (
 	Invoice_ID int,
 	Invoice_description varchar(50),
 	Status varchar(50),
-	PRIMARY KEY (ID, Bill_ID) -- will only Bill_ID work ?
+	PRIMARY KEY (ID, Bill_ID), -- will only Bill_ID work ?
 	foreign key (ID) references Non_waiting_customer on delete set null,
 	foreign key (Bill_ID) references Payment on delete set null
 );
 
-CREATE Table Payment (
-	Bill_ID int PRIMARY KEY,
-	Work_Date Date,
-	Discount_offered varchar(4),
-
-);
 
 CREATE Table Receptionist (
 	ID int PRIMARY KEY,
 	Salary bigint
+);
+
+CREATE Table Sit_Table (
+	Table_ID int PRIMARY KEY,
+	Size int,
+	Status varchar(20)
 );
 
 CREATE Table Sitting (
@@ -142,17 +152,12 @@ CREATE Table Sitting (
 	foreign key (Table_ID) references Sit_Table on delete set null
 );
 
-CREATE Table Sit_Table (
-	Table_ID int PRIMARY KEY,
-	Size int,
-	Status varchar(20)
-);
 
 CREATE Table Staff (
 	ID int PRIMARY KEY CHECK(ID>=1),
-	name.FN varchar(100),
-	name.MN varchar(100),
-	name.LN varchar(100),
+	FN varchar(100),
+	MN varchar(100),
+	SN varchar(100),
 	gender varchar(20),
 	Age int CHECK(Age>=1)
 );
