@@ -38,6 +38,12 @@ CREATE Table Staff (
 	Role varchar(20)
 );
 
+CREATE Table Staff_Contact(
+	Contact bigint PRIMARY KEY CHECK(Contact>=1000000000 and Contact<=9999999999),
+	ID int,
+	foreign key(ID) references Staff on delete set null
+);
+
 -- CREATE Table Chef (
 -- 	ID int PRIMARY KEY CHECK(ID>=1),
 -- 	Salary bigint CHECK(Salary>=1),
@@ -84,7 +90,7 @@ CREATE Table Orders (
 	Day varchar(9),
 	Quantity_Ordered int,
 	Review int CHECK(Review>=1 and Review<=5),
-	Cost int CHECK(Cost>=0)
+	Cost int CHECK(Cost>=0),
 	PRIMARY KEY (Order_ID, Dish_ID),
 	foreign key (ID) references Non_waiting_customer on delete set null,
 	foreign key (Dish_ID) references Dishes on delete set null
@@ -148,12 +154,6 @@ CREATE Table Sitting (
 	foreign key (Table_ID) references Sit_Table on delete set null
 );
 
-CREATE Table Staff_Contact(
-	Contact bigint PRIMARY KEY CHECK(Contact>=1000000000 and Contact<=9999999999),
-	ID int,
-	foreign key(ID) references Staff on delete set null
-);
-
 CREATE Table Tracks (
 	ID int,
 	Work_Date Date,
@@ -176,3 +176,6 @@ CREATE Table Waiting_customer (
 	ID int PRIMARY KEY,
 	Waiting_Number int CHECK(Waiting_Number>=0)
 );
+
+
+CREATE INDEX Order_Serial_Number on Orders(Order_ID, Dish_ID);

@@ -12,12 +12,12 @@ BEGIN
 	END IF;
 END$$
 
-create trigger Add_Ingredient before INSERT on Ingredients for each row 
-BEGIN
-	IF(Ingredients.Quality IS NULL) THEN
-		set Ingredients.Quality = 5;
-	END IF;
-END$$
+-- create trigger Add_Ingredient before INSERT on Ingredients for each row 
+-- BEGIN
+-- 	IF(Ingredients.Quality IS NULL) THEN
+-- 		set Ingredients.Quality = 5;
+-- 	END IF;
+-- END$$
 
 create trigger Add_Orders before INSERT on Orders for each row 
 BEGIN
