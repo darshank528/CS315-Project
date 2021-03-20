@@ -1,20 +1,20 @@
-1 salt
-2 oil
-3 sugar
-4 flour
-5 ghee
-6 chole
-7 chicken
-8 rice
-9 coriander
-10 masala
-11 lemon
-12 milk
-13 dal
-14 paneer
-15 capsicum
-16 carrot
-17 onion
-18 garlic
-19 chilli
-20 mushroom
+1,salt
+2,oil
+3,sugar
+4,flour
+5,ghee
+6,chole
+7,chicken
+8,rice
+9,coriander
+10,masala
+11,lemon
+12,milk
+13,dal
+14,paneer
+15,capsicum
+16,carrot
+17,onion
+18,garlic
+19,chilli
+20,mushroom
