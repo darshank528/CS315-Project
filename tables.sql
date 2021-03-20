@@ -1,32 +1,41 @@
-DROP TABLE IF EXISTS Accounts;
--- DROP TABLE IF EXISTS Chef;
-DROP TABLE IF EXISTS Contains;
-DROP TABLE IF EXISTS Cooks;
-DROP TABLE IF EXISTS Customers;
-DROP TABLE IF EXISTS Customers_Contact;
-DROP TABLE IF EXISTS Delivers;
-DROP TABLE IF EXISTS Dishes;
-DROP TABLE IF EXISTS Ingredients;
--- DROP TABLE IF EXISTS Manager;
-DROP TABLE IF EXISTS Non_waiting_customer;
-DROP TABLE IF EXISTS Orders;
--- DROP TABLE IF EXISTS Owners;
-DROP TABLE IF EXISTS Pay_By;
-DROP TABLE IF EXISTS Payment;
--- DROP TABLE IF EXISTS Receptionist;
-DROP TABLE IF EXISTS Sitting;
-DROP TABLE IF EXISTS Sit_Table;
-DROP TABLE IF EXISTS Staff;
-DROP TABLE IF EXISTS Staff_Contact;
-DROP TABLE IF EXISTS Tracks;
--- DROP TABLE IF EXISTS Waiter;
-DROP TABLE IF EXISTS Waiting_customer;
+DROP TABLE IF EXISTS Accounts CASCADE;
+DROP TABLE IF EXISTS Contains CASCADE;
+DROP TABLE IF EXISTS Cooks CASCADE;
+DROP TABLE IF EXISTS Customers CASCADE;
+DROP TABLE IF EXISTS Customers_Contact CASCADE;
+DROP TABLE IF EXISTS Delivers CASCADE;
+DROP TABLE IF EXISTS Dishes CASCADE;
+DROP TABLE IF EXISTS Ingredients CASCADE;
+DROP TABLE IF EXISTS Non_waiting_customer CASCADE;
+DROP TABLE IF EXISTS Orders CASCADE;
+DROP TABLE IF EXISTS Pay_By CASCADE;
+DROP TABLE IF EXISTS Payment CASCADE;
+DROP TABLE IF EXISTS Sitting CASCADE;
+DROP TABLE IF EXISTS Sit_Table CASCADE;
+DROP TABLE IF EXISTS Staff CASCADE;
+DROP TABLE IF EXISTS Staff_Contact CASCADE;
+DROP TABLE IF EXISTS Tracks CASCADE;
+DROP TABLE IF EXISTS Waiting_customer CASCADE;
 
 CREATE Table Accounts(
 	Work_Date Date PRIMARY KEY,
 	Restaurant_profit int,
 	expenditure int CHECK(expenditure>=0),
 	Total_food_wasted real CHECK(Total_food_wasted>=0)
+);
+
+CREATE Table Staff (
+	ID int PRIMARY KEY CHECK(ID>=1),
+	Name_FN varchar(100),
+	Name_MN varchar(100),
+	Name_LN varchar(100),
+	Gender varchar(20),
+	Age int CHECK(Age>=1),
+	Salary bigint CHECK(Salary>=0),
+	Experience int CHECK(Experience>=0),
+	Occupied int CHECK(Occupied<=1 and Occupied>=0),
+	TCDM int CHECK(TCDM>=1),
+	Role varchar(20)
 );
 
 -- CREATE Table Chef (
@@ -60,49 +69,6 @@ CREATE Table Contains (
 	foreign key (Ingredient_ID) references Ingredients on delete set null
 );
 
-CREATE Table Cooks (
-	ID int,
-	Order_ID int,
-	Dish_ID int,
-	PRIMARY KEY (ID, Dish_ID, Order_ID),
-	foreign key (ID) references Staff on delete set null,
-	foreign key (Order_ID, Dish_ID) references Orders on delete set null
-);
-
--- CREATE Table Customers (
-	-- ID int PRIMARY KEY,
-	-- Order_Frequency int
--- );
-CREATE Table Customers (
-	ID int PRIMARY KEY CHECK(ID>=1),
-	Name_FN varchar(100),
-	Name_MN varchar(100),
-	Name_LN varchar(100),
-	Gender varchar(20),
-	Age int CHECK(Age>=1),
-	Order_Frequency int CHECK(Order_Frequency>=0)
-);
-
-CREATE Table Customers_Contact(
-	Contact bigint PRIMARY KEY CHECK(Contact>=1000000000 and Contact<=9999999999),
-	ID int,
-	foreign key(ID) references Customers on delete set null
-);
-
-
-
-CREATE Table Payment (
-	Bill_ID int PRIMARY KEY,
-	Work_Date Date,
-	Discount_offered varchar(4)
-);
-
-
--- CREATE Table Manager (
--- 	ID int PRIMARY KEY,
--- 	Salary bigint not null CHECK(Salary>=0)
--- );
-
 CREATE Table Non_waiting_customer (
 	ID int PRIMARY KEY,
 	Amount_Spent int CHECK(Amount_Spent>=0),
@@ -124,9 +90,37 @@ CREATE Table Orders (
 	foreign key (Dish_ID) references Dishes on delete set null
 );
 
--- CREATE Table Owners (
--- 	ID int PRIMARY KEY
--- );
+CREATE Table Cooks (
+	ID int,
+	Order_ID int,
+	Dish_ID int,
+	Completed int CHECK(Completed>=0 and Completed<=1),
+	PRIMARY KEY (ID, Dish_ID, Order_ID),
+	foreign key (ID) references Staff on delete set null,
+	foreign key (Order_ID, Dish_ID) references Orders on delete set null
+);
+
+CREATE Table Customers (
+	ID int PRIMARY KEY CHECK(ID>=1),
+	Name_FN varchar(100),
+	Name_MN varchar(100),
+	Name_LN varchar(100),
+	Gender varchar(20),
+	Age int CHECK(Age>=1),
+	Order_Frequency int CHECK(Order_Frequency>=0)
+);
+
+CREATE Table Customers_Contact(
+	Contact bigint PRIMARY KEY CHECK(Contact>=1000000000 and Contact<=9999999999),
+	ID int,
+	foreign key(ID) references Customers on delete set null
+);
+
+CREATE Table Payment (
+	Bill_ID int PRIMARY KEY,
+	Work_Date Date,
+	Discount_offered int CHECK(Discount_offered<=100 and Discount_offered>=0)
+);
 
 CREATE Table Pay_By (
 	ID int,
@@ -140,12 +134,6 @@ CREATE Table Pay_By (
 	foreign key (Bill_ID) references Payment on delete set null
 );
 
-
--- CREATE Table Receptionist (
--- 	ID int PRIMARY KEY,
--- 	Salary bigint CHECK(Salary>=0)
--- );
-
 CREATE Table Sit_Table (
 	Table_ID int PRIMARY KEY,
 	Size int,
@@ -158,21 +146,6 @@ CREATE Table Sitting (
 	Table_ID int CHECK(Table_ID>=0),
 	foreign key (ID) references Non_waiting_customer on delete set null,
 	foreign key (Table_ID) references Sit_Table on delete set null
-);
-
-
-CREATE Table Staff (
-	ID int PRIMARY KEY CHECK(ID>=1),
-	Name_FN varchar(100),
-	Name_MN varchar(100),
-	Name_LN varchar(100),
-	Gender varchar(20),
-	Age int CHECK(Age>=1),
-	Salary bigint CHECK(Salary>=0),
-	Experience int CHECK(Experience>=0),
-	Occupied bit CHECK(Occupied<=1 and Occupied>=0),
-	TCDM int CHECK(TCDM>=1),
-	Role varchar(20)
 );
 
 CREATE Table Staff_Contact(
@@ -189,16 +162,11 @@ CREATE Table Tracks (
 	foreign key (Work_Date) references Accounts on delete set null
 );
 
--- CREATE Table Waiter (
--- 	ID int PRIMARY KEY,
--- 	Salary bigint CHECK(Salary>=0),
--- 	Occupied bit
--- );
-
 CREATE Table Delivers (
 	ID int,
 	Order_ID int,
 	Dish_ID int,
+	Completed int CHECK(Completed>=0 and Completed<=1),
 	PRIMARY KEY (ID, Dish_ID, Order_ID),
 	foreign key (ID) references Staff on delete set null,
 	foreign key (Order_ID, Dish_ID) references Orders on delete set null
@@ -206,5 +174,5 @@ CREATE Table Delivers (
 
 CREATE Table Waiting_customer (
 	ID int PRIMARY KEY,
-	Waiting_customer int CHECK(Waiting_Number>=0)
+	Waiting_Number int CHECK(Waiting_Number>=0)
 );

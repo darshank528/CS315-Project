@@ -5,10 +5,10 @@ BEGIN
 	END IF;
 END$$
 
-create trigger Add_Chef before INSERT on Chef for each row 
+create trigger Add_Chef before INSERT on Staff for each row 
 BEGIN
-	IF(Chef.TCDM IS NULL) THEN
-		set Chef.TCDM = 0;
+	IF(Staff.TCDM IS NULL) THEN
+		set Staff.TCDM = 0;
 	END IF;
 END$$
 
@@ -77,14 +77,14 @@ BEGIN
     END IF;
 END$$
 
-create trigger after_order_insert after INSERT on Order 
+create trigger after_order_insert after INSERT on Orders 
 Referencing Old As "OLD" New As "NEW" for each row
 BEGIN
     IF NEW.Day IS NULL THEN
-        INSERT INTO Order(ID, Dish_id, Work_Date, Work_Time, Day, Quantity_Ordered, Review, Cost)
+        INSERT INTO Orders(ID, Dish_id, Work_Date, Work_Time, Day, Quantity_Ordered, Review, Cost)
         VALUES(NEW.ID, NEW.Dish_id, NEW.Work_Date, NEW.Work_Time, "please enter day of order", NEW.Quantity_Ordered, NEW.Review, NEW.Cost);
     ELSE
-    	INSERT INTO Order(ID, Dish_id, Work_Date, Work_Time, Day, Quantity_Ordered, Review, Cost)
+    	INSERT INTO Orders(ID, Dish_id, Work_Date, Work_Time, Day, Quantity_Ordered, Review, Cost)
         VALUES(NEW.ID, NEW.Dish_id, NEW.Work_Date, NEW.Work_Time, NEW.Day, NEW.Quantity_Ordered, NEW.Review, NEW.Cost);
     END IF;
 END$$

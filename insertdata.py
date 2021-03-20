@@ -34,12 +34,12 @@ with open("accounts.sql",'w') as file:
 
 
 #FOR Ingredients
-with open("ingedients.sql",'w') as file:
+with open("ingredients.sql",'w') as file:
 	with open("ingredients.txt",'r') as ifile:
 		for line in ifile:
 			l2 = line[:-1]
 			l = l2.split(',')
-			sql = sql1 + "ingedients" + sql2 + l[0] + ',' + '\'' +l[1] + '\'' + sql3
+			sql = sql1 + "ingredients" + sql2 + l[0] + ',' + '\'' +l[1] + '\'' + sql3
 			file.write(sql)
 
 
