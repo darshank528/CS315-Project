@@ -1,12 +1,12 @@
-function myFunction() {
-  document.getElementById("myDropdown").classList.toggle("show");
+function myFunction(i) {
+  document.getElementsByClassName("myDropdown")[i].classList.toggle("show");
 }
 
-function filterFunction() {
+function filterFunction(i) {
   var input, filter, ul, li, a, i;
-  input = document.getElementById("myInput");
+  input = document.getElementsByClassName("myInput")[i];
   filter = input.value.toUpperCase();
-  div = document.getElementById("myDropdown");
+  div = document.getElementsByClassName("myDropdown")[i];
   a = div.getElementsByTagName("a");
   for (i = 0; i < a.length; i++) {
     txtValue = a[i].textContent || a[i].innerText;
