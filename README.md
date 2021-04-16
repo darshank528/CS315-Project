@@ -8,5 +8,7 @@ Deliverable 3 - https://docs.google.com/document/d/1MKbRuC2MHaueAgwyGKugyBJeGGgh
 
 Deliverable 4 - https://docs.google.com/document/d/1VO4FULHOvVtQ_lfVXpOZRXIs28vhP0TCUWWLy2kc-eM/edit
 
+Deliverable 5 - https://docs.google.com/document/d/16foWFUPZVHgFTPL4QqHE_JMgR1gtRJhItS5hC-RvWN0/edit
+
 
 To generate the dataset, Run: python3 insertdata.py (should be in the same folder as the .txt files)
