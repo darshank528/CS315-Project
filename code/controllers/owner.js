@@ -1,11 +1,11 @@
-var User = require('./../models/login');
+var Owner = require('./../models/owner');
 
 module.exports = {
-  createUser: function(req, res) {
-    User.create(req.body)
+  createOwner: function(req, res) {
+    Owner.create(req.body)
       .then(function(result) {
         return res.status(200).json({
-          message: 'success! created account for new user',
+          message: 'success! created account for new Owner',
           id: result.id
         });
       })
@@ -17,5 +17,17 @@ module.exports = {
   },
   loadhome: function(req,res){
   	res.render('./includes/home',{'pageTitle':"Home"});
+  }
+  ShowEmployeeInformation: function(req,res){
+
+  }
+  Analytics: function(req,res){
+
+  }
+  OrderHistory: function(req,res){
+
+  }
+  UpdateInventory: function(req,res){
+    
   }
 }

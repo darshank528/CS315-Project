@@ -2,11 +2,14 @@
 const path = require('path');
 const express = require('express');
 
-const userCon = require('../controllers/owner');
+const ownerCon = require('../controllers/owner');
 
 const router = express.Router();
 
-router.get('/',userCon.loadhome);
-router.get('/register',userCon.createUser);
+router.get('/',ownerCon.loadhome);
+router.get('/register',ownerCon.createOwner);
+router.get('/',ownerCon.Analytics);
+router.get('/',ownerCon.OrderHistory);
+router.get('/',ownerCon.UpdateInventory);
 
 module.exports = router;
