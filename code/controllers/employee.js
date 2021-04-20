@@ -1,11 +1,11 @@
-var User = require('./../models/login');
+var Employee = require('./../models/employee');
 
 module.exports = {
-  createUser: function(req, res) {
-    User.create(req.body)
+  createEmployee: function(req, res) {
+    Employee.create(req.body)
       .then(function(result) {
         return res.status(200).json({
-          message: 'success! created account for new user',
+          message: 'success! created account for new Employee',
           id: result.id
         });
       })
@@ -18,16 +18,10 @@ module.exports = {
   loadhome: function(req,res){
   	res.render('./includes/home',{'pageTitle':"Home"});
   },
-
-  PlaceOrder: function(req, res){
-
-  },
-
-  GetProfile: function(req, res){
+  GetProfile: function(req,res){
 
   },
-
-  OrderHistory: function(req, res){
+  CookOrServeDish: function(req,res){
 
   }
 }

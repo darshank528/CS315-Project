@@ -17,16 +17,28 @@ module.exports = {
   },
   loadhome: function(req,res){
   	res.render('./includes/home',{'pageTitle':"Home"});
-  }
+  },
+
   ShowEmployeeInformation: function(req,res){
 
-  }
+  },
+
   Analytics: function(req,res){
 
-  }
+  },
+
   OrderHistory: function(req,res){
 
-  }
+  },
+
+  AllotOrderToChef: function(req,res){
+
+  },
+
+  AllotOrderToWaiter: function(req,res){
+
+  },
+
   UpdateInventory: function(req,res){
     
   }

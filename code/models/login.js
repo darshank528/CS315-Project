@@ -14,8 +14,8 @@ module.exports = {
 	        })
 	        .then(function(hash) {
 	          return db.query(
-	            'INSERT INTO users (name, email, password) VALUES ($1, $2, $3) returning id',
-	            [data.name, data.email, hash]);
+	            'INSERT INTO Customers (ID, Name_FN, Name_MN, Name_LN, Gender, Age, Order_Frequency) VALUES ($1, $2, $3, $4, $5, $6, $7) returning id',
+	            [data.name, data.Name_FN, data.Name_MN, data.Name_LN, data.Gender, data.Age, data.Order_Frequency]);
 	        })
 	        .then(function(result) {
 	          resolve(result.rows[0]);
