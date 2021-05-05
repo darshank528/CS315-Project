@@ -14,13 +14,15 @@
         <% var pro = prof[i]; %>
     <article class="card product-item">
                     <header class="card__header">
-                        <h1 class="product__title"> Name: 
-                            <%= pro.name_fn %>
+                        <h1 class="product__title"> My Profile 
                         </h1>
                     </header>
                     
                     <div class="card__content">
-                        <h3 class="product__price"> Gender: 
+                        <h3 class="product__description">Name: 
+                            <%= pro.name_fn %>
+                        </h3>
+						<h3 class="product__description">Gender: 
                             <%= pro.gender %>
                         </h3>
                         <h3 class="product__description">Age: 
