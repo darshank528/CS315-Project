@@ -20,6 +20,12 @@ module.exports = {
   },
   GetProfile: function(req,res){
 
+    Employee.getProfile()
+      .then(()=> {
+        res.redirect('/includes/employee');
+      })
+      .catch(err=>console.log(err));
+
   },
   CookOrServeDish: function(req,res){
 

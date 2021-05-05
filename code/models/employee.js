@@ -6,6 +6,11 @@ var bcrypt = require('bcrypt');
 
 module.exports = {
 
+	getProfile(staff_id)
+	{
+		return db.query('SELECT * FROM Staff where id = $1;', [staff_id])
+	},
+
 	create: function(data) {
 	    return new Promise(function(resolve, reject) {
 	      validateUserData(data)
