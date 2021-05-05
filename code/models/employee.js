@@ -3,6 +3,7 @@
 var db = require('./../utils/database');
 // var config = require('./../config/config');
 var bcrypt = require('bcrypt');
+const { promiseImpl } = require('ejs');
 
 module.exports = {
 
@@ -18,6 +19,17 @@ module.exports = {
 		var order_list = await db.query('SELECT order_id, delivers.dish_id as dish_id, completed, dishes.name as dish  FROM Delivers, dishes where id = $1 and dishes.dish_id = delivers.dish_id;', [staff_id]);
 		
 		return order_list;
+	},
+
+	async update_cookserve(staff_id, order_id, dish_id)
+	{	
+		//var order_list = await db.query('SELECT order_id, delivers.dish_id as dish_id, completed, dishes.name as dish  FROM Delivers, dishes where id = $1 and dishes.dish_id = delivers.dish_id;', [staff_id]);
+		
+		db.query('UPDATE DELIVERY set completed = 1 where id=$1 and order_id=$2 and dish_id=$3;', [staff_id, order_id, dish_id]);
+		
+		return Promise.resolve(0);
+		
+		//return order_list;
 	},
 
 	create: function(data) {
