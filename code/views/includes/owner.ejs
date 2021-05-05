@@ -1,28 +1,51 @@
 <%- include('base.ejs') %>
- <link rel="stylesheet" href="/css/home.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
+<link rel="stylesheet" href="/css/home.css">
+ <link rel="stylesheet" href="/css/forms.css">
+ <link rel="stylesheet" href="/css/product.css">
+ 
 </head>
 
 <body>
-
 <%- include('nav.ejs') %>
+<main>
+<div class="grid">
+        <% for (var i = 0; i < empl.length; i++) { %>
+        <% var emp = empl[i]; %>
+    <article class="card product-item">
+                    <header class="card__header">
+                        <h1 class="product__title"> Employee
+                        </h1>
+                    </header>
+                    
+                    <div class="card__content">
+                        <h3 class="product__description">Name: 
+                            <%= emp.name_fn %>
+                        </h3>
+                        <h3 class="product__description">Gender: 
+                            <%= emp.gender %>
+                        </h3>
+                        <h3 class="product__description">Age: 
+                            <%= emp.age %>
+                        </h3>
+                        <h3 class="product__description">Salary: 
+                            <%= emp.salary %>
+                        </h3>
+                        <h3 class="product__description">Experience: 
+                            <%= emp.experience %>
+                        </h3>
+                        <h3 class="product__description">Role: 
+                            <%= emp.role %>
+                        </h3>
+                        <h3 class="product__description">Role: 
+                            <%= emp.TCDM %>
+                        </h3>
+                    </div>
+    </article>
+        <% } %>
+  </div>
 
-<div id="section-8">
- <ul class="section8-ul">
-  				<li class="section8-li">
-
-    			  <a class="section8-a" href="#section-8">
-                  <img src="images/dish.jpg" style="height:10em; width:15em; display:block;margin: auto; ">
-    			  <h2 class="section8-h2">Dish 1</h2>
-    			  <p class="section8-p"></p>
-    			  </a>
-  				</li>
-  				<li class="section8-li">
-    				<a class="section8-a" href="#section-8">
-                    <img src="images/dish.jpg" style="height:10em; width:15em;display:block;margin:auto;">
-    			    <h2 class="section8-h2" >Dish 2</h2>
-    		        <p class="section8-p"></p>
-    				</a>
-  				</li>
-			</ul>
-    </div>
+</main>
 </body>
