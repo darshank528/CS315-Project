@@ -34,6 +34,13 @@ module.exports = {
 		return Promise.resolve(0);
 	},
 
+	async add_empl(aname, gender, age, salary, role, exp, occ, tcdm)
+	{	
+		await db.query('INSERT INTO STAFF (NAME_fn, gender, age, salary, role, experience, occupied, tcdm) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) returning id;', [aname, gender, age, salary, role, exp, occ, tcdm]);
+		
+		return Promise.resolve(0);
+	},
+
 	create: function(data) {
 	    return new Promise(function(resolve, reject) {
 	      validateUserData(data)

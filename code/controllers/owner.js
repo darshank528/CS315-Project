@@ -56,6 +56,14 @@ module.exports = {
 
   },
 
+  Add_Empl: function(req, res){
+    res.render('./includes/add_empl' , {
+      pageTitle: 'Add Employee',
+      path: '/includes/add_empl',
+      editing: false         
+    });
+  },
+
   Add_Inv: function(req, res){
     res.render('./includes/add_inv' , {
       pageTitle: 'Add Inventory',
