@@ -16,13 +16,26 @@ module.exports = {
       });
   },
   loadhome: function(req,res){
-  	res.render('./includes/home',{'pageTitle':"Home"});
+  	//res.render('./includes/home',{'pageTitle':"Home"});
+
+    Employee.getProfile(20)
+      .then((value)=> {
+        res.render('./includes/employee' , {
+          pageTitle: 'My Profile',
+          path: '/includes/employee',
+          editing:false,
+          prof: value.rows          
+
+        });
+      })
+      .catch(err=>console.log(err));
+
   },
   GetProfile: function(req,res){
 
-    Employee.getProfile()
+    Employee.getProfile(20)
       .then((value)=> {
-        res.render('employee' , {
+        res.render('./includes/employee' , {
           pageTitle: 'My Profile',
           path: '/includes/employee',
           editing:false,

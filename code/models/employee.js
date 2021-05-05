@@ -7,8 +7,14 @@ var bcrypt = require('bcrypt');
 module.exports = {
 
 	getProfile(staff_id)
-	{
-		return db.query('SELECT * FROM Staff where id = $1;', [staff_id])
+	{	
+		//return new Promise(function(resolve, reject) {
+			return db.query('SELECT * FROM Staff where id = $1;', [staff_id]);
+		//.then((value)=>{
+		//	console.log(value);
+		//	return value;
+		//});
+
 	},
 
 	create: function(data) {
@@ -19,7 +25,7 @@ module.exports = {
 	        })
 	        .then(function(hash) {
 	          return db.query(
-	            'INSERT INTO Staff (name, email, password) VALUES ($1, $2, $3) returning id',
+	            'INSERT INTO Staff (name, email, password) VALUES ($1, $2, $3) returning id;',
 	            [data.name, data.email, hash]);
 	        })
 	        .then(function(result) {
