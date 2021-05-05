@@ -7,6 +7,7 @@ const pool =  require('./utils/database');
 
 const userRo = require('./routes/user');
 const empRo = require('./routes/employee');
+const ownRo = require('./routes/owner');
 
 const app = express();
 app.set('view engine', 'ejs');
@@ -16,5 +17,6 @@ app.use(express.static(path.join(__dirname,'public')));
 
 app.use('/',userRo);
 app.use('/employee',empRo);
+app.use('/owner',ownRo);
 
 app.listen(3000);

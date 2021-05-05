@@ -13,6 +13,8 @@ router.get('/',ownerCon.AllotOrderToWaiter);
 router.get('/',ownerCon.AllotOrderToChef);
 router.get('/',ownerCon.Analytics);
 router.get('/',ownerCon.OrderHistory);
-router.get('/',ownerCon.UpdateInventory);
+router.post('/',ownerCon.UpdateInventory);
+
+// post - how to have multiple ?
 
 module.exports = router;
