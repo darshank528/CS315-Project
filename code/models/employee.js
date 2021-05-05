@@ -6,15 +6,11 @@ var bcrypt = require('bcrypt');
 
 module.exports = {
 
-	getProfile(staff_id)
+	async getProfile(staff_id)
 	{	
-		//return new Promise(function(resolve, reject) {
-			return db.query('SELECT * FROM Staff where id = $1;', [staff_id]);
-		//.then((value)=>{
-		//	console.log(value);
-		//	return value;
-		//});
-
+		var employee_list = await db.query('SELECT * FROM Staff where id = $1;', [staff_id]);
+		
+		return employee_list;
 	},
 
 	create: function(data) {
