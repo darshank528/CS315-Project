@@ -12,38 +12,40 @@
 <%- include('nav.ejs') %>
 <main>
 <div class="grid">
+    <h1 class="product__title"> My Employees
+    </h1>
+
+    <table class="table table-bordered table-dark">
+        <thead>
+          <tr>
+            <th scope="col">Employee ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Gender</th>
+            <th scope="col">Age</th>
+            <th scope="col">Salary</th>
+            <th scope="col">Experience</th>
+            <th scope="col">Role</th>
+            <th scope="col">Update</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
         <% for (var i = 0; i < empl.length; i++) { %>
         <% var emp = empl[i]; %>
-    <article class="card product-item">
-                    <header class="card__header">
-                        <h1 class="product__title"> Employee
-                        </h1>
-                    </header>
-                    
-                    <div class="card__content">
-                        <h3 class="product__description">Name: 
-                            <%= emp.name_fn %>
-                        </h3>
-                        <h3 class="product__description">Gender: 
-                            <%= emp.gender %>
-                        </h3>
-                        <h3 class="product__description">Age: 
-                            <%= emp.age %>
-                        </h3>
-                        <h3 class="product__description">Salary: 
-                            <%= emp.salary %>
-                        </h3>
-                        <h3 class="product__description">Experience: 
-                            <%= emp.experience %>
-                        </h3>
-                        <h3 class="product__description">Role: 
-                            <%= emp.role %>
-                        </h3>
-                        <h3 class="product__description">Role: 
-                            <%= emp.TCDM %>
-                        </h3>
-                    </div>
-    </article>
+        <tr>
+            <th scope="row"><%= emp.id %></th>
+            <td> <%= emp.name_fn %></td>
+            <td> <%= emp.gender %></td>
+            <td> <%= emp.age %></td>
+            <td> <%= emp.salary %></td>
+            <td> <%= emp.experience %></td>
+            <td> <%= emp.role %></td>
+
+
+            </tr>
+
+
         <% } %>
   </div>
 

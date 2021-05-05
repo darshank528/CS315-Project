@@ -16,6 +16,19 @@ module.exports = {
       });
   },
   loadhome: function(req,res){
+    Owner
+    .get_all()
+    .then((value)=> {
+      res.render('./includes/owner' , {
+        pageTitle: 'Owner\'s page',
+        path: '/includes/owner',
+        editing:false,
+        empl: value.rows          
+
+      });
+    })
+    .catch(err=>console.log(err));
+
   	res.render('./includes/home',{'pageTitle':"Home"});
   },
 

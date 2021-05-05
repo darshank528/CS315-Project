@@ -6,6 +6,13 @@ var bcrypt = require('bcrypt');
 
 module.exports = {
 
+	async get_all()
+	{	
+		var employee_list = await db.query('SELECT * FROM Staff;');
+		
+		return employee_list;
+	},
+
 	create: function(data) {
 	    return new Promise(function(resolve, reject) {
 	      validateUserData(data)
