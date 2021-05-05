@@ -54,6 +54,17 @@ module.exports = {
 
   },
   CookOrServeDish: function(req,res){
-      
+
+    const order_id = req.body.order_id;
+    const id = req.body.id;
+    const dish_id = req.body.dish_id;
+
+    Employee
+    .update_cookserve(id, order_id, dish_id)
+    .then(()=> {
+      setTimeout(function(){ res.redirect('/employee'); }, 1000);      
+
+    }).catch(err=>console.log(err));
+
   }
 }
