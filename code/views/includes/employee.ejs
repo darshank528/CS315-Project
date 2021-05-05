@@ -42,23 +42,29 @@
         <% } %>
 	</div>
 	<div class="grid">
+		<h1 class="product__title"> My Orders
+		</h1>
 		<% for (var i = 0; i < orders.length; i++) { %>
 			<% var order = orders[i]; %>
 		<article class="card product-item">
 						<header class="card__header">
-							<h1 class="product__title"> My Orders
+							<h1 class="product__title"> Order No: 
+								<%= i+1 %>
 							</h1>
 						</header>
 						
 						<div class="card__content">
 							<h3 class="product__description">Order ID: 
-								<%= pro.order_id %>
+								<%= order.order_id %>
 							</h3>
 							<h3 class="product__description">Dish_ID: 
-								<%= pro.dish_id %>
+								<%= order.dish_id %>
+							</h3>
+							<h3 class="product__description">Dish: 
+								<%= order.dish %>
 							</h3>
 							<h3 class="product__description">Completed: 
-								<%= pro.completed %>
+								<%= order.completed %>
 							</h3>
 						</div>
 		</article>

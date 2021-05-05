@@ -18,18 +18,20 @@ module.exports = {
   },
   loadhome: function(req,res){
   	//res.render('./includes/home',{'pageTitle':"Home"});
+    var a = 0;
 
-    Employee.getProfile(20)
+    Employee.getProfile(10)
       .then((value1)=> {
-        return [value1, getOrders(20)];
+        a = value1;
+        return getOrders(10);
       })
       .then((value2)=>{
         res.render('./includes/employee' , {
-          pageTitle: 'My Profile',
+          pageTitle: 'My Details',
           path: '/includes/employee',
           editing:false,
-          prof: value2[0].rows,
-          orders: value2[1].rows          
+          prof: a.rows,
+          orders: value2.rows          
 
         });
       })
