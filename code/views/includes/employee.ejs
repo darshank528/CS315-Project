@@ -44,31 +44,29 @@
 	<div class="grid">
 		<h1 class="product__title"> My Orders
 		</h1>
+
+		<table class="table table-bordered table-dark">
+			<thead>
+			  <tr>
+				<th scope="col">Order No.</th>
+				<th scope="col">Dish</th>
+				<th scope="col">Comleted</th>
+				<th scope="col">Button</th>
+			  </tr>
+			</thead>
+
+			<tbody>
 		<% for (var i = 0; i < orders.length; i++) { %>
 			<% var order = orders[i]; %>
-		<article class="card product-item">
-						<header class="card__header">
-							<h1 class="product__title"> Order No: 
-								<%= i+1 %>
-							</h1>
-						</header>
-						
-						<div class="card__content">
-							<h3 class="product__description">Order ID: 
-								<%= order.order_id %>
-							</h3>
-							<h3 class="product__description">Dish_ID: 
-								<%= order.dish_id %>
-							</h3>
-							<h3 class="product__description">Dish: 
-								<%= order.dish %>
-							</h3>
-							<h3 class="product__description">Completed: 
-								<%= order.completed %>
-							</h3>
-						</div>
-		</article>
+				<tr>
+				<th scope="row"><%= i+1 %></th>
+				<td> <%= order.dish %></td>
+				<td> <%= order.completed %> </td>
+				<td></td>
+				</tr>
 			<% } %>
+		</tbody>
+		</table>
     </div>
 </main>
 </body>
