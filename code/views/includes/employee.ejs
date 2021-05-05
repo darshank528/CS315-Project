@@ -1,7 +1,11 @@
 <%- include('base.ejs') %>
- <link rel="stylesheet" href="/css/home.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
+<link rel="stylesheet" href="/css/home.css">
  <link rel="stylesheet" href="/css/forms.css">
  <link rel="stylesheet" href="/css/product.css">
+ 
 </head>
 
 <body>
@@ -61,8 +65,13 @@
 				<tr>
 				<th scope="row"><%= i+1 %></th>
 				<td> <%= order.dish %></td>
-				<td> <%= order.completed %> </td>
-				<td></td>
+				<td> <p class="product__description">
+					<%= order.completed %> 
+					</p>
+				</td>
+				<td>
+					<button type="button">Cook/Serve</button> 
+				</td>
 				</tr>
 			<% } %>
 		</tbody>
