@@ -51,6 +51,14 @@ module.exports = {
 
   },
 
+  Add_Inv: function(req, res){
+    res.render('./includes/add_inv' , {
+      pageTitle: 'Add Inventory',
+      path: '/includes/add_inv',
+      editing: false          
+    });
+  },
+
   AllotOrderToChef: function(req,res){
 
   },
@@ -61,5 +69,14 @@ module.exports = {
 
   UpdateInventory: function(req,res){
     
+    const id = req.body.id;
+    const name = req.body.name;
+
+    Owner
+    .add_inv(id, name)
+    .then(()=>{
+      setTimeout(function(){ res.redirect('/owner'); }, 1000);      
+    })
+    .catch(err=>console.log(err));
   }
 }

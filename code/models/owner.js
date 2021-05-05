@@ -20,6 +20,13 @@ module.exports = {
 		return inv_list;
 	},
 
+	async add_inv(id, aname)
+	{	
+		await db.query('INSERT INTO INGREDIENTS VALUES ($1, $2);', [id, aname]);
+		
+		return Promise.resolve(0);
+	},
+
 	create: function(data) {
 	    return new Promise(function(resolve, reject) {
 	      validateUserData(data)

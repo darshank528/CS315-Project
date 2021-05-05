@@ -1,0 +1,36 @@
+<%- include('base.ejs') %>
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
+<link rel="stylesheet" href="/css/home.css">
+ <link rel="stylesheet" href="/css/forms.css">
+ <link rel="stylesheet" href="/css/product.css">
+</head>
+
+<body>
+
+<%- include('nav.ejs') %>
+<main>
+
+    <form class="product-form" action="invent" method="POST">
+        <div class="form-control">
+            <label for="id">ID</label>
+            <input type="text" name="id" id="title" value="<% if (editing) { %><%= product.id %><% } %>">
+        </div>
+        <div class="form-control">
+            <label for="name">Name</label>
+            <input type="text" name="name" id="name" value="<% if (editing) { %><%= product.name %><% } %>">
+        </div>
+
+        <% if (editing) { %>
+        <input type="hidden" value="<%= product.id %>" name="id">
+        <input type="hidden" value="<%= product.name %>" name="name">
+        <% } %>
+
+        <button class="btn" type="submit">Add</button>
+        
+    </form>
+
+
+</main>
+</body>
