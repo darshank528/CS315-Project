@@ -9,6 +9,6 @@ const router = express.Router();
 router.get('/',employeeCon.loadhome);
 router.get('/register',employeeCon.createEmployee);
 router.get('/',employeeCon.GetProfile);
-router.get('/',employeeCon.CookOrServeDish);
+router.post('/',employeeCon.CookOrServeDish);
 
 module.exports = router;
