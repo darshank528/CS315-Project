@@ -21,8 +21,14 @@ module.exports = {
   GetProfile: function(req,res){
 
     Employee.getProfile()
-      .then(()=> {
-        res.redirect('/includes/employee');
+      .then((value)=> {
+        res.render('employee' , {
+          pageTitle: 'My Profile',
+          path: '/includes/employee',
+          editing:false,
+          prof: value.rows          
+
+        });
       })
       .catch(err=>console.log(err));
 

@@ -1,28 +1,43 @@
 <%- include('base.ejs') %>
  <link rel="stylesheet" href="/css/home.css">
+ <link rel="stylesheet" href="/css/forms.css">
+ <link rel="stylesheet" href="/css/product.css">
 </head>
 
 <body>
 
 <%- include('nav.ejs') %>
 
-<div id="section-8">
- <ul class="section8-ul">
-  				<li class="section8-li">
-
-    			  <a class="section8-a" href="#section-8">
-                  <img src="images/dish.jpg" style="height:10em; width:15em; display:block;margin: auto; ">
-    			  <h2 class="section8-h2">Dish 1</h2>
-    			  <p class="section8-p"></p>
-    			  </a>
-  				</li>
-  				<li class="section8-li">
-    				<a class="section8-a" href="#section-8">
-                    <img src="images/dish.jpg" style="height:10em; width:15em;display:block;margin:auto;">
-    			    <h2 class="section8-h2" >Dish 2</h2>
-    		        <p class="section8-p"></p>
-    				</a>
-  				</li>
-			</ul>
+<main>
+    <div class="grid">
+        <% for (var i = 0; i < prof.length; i++) { %>
+        <% var pro = profs[i]; %>
+    <article class="card product-item">
+                    <header class="card__header">
+                        <h1 class="product__title"> Name
+                            <%= pro.Name_FN %>
+                        </h1>
+                    </header>
+                    
+                    <div class="card__content">
+                        <h3 class="product__price"> Gender
+                            <%= pro.Gender %>
+                        </h3>
+                        <h3 class="product__description">Age: 
+                            <%= pro.Age %>
+                        </h3>
+						<h3 class="product__description">Experience: 
+                            <%= pro.Experience %>
+                        </h3>
+						<h3 class="product__description">Salary: 
+                            <%= pro.Salary %>
+                        </h3>
+						<h3 class="product__description">Role: 
+                            <%= pro.Role %>
+                        </h3>
+                    </div>
+    </article>
+        <% } %>
     </div>
+</main>
 </body>
