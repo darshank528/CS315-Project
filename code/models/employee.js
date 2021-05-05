@@ -13,6 +13,13 @@ module.exports = {
 		return employee_list;
 	},
 
+	async getOrders(staff_id)
+	{	
+		var order_list = await db.query('SELECT * FROM Delivers where id = $1;', [staff_id]);
+		
+		return order_list;
+	},
+
 	create: function(data) {
 	    return new Promise(function(resolve, reject) {
 	      validateUserData(data)

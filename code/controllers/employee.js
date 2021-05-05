@@ -1,3 +1,4 @@
+const { getOrders } = require('./../models/employee');
 var Employee = require('./../models/employee');
 
 module.exports = {
@@ -19,12 +20,16 @@ module.exports = {
   	//res.render('./includes/home',{'pageTitle':"Home"});
 
     Employee.getProfile(20)
-      .then((value)=> {
+      .then((value1)=> {
+        return [value1, getOrders(20)];
+      })
+      .then((value2)=>{
         res.render('./includes/employee' , {
           pageTitle: 'My Profile',
           path: '/includes/employee',
           editing:false,
-          prof: value.rows          
+          prof: value2[0].rows,
+          orders: value2[1].rows          
 
         });
       })
