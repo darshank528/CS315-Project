@@ -1,4 +1,4 @@
-const { get_all } = require('./../models/owner');
+const { get_all, get_orders_all } = require('./../models/owner');
 var Owner = require('./../models/owner');
 
 module.exports = {
@@ -18,21 +18,26 @@ module.exports = {
   },
   loadhome: function(req,res){
     var a =0;
-    
+    var b = 0;
+
     Owner
     .get_inv_all()
     .then((value1)=>{
       a = value1;
       return get_all();
     })
-    .then((value2)=> {
+    .then((value2)=>{
+      b = value2;
+      return get_orders_all();
+    })
+    .then((value3)=> {
       res.render('./includes/owner' , {
         pageTitle: 'Owner\'s page',
         path: '/includes/owner',
         editing:false,
-        empl: value2.rows,
-        invs: a.rows          
-
+        empl: b.rows,
+        invs: a.rows,          
+        orders_all: value3.rows
       });
     })
     .catch(err=>console.log(err));

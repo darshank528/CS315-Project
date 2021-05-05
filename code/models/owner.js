@@ -20,6 +20,13 @@ module.exports = {
 		return inv_list;
 	},
 
+	async get_orders_all()
+	{	
+		var inv_list = await db.query('SELECT name, count(*) as num_orders FROM orders, dishes where dishes.dish_id = orders.dish_id group by dishes.dish_id;');
+		
+		return inv_list;
+	},
+
 	async add_inv(id, aname)
 	{	
 		await db.query('INSERT INTO INGREDIENTS VALUES ($1, $2);', [id, aname]);

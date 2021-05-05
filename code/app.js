@@ -9,6 +9,7 @@ const userRo = require('./routes/user');
 const empRo = require('./routes/employee');
 const ownRo = require('./routes/owner');
 const invRo = require('./routes/invent');
+//const emp_maRo = require('./routes/empl');
 
 const app = express();
 app.set('view engine', 'ejs');
@@ -20,5 +21,6 @@ app.use('/',userRo);
 app.use('/employee',empRo);
 app.use('/owner',ownRo);
 app.use('/invent',invRo);
+//app.use('/empl',emp_maRo);
 
 app.listen(3000);
