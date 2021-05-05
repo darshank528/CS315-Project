@@ -1,11 +1,17 @@
 <%- include('base.ejs') %>
- <link rel="stylesheet" href="/css/home.css">
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
+<link rel="stylesheet" href="/css/home.css">
+ <link rel="stylesheet" href="/css/forms.css">
+ <link rel="stylesheet" href="/css/product.css">
 </head>
 
 <body>
 
 <%- include('nav.ejs') %>
 
+<main>
 <div id="section-8">
  <ul class="section8-ul">
   				<li class="section8-li">
@@ -25,4 +31,37 @@
   				</li>
 			</ul>
     </div>
+
+
+	<div class="grid">
+		<h1 class="product__title"> My Order History
+		</h1>
+		<% for (var i = 0; i < orders.length; i++) { %>
+		<% var order = orders[i]; %>
+		<article class="card product-item">
+		<header class="card__header">
+		<h1 class="product__title"> Order ID  <%= order.order_id %>
+		</h1>
+		</header>
+		
+		<div class="card__content">
+		
+		<h3 class="product__description">Dish: 
+		<%= order.dish %>
+		</h3>
+		<h3 class="product__description">Quantity Ordered: 
+		<%= order.qty %>
+		</h3>
+		<h3 class="product__description">Review: 
+		<%= order.review %>
+		</h3>
+		<h3 class="product__description">Cost: 
+		<%= order.cost %>
+		</h3>
+		</div>
+		</article>
+		<% } %>
+		</div>
+
+	</main>
 </body>
