@@ -41,13 +41,54 @@
             <td> <%= emp.salary %></td>
             <td> <%= emp.experience %></td>
             <td> <%= emp.role %></td>
-
+            <td>
+                <form action="/owner" method="post">
+                    <button class="btn" type="submit">Update</button> 
+                    <input type="hidden" name="id" value="<%= emp.id %>">
+                   
+                </form>
+            </td>
 
             </tr>
 
 
         <% } %>
   </div>
+
+  <div class="grid">
+    <h1 class="product__title"> Inventory
+    </h1>
+
+    <table class="table table-bordered table-dark">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Increment</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+        <% for (var i = 0; i < invs.length; i++) { %>
+        <% var inv = invs[i]; %>
+        <tr>
+            <th scope="row"><%= inv.ingredient_id %></th>
+            <td> <%= inv.ingredient_name %></td>
+            <td>
+                <form action="/owner" method="post">
+                    <button class="btn" type="submit">Increment</button> 
+                    <input type="hidden" name="id" value="<%= inv.id %>">
+                   
+                </form>
+            </td>
+
+            </tr>
+
+
+        <% } %>
+  </div>
+  
 
 </main>
 </body>

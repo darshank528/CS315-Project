@@ -13,6 +13,13 @@ module.exports = {
 		return employee_list;
 	},
 
+	async get_inv_all()
+	{	
+		var inv_list = await db.query('SELECT * FROM ingredients;');
+		
+		return inv_list;
+	},
+
 	create: function(data) {
 	    return new Promise(function(resolve, reject) {
 	      validateUserData(data)

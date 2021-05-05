@@ -1,3 +1,4 @@
+const { get_all } = require('./../models/owner');
 var Owner = require('./../models/owner');
 
 module.exports = {
@@ -16,20 +17,26 @@ module.exports = {
       });
   },
   loadhome: function(req,res){
+    var a =0;
+    
     Owner
-    .get_all()
-    .then((value)=> {
+    .get_inv_all()
+    .then((value1)=>{
+      a = value1;
+      return get_all();
+    })
+    .then((value2)=> {
       res.render('./includes/owner' , {
         pageTitle: 'Owner\'s page',
         path: '/includes/owner',
         editing:false,
-        empl: value.rows          
+        empl: value2.rows,
+        invs: a.rows          
 
       });
     })
     .catch(err=>console.log(err));
 
-  	res.render('./includes/home',{'pageTitle':"Home"});
   },
 
   ShowEmployeeInformation: function(req,res){
