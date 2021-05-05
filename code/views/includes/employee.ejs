@@ -53,6 +53,7 @@
 			<thead>
 			  <tr>
 				<th scope="col">Order No.</th>
+				<th scope="col">Order ID</th>
 				<th scope="col">Dish</th>
 				<th scope="col">Comleted</th>
 				<th scope="col">Button</th>
@@ -64,6 +65,7 @@
 			<% var order = orders[i]; %>
 				<tr>
 				<th scope="row"><%= i+1 %></th>
+				<td> <%= order.order_id %></td>
 				<td> <%= order.dish %></td>
 				<td> <p class="product__description">
 					<%= order.completed %> 
