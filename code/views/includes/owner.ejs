@@ -12,8 +12,10 @@
 <%- include('owner_nav.ejs') %>
 <main>
 <div class="grid">
+    <a id="my_employees">
     <h1 class="product__title"> My Employees
     </h1>
+    </a>
 
     <form action="/empl" method="get">
         <button class="btn" type="submit">Add New Employee</button>
@@ -126,8 +128,8 @@
             <td> <%= serve_order.cost %></td>
             <td>
                 <form action="/upp_allotwaiter1" method="post">
-                  <input type="hidden" name="order_id" value="<%= order_left.order_id %>">
-                  <input type="hidden" name="dish_id" value="<%= order_left.dish_id %>">
+                  <input type="hidden" name="order_id" value="<%= serve_order.order_id %>">
+                  <input type="hidden" name="dish_id" value="<%= serve_order.dish_id %>">
                     <button class="btn" type="submit">Allot Serve Order</button> 
                    
                 </form>

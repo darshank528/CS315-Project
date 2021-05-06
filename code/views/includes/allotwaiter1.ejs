@@ -9,19 +9,18 @@
 
 <body>
 
-<%- include('nav.ejs') %>
 <main>
-
+    <div style="width:800px; margin:0 auto; padding: 100px;">
     <form class="product-form" action="allotwaiter1" method="POST">
         <div class="form-group row">
-            <label for="id" class="col-sm-2 col-form-label">ID</label>
-            <div class="col-sm-10">
+            <label for="id" class="col-sm-4 col-form-label">Waiter ID</label>
+            <div class="col-sm-8">
                 <input type="number" name="id" id="id" value="<% if (editing) { %><%= product.id %><% } %>">
             </div>
         </div>
         <div class="form-group row">
-            <label for="name" class="col-sm-2 col-form-label">Name</label>
-            <div class="col-sm-10">
+            <label for="name" class="col-sm-4 col-form-label">Waiter Name</label>
+            <div class="col-sm-8">
             <input type="text" name="name" id="name" value="<% if (editing) { %><%= product.name %><% } %>">
         
             </div>
@@ -37,7 +36,7 @@
         <button class="btn" type="submit">Add</button>
         
     </form>
-
+    </div>
 
 </main>
 </body>
