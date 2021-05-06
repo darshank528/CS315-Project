@@ -16,7 +16,7 @@ module.exports = {
 
 	async getOrders(staff_id)
 	{	
-		var order_list = await db.query('SELECT delivers.id as id, order_id, delivers.dish_id as dish_id, completed, dishes.name as dish  FROM Delivers, dishes where id = $1 and dishes.dish_id = delivers.dish_id;', [staff_id]);
+		var order_list = await db.query('SELECT delivers.id as id, order_id, delivers.dish_id as dish_id, completed, dishes.name as dish FROM Delivers, dishes where id = $1 and dishes.dish_id = delivers.dish_id;', [staff_id]);
 		
 		return order_list;
 	},
