@@ -14,42 +14,67 @@
 
     <form class="product-form" action="/up_empl" method="POST">
         
-        <div class="form-control">
-            <label for="id">ID (Don't change)</label>
+        <div class="form-group row">
+            <label for="id" class="col-sm-2 col-form-label">ID (Don't change)</label>
+            <div class="col-sm-10">
             <input type="number" disabled="disabled" name="id" id="id" value="<%= info[0].id %>">
+            </div>
         </div>
 
-        <div class="form-control">
-            <label for="name">Name</label>
-            <input type="text" name="name" id="name" value="<% if (editing) { %><%= product.name %><% } else { %> <%= info[0].name_fn %>  <% } %>">">
+        <div class="form-group row">
+            <label for="name" class="col-sm-2 col-form-label">Name</label>
+            <div class="col-sm-10">
+            <input type="text" name="name" id="name" value="<% if (editing) { %><%= product.name %><% } else { %> <%= info[0].name_fn %>  <% } %>">
+            </div>
         </div>
-        <div class="form-control">
-            <label for="gender">Gender</label>
-            <input type="text" name="gender" id="gender" value="<% if (editing) { %><%= product.gender %><% } else { %> <%= info[0].gender %>  <% } %>">">
+
+        <div class="form-group row">
+            <label for="gender" class="col-sm-3 col-form-label">Gender</label>
+            <div class="col-sm-9">
+            <input type="text" name="gender" id="gender" value="<% if (editing) { %><%= product.gender %><% } else { %> <%= info[0].gender %>  <% } %>">
+            </div>
         </div>
-        <div class="form-control">
-            <label for="age">Age</label>
-            <input type="number" name="age" id="age" value="<% if (editing) { %><%= product.age %><% } else { %> <%= info[0].age %>  <% } %>">">
+
+        <div class="form-group row">
+            <label for="age" class="col-sm-2 col-form-label">Age</label>
+            <div class="col-sm-10">
+            <input type="number" name="age" id="age" value="<% if (editing) { %><%= product.age %><% } else { %> <%= info[0].age %>  <% } %>">
+            </div>
         </div>
-        <div class="form-control">
-            <label for="salary">Salary</label>
-            <input type="text" name="salary" id="salary" value="<% if (editing) { %><%= product.salary %><% } else { %> <%= info[0].salary %>  <% } %>">">
+
+        <div class="form-group row">
+            <label for="salary" class="col-sm-3 col-form-label">Salary</label>
+            <div class="col-sm-9">
+            <input type="text" name="salary" id="salary" value="<% if (editing) { %><%= product.salary %><% } else { %> <%= info[0].salary %>  <% } %>">
+            </div>
         </div>
-        <div class="form-control">
-            <label for="role">Role</label>
-            <input type="text" name="role" id="role" value="<% if (editing) { %><%= product.role %><% } else { %> <%= info[0].role %>  <% } %>">">
+        
+        <div class="form-group row">
+            <label for="role" class="col-sm-2 col-form-label">Role</label>
+            <div class="col-sm-10">
+            <input type="text" name="role" id="role" value="<% if (editing) { %><%= product.role %><% } else { %> <%= info[0].role %>  <% } %>">
+            </div>
         </div>
-        <div class="form-control">
-            <label for="exp">Experience</label>
-            <input type="number" step="1" name="exp" id="exp" value="<% if (editing) { %><%= product.exp %><% } else { %> <%= info[0].experience %>  <% } %>">">
+
+        <div class="form-group row">
+            <label for="exp" class="col-sm-4 col-form-label">Experience</label>
+            <div class="col-sm-8">
+            <input type="number" step="1" name="exp" id="exp" value="<% if (editing) { %><%= product.exp %><% } else { %> <%= info[0].experience %>  <% } %>">
+            </div>
         </div>
-        <div class="form-control">
-            <label for="occ">Occupied?</label>
+
+        <div class="form-group row">
+            <label for="occ" class="col-sm-4 col-form-label">Occupied?</label>
+            <div class="col-sm-8">
             <input type="number" name="occ" id="occ" value="<% if (editing) { %><%= product.occ %><%} else { %> <%= info[0].occupied %>  <% } %>">
+            </div>
         </div>
-        <div class="form-control">
-            <label for="tcdm">TCDM</label>
-            <input type="number" name="tcdm" id="tcdm" value="<% if (editing) { %><%= product.tcdm %><% } else { %> <%= info[0].tcdm %>  <% } %>">">
+
+        <div class="form-group row">
+            <label for="tcdm" class="col-sm-2 col-form-label">TCDM</label>
+            <div class="col-sm-10">
+            <input type="number" name="tcdm" id="tcdm" value="<% if (editing) { %><%= product.tcdm %><% } else { %> <%= info[0].tcdm %>  <% } %>">
+            </div>
         </div>
 
         <input type="hidden" value="<%= info[0].id %>" name="id">
