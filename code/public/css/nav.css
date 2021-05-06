@@ -78,6 +78,15 @@
   display: flex;
 }
 
+.owner_navbar{
+  position:fixed;
+  width = 10%;
+}
+.owner_navbar1{
+  position:relative;
+ 
+}
+
 /* Dropdown Content (Hidden by Default) */
 .dropdown-content {
   display: none;

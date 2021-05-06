@@ -5,6 +5,9 @@
 <link rel="stylesheet" href="/css/home.css">
  <link rel="stylesheet" href="/css/forms.css">
  <link rel="stylesheet" href="/css/product.css">
+ <link rel="stylesheet" href="/css/table.css">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
  
 
  <style>
@@ -86,9 +89,9 @@
 		<h1 class="product__title"> My Orders
 		</h1>
 
-		<table class="table table-bordered table-dark">
+		<table class="w3-table w3-striped w3-bordered" style = "border: 2px single brown;">
 			<thead>
-			  <tr>
+			  <tr style = "border: 2px single brown;">
 				<th scope="col">Order No.</th>
 				<th scope="col">Order ID</th>
 				<th scope="col">Dish</th>
@@ -100,7 +103,7 @@
 			<tbody>
 		<% for (var i = 0; i < orders.length; i++) { %>
 			<% var order = orders[i]; %>
-				<tr>
+				<tr style = "border: 2px single brown;">
 				<th scope="row"><%= i+1 %></th>
 				<td> <%= order.order_id %></td>
 				<td> <%= order.dish %></td>
@@ -110,7 +113,7 @@
 				</td>
 				<td>
 					<form action="/employee" method="post">
-						<button class="btn" type="submit">Cook/Serve</button> 
+						<button class="btn" type="submit" style="background-color:rgb(97, 47, 1);color:white;">Cook/Serve</button> 
 						<input type="hidden" name="id" value="<%= order.id %>">
 						<input type="hidden" name="order_id" value="<%= order.order_id %>">
 					   <input type="hidden" name="dish_id" value="<%= order.dish_id %>">
