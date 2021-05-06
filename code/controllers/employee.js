@@ -20,10 +20,10 @@ module.exports = {
   	//res.render('./includes/home',{'pageTitle':"Home"});
     var a = 0;
 
-    Employee.getProfile(9)
+    Employee.getProfile(14)
       .then((value1)=> {
         a = value1;
-        return getOrders(9);
+        return getOrders(14);
       })
       .then((value2)=>{
         res.render('./includes/employee' , {
@@ -40,7 +40,7 @@ module.exports = {
   },
   GetProfile: function(req,res){
 
-    Employee.getProfile(9)
+    Employee.getProfile(14)
       .then((value)=> {
         res.render('./includes/employee' , {
           pageTitle: 'My Profile',
