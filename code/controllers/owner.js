@@ -252,7 +252,7 @@ module.exports = {
     const order_id = req.body.o_id;
     const dish_id = req.body.d_id;
     // const id = req.body.id;
-    console.log(order_id);
+    console.log(req.body);
 
     Owner
     .insert_into_cooks(cook_id, cook_name, order_id, dish_id)
