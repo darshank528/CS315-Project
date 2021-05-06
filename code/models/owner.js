@@ -8,7 +8,7 @@ module.exports = {
 
 	async get_all()
 	{	
-		var employee_list = await db.query('SELECT * FROM Staff;');
+		var employee_list = await db.query('SELECT * FROM Staff order by id;');
 		
 		return employee_list;
 	},
@@ -22,14 +22,14 @@ module.exports = {
 
 	async get_inv_all()
 	{	
-		var inv_list = await db.query('SELECT * FROM ingredients;');
+		var inv_list = await db.query('SELECT * FROM ingredients order by ingredient_id;');
 		
 		return inv_list;
 	},
 
 	async get_orders_all()
 	{	
-		var inv_list = await db.query('SELECT name, count(*) as num_orders FROM orders, dishes where dishes.dish_id = orders.dish_id group by dishes.dish_id;');
+		var inv_list = await db.query('SELECT name, count(*) as num_orders FROM orders, dishes where dishes.dish_id = orders.dish_id group by dishes.dish_id ORDER BY Num_orders desc;');
 		
 		return inv_list;
 	},
@@ -57,14 +57,14 @@ module.exports = {
 
 	async get_orders_left()
 	{	
-		var inv_list = await db.query('SELECT order_ID as order_id, dish_ID as dish_id, quantity_ordered as qty, cost as cost FROM orders where (order_ID, dish_ID) not in (select order_id, dish_ID from cooks);');
+		var inv_list = await db.query('SELECT order_ID as order_id, dish_ID as dish_id, quantity_ordered as qty, cost as cost FROM orders where (order_ID, dish_ID) not in (select order_id, dish_ID from cooks) order by order_id, dish_ID;');
 		
 		return inv_list;
 	},
 
 	async get_orders_to_serve()
 	{	
-		var inv_list = await db.query('SELECT orders.order_ID as order_id, orders.dish_ID as dish_id, quantity_ordered as qty, cost as cost FROM orders,cooks where (orders.order_ID, orders.dish_ID) = (cooks.order_ID,cooks.dish_ID) and cooks.completed = 1 and (orders.order_ID, orders.dish_ID) not in (select order_id, dish_ID from delivers);');
+		var inv_list = await db.query('SELECT orders.order_ID as order_id, orders.dish_ID as dish_id, quantity_ordered as qty, cost as cost FROM orders,cooks where (orders.order_ID, orders.dish_ID) = (cooks.order_ID,cooks.dish_ID) and cooks.completed = 1 and (orders.order_ID, orders.dish_ID) not in (select order_id, dish_ID from delivers) order by order_id, dish_ID;');
 		
 		return inv_list;
 	},
