@@ -117,10 +117,11 @@ module.exports = {
 
   upemp_get: function(req, res){
     
-    console.log(req.body.id);
+    const id = req.body.id;
+    console.log(id);
 
     Owner
-    .getinfo(req.body.id)
+    .getinfo(id)
     .then((value)=>{
     res.render('./includes/up_empl_get' , {
       pageTitle: 'Update Employee',

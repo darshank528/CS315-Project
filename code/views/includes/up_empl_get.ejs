@@ -21,7 +21,7 @@
 
         <div class="form-control">
             <label for="name">Name</label>
-            <input type="text" name="name" id="name" value="<% if (editing) { %><%= product.name %><% } else { %> <%= info[0].name %>  <% } %>">">
+            <input type="text" name="name" id="name" value="<% if (editing) { %><%= product.name %><% } else { %> <%= info[0].name_fn %>  <% } %>">">
         </div>
         <div class="form-control">
             <label for="gender">Gender</label>
@@ -74,7 +74,7 @@
             <input type="hidden" value="<%= info[0].tcdm %>" name="tcdm">
         <% } %>
 
-        <button class="btn" type="submit">Add</button>
+        <button class="btn" type="submit">Update</button>
         
     </form>
 
