@@ -44,6 +44,7 @@
             <th scope="col">Experience</th>
             <th scope="col">Role</th>
             <th scope="col">Update</th>
+            <th scope="col">Delete</th>
           </tr>
         </thead>
 
@@ -66,6 +67,13 @@
                    
                 </form>
             </td>
+            <td>
+              <form action="/del_empl" method="post">
+                <input type="hidden" name="id" value="<%= emp.id %>">
+                  <button class="btn" type="submit">Delete</button> 
+                 
+              </form>
+          </td>
 
             </tr>
 
@@ -168,6 +176,7 @@
             <th scope="col">ID</th>
             <th scope="col">Name</th>
             <th scope="col">Increment</th>
+            <th scope="col">Delete</th>
           </tr>
         </thead>
 
@@ -182,9 +191,15 @@
                 
                     <button class="btn" type="submit">Increment</button> 
                     
-                   
-                
             </td>
+            <td>
+              <form action="/del_inv" method="post">
+                <input type="hidden" name="id" value="<%= inv.ingredient_id %>">
+                  <button class="btn" type="submit">Delete</button> 
+                 
+              </form>
+          </td>
+            
 
             </tr>
 

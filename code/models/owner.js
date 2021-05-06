@@ -88,6 +88,20 @@ module.exports = {
 		return Promise.resolve(0);
 	},
 
+	async del_inv(id)
+	{	
+		await db.query('DELETE FROM INGREDIENTS WHERE ingredient_ID=$1;', [id]);
+		
+		return Promise.resolve(0);
+	},
+
+	async delete_emp(id)
+	{	
+		await db.query('DELETE FROM STAFF WHERE ID=$1;', [id]);
+		
+		return Promise.resolve(0);
+	},
+
 	async getid()
 	{	
 		var idd = await db.query('SELECT MAX(ID)+1 as id FROM STAFF;');
