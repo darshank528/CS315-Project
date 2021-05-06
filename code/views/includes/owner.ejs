@@ -123,5 +123,83 @@
         <% } %>
   </div>
 
+  <div class="grid">
+    <h1 class="product__title"> Chef Analytics
+    </h1>
+
+    <table class="table table-bordered table-dark">
+        <thead>
+          <tr>
+            <th scope="col">Chef Name</th>
+            <th scope="col">Number of Orders Prepared</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+        <% for (var i = 0; i < cooks_all.length; i++) { %>
+        <% var cooks = cooks_all[i]; %>
+        <tr>
+            <th scope="row"><%= cooks.name %></th>
+            <td> <%= cooks.num_orders %></td>
+
+            </tr>
+
+
+        <% } %>
+  </div>
+
+  <div class="grid">
+    <h1 class="product__title"> Waiter Analytics
+    </h1>
+
+    <table class="table table-bordered table-dark">
+        <thead>
+          <tr>
+            <th scope="col">Waiter Name</th>
+            <th scope="col">Number of Orders Served</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+        <% for (var i = 0; i < serves_all.length; i++) { %>
+        <% var serves = serves_all[i]; %>
+        <tr>
+            <th scope="row"><%= serves.name %></th>
+            <td> <%= serves.num_orders %></td>
+
+            </tr>
+
+
+        <% } %>
+  </div>
+
+  <div class="grid">
+    <h1 class="product__title"> User Analytics
+    </h1>
+
+    <table class="table table-bordered table-dark">
+        <thead>
+          <tr>
+            <th scope="col">User Name</th>
+            <th scope="col">Number of Orders Placed</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+        <% for (var i = 0; i < users_all.length; i++) { %>
+        <% var user = users_all[i]; %>
+        <tr>
+            <th scope="row"><%= user.name %></th>
+            <td> <%= user.num_orders %></td>
+
+            </tr>
+
+
+        <% } %>
+  </div>
+
 </main>
 </body>
