@@ -22,6 +22,8 @@ module.exports = {
     var c=0;
     var d=0;
     var e=0;
+    var f=0;
+    var g=0;
 
     Owner
     .get_inv_all()
@@ -179,6 +181,164 @@ module.exports = {
     });
   })
   .catch(err=>console.log(err));
+
+  },
+
+  // Cook
+  upallotcook1_get: function(req, res){
+    
+    const id = req.body.id;
+    console.log(id);
+
+    Owner
+    .getinfo(id)
+    .then((value)=>{
+    res.render('./includes/up_empl_get' , {
+      pageTitle: 'Update Employee',
+      path: '/includes/up_empl_get',
+      editing: false,  
+      info:value.rows       
+    });
+  })
+  .catch(err=>console.log(err));
+
+  },
+
+  uppallotcook1_post: function(req, res){
+    
+    const order_id = req.body.order_id;
+    const dish_id = req.body.dish_id;
+    console.log(order_id);
+
+    // Owner
+    // .getinfo(id)
+    // .then((value)=>{
+    res.render('./includes/allotcook1' , {
+      pageTitle: 'Allot Order to Chef',
+      path: '/includes/allotcook1',
+      editing: false,  
+      // info:value.rows,
+      o_id: order_id,
+      d_id: dish_id       
+    });
+  // })
+  // .catch(err=>console.log(err));
+
+  },
+
+  allotcook1_get: function(req, res){
+    
+    const id = req.body.id;
+    console.log(id);
+
+    Owner
+    .getinfo(id)
+    .then((value)=>{
+    res.render('./includes/up_empl_get' , {
+      pageTitle: 'Update Employee',
+      path: '/includes/up_empl_get',
+      editing: false,  
+      info:value.rows       
+    });
+  })
+  .catch(err=>console.log(err));
+
+  },
+
+  allotcook1_post: function(req, res){
+    
+    const cook_id = req.body.id;
+    const cook_name = req.body.name;
+    const order_id = req.body.o_id;
+    const dish_id = req.body.d_id;
+    // const id = req.body.id;
+    console.log(order_id);
+
+    Owner
+    .insert_into_cooks(cook_id, cook_name, order_id, dish_id)
+    .then(()=>{
+      setTimeout(function(){ res.redirect('/owner'); }, 1000);      
+    })
+    .catch(err=>console.log(err));
+
+  },
+
+  // Waiter
+  upallotwaiter1_get: function(req, res){
+    
+    const id = req.body.id;
+    console.log(id);
+
+    Owner
+    .getinfo(id)
+    .then((value)=>{
+    res.render('./includes/up_empl_get' , {
+      pageTitle: 'Update Employee',
+      path: '/includes/up_empl_get',
+      editing: false,  
+      info:value.rows       
+    });
+  })
+  .catch(err=>console.log(err));
+
+  },
+
+  uppallotwaiter1_post: function(req, res){
+    
+    const order_id = req.body.order_id;
+    const dish_id = req.body.dish_id;
+    console.log(order_id);
+
+    // Owner
+    // .getinfo(id)
+    // .then((value)=>{
+    res.render('./includes/allotwaiter1' , {
+      pageTitle: 'Allot Order to Waiter',
+      path: '/includes/allotwaiter1',
+      editing: false,  
+      // info:value.rows,
+      o_id: order_id,
+      d_id: dish_id       
+    });
+  // })
+  // .catch(err=>console.log(err));
+
+  },
+
+  allotwaiter1_get: function(req, res){
+    
+    const id = req.body.id;
+    console.log(id);
+
+    Owner
+    .getinfo(id)
+    .then((value)=>{
+    res.render('./includes/up_empl_get' , {
+      pageTitle: 'Update Employee',
+      path: '/includes/up_empl_get',
+      editing: false,  
+      info:value.rows       
+    });
+  })
+  .catch(err=>console.log(err));
+
+  },
+
+  allotwaiter1_post: function(req, res){
+    
+    const waiter_id = req.body.id;
+    const waiter_name = req.body.name;
+    const order_id = req.body.o_id;
+    const dish_id = req.body.d_id;
+    // const id = req.body.id;
+    console.log(order_id);
+
+    Owner
+    .insert_into_delivers(waiter_id, waiter_name, order_id, dish_id)
+    .then(()=>{
+      setTimeout(function(){ res.redirect('/owner'); }, 1000);      
+    })
+    .catch(err=>console.log(err));
 
   },
 

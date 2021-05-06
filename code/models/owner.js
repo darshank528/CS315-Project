@@ -69,6 +69,18 @@ module.exports = {
 		return inv_list;
 	},
 
+	async insert_into_cooks(cook_id,cook_name,order_id,dish_id){
+		await db.query('INSERT into cooks values ($1, $2, $3, 0);', [cook_id, order_id, dish_id]);
+		
+		return Promise.resolve(0);
+	},
+
+	async insert_into_delivers(waiter_id,waiter_name,order_id,dish_id){
+		await db.query('INSERT into delivers values ($1, $2, $3, 0);', [waiter_id, waiter_name, dish_id]);
+		
+		return Promise.resolve(0);
+	},
+
 	async add_inv(id, aname)
 	{	
 		await db.query('INSERT INTO INGREDIENTS VALUES ($1, $2);', [id, aname]);

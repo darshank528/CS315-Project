@@ -85,8 +85,9 @@
             <td> <%= order_left.qty %></td>
             <td> <%= order_left.cost %></td>
             <td>
-                <form action="/upp_empl" method="post">
-                  <input type="hidden" name="id" value="<%= emp.id %>">
+                <form action="/upp_allotcook1" method="post">
+                  <input type="hidden" name="order_id" value="<%= order_left.order_id %>">
+                  <input type="hidden" name="order_id" value="<%= order_left.dish_id %>">
                     <button class="btn" type="submit">Allot Order</button> 
                    
                 </form>
@@ -124,8 +125,9 @@
             <td> <%= serve_order.qty %></td>
             <td> <%= serve_order.cost %></td>
             <td>
-                <form action="/upp_empl" method="post">
-                  <input type="hidden" name="id" value="<%= emp.id %>">
+                <form action="/upp_allotwaiter1" method="post">
+                  <input type="hidden" name="order_id" value="<%= order_left.order_id %>">
+                  <input type="hidden" name="order_id" value="<%= order_left.dish_id %>">
                     <button class="btn" type="submit">Allot Serve Order</button> 
                    
                 </form>
