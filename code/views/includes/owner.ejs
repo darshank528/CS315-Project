@@ -46,8 +46,8 @@
             <td> <%= emp.experience %></td>
             <td> <%= emp.role %></td>
             <td>
-                <form action="/up_empl" method="get">
-                  <input type="hidden" name="id" value="<%= emp.id %>"">
+                <form action="/upp_empl" method="post">
+                  <input type="hidden" name="id" value="<%= emp.id %>">
                     <button class="btn" type="submit">Update</button> 
                    
                 </form>

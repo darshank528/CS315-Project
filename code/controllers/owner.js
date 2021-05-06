@@ -134,6 +134,25 @@ module.exports = {
 
   },
 
+  uppemp_post: function(req, res){
+    
+    const id = req.body.id;
+    console.log(id);
+
+    Owner
+    .getinfo(id)
+    .then((value)=>{
+    res.render('./includes/up_empl_get' , {
+      pageTitle: 'Update Employee',
+      path: '/includes/up_empl_get',
+      editing: false,  
+      info:value.rows       
+    });
+  })
+  .catch(err=>console.log(err));
+
+  },
+
   Add_Inv: function(req, res){
     res.render('./includes/add_inv' , {
       pageTitle: 'Add Inventory',

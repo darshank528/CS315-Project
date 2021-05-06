@@ -11,6 +11,7 @@ const ownRo = require('./routes/owner');
 const invRo = require('./routes/invent');
 const emp_maRo = require('./routes/empl');
 const upemp = require('./routes/up_empl');
+const uppemp = require('./routes/upp_empl');
 
 const app = express();
 app.set('view engine', 'ejs');
@@ -25,5 +26,6 @@ app.use('/owner',ownRo);
 app.use('/invent',invRo);
 app.use('/empl',emp_maRo);
 app.use('/up_empl',upemp);
+app.use('/upp_empl',uppemp);
 
 app.listen(3000);
