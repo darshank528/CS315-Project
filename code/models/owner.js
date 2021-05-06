@@ -99,7 +99,7 @@ module.exports = {
 
 	async up_empl(id, aname, gender, age, salary, role, exp, occ, tcdm)
 	{	
-		await db.query('UPDATE STAFF SET NAME_fn=$2, gender=$3, age=$4, salary=$5, role=$6, experience=$7, occupied=$8, tcdm=$9) WHERE ID=$1;', [id, aname, gender, age, salary, role, exp, occ, tcdm]);
+		await db.query('UPDATE STAFF SET NAME_fn=$2, gender=$3, age=$4, salary=$5, role=$6, experience=$7, occupied=$8, tcdm=$9 WHERE ID=$1;', [id, aname, gender, age, salary, role, exp, occ, tcdm]);
 		
 		return Promise.resolve(0);
 	},
