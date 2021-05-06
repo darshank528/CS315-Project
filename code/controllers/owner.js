@@ -1,4 +1,4 @@
-const { get_all, get_orders_all, get_cooks_all, get_serves_all, get_users_all } = require('./../models/owner');
+const { get_all, get_orders_all, get_cooks_all, get_serves_all, get_users_all, get_orders_left, get_orders_to_serve } = require('./../models/owner');
 var Owner = require('./../models/owner');
 
 module.exports = {
@@ -45,7 +45,15 @@ module.exports = {
       e = value5;
       return get_users_all();
     })
-    .then((value6)=> {
+    .then((value6)=>{
+      f = value6;
+      return get_orders_left();
+    })
+    .then((value7)=>{
+      g = value7;
+      return get_orders_to_serve();
+    })
+    .then((value8)=> {
       res.render('./includes/owner' , {
         pageTitle: 'Owner\'s page',
         path: '/includes/owner',
@@ -55,7 +63,9 @@ module.exports = {
         orders_all: c.rows,
         cooks_all: d.rows,
         serves_all: e.rows,
-        users_all: value6.rows
+        users_all: f.rows,
+        orders_left: g.rows,
+        orders_to_serve: value8.rows
       });
     })
     .catch(err=>console.log(err));

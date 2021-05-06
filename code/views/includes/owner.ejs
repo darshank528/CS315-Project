@@ -57,6 +57,85 @@
 
 
         <% } %>
+        </table>
+  </div>
+
+  <div class="grid">
+    <h1 class="product__title"> Allot Order Left
+    </h1>
+
+    <table class="table table-bordered table-dark">
+        <thead>
+          <tr>
+            <th scope="col">Order_ID</th>
+            <th scope="col">Dish_ID</th>
+            <th scope="col">Quantity_Ordered</th>
+            <th scope="col">Cost</th>
+            <th scope="col">Allot Order</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+        <% for (var i = 0; i < orders_left.length; i++) { %>
+        <% var order_left = orders_left[i]; %>
+        <tr>
+            <th scope="row"><%= order_left.order_id %></th>
+            <td> <%= order_left.dish_id %></td>
+            <td> <%= order_left.qty %></td>
+            <td> <%= order_left.cost %></td>
+            <td>
+                <form action="/upp_empl" method="post">
+                  <input type="hidden" name="id" value="<%= emp.id %>">
+                    <button class="btn" type="submit">Allot Order</button> 
+                   
+                </form>
+            </td>
+
+            </tr>
+
+
+        <% } %>
+        </table>
+  </div>
+
+  <div class="grid">
+    <h1 class="product__title"> Allot Order to Serve
+    </h1>
+
+    <table class="table table-bordered table-dark">
+        <thead>
+          <tr>
+            <th scope="col">Order_ID</th>
+            <th scope="col">Dish_ID</th>
+            <th scope="col">Quantity_Ordered</th>
+            <th scope="col">Cost</th>
+            <th scope="col">Allot serve order</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+        <% for (var i = 0; i < orders_to_serve.length; i++) { %>
+        <% var serve_order = orders_to_serve[i]; %>
+        <tr>
+            <th scope="row"><%= serve_order.order_id %></th>
+            <td> <%= serve_order.dish_id %></td>
+            <td> <%= serve_order.qty %></td>
+            <td> <%= serve_order.cost %></td>
+            <td>
+                <form action="/upp_empl" method="post">
+                  <input type="hidden" name="id" value="<%= emp.id %>">
+                    <button class="btn" type="submit">Allot Serve Order</button> 
+                   
+                </form>
+            </td>
+
+            </tr>
+
+
+        <% } %>
+        </table>
   </div>
 
   <div class="grid">
@@ -95,6 +174,7 @@
 
 
         <% } %>
+        </table>
   </div>
   
   <div class="grid">

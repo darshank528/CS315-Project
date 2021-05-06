@@ -55,6 +55,20 @@ module.exports = {
 		return inv_list;
 	},
 
+	async get_orders_left()
+	{	
+		var inv_list = await db.query('SELECT order_ID as order_id, dish_ID as dish_id, quantity_ordered as qty, cost as cost FROM orders where (order_ID, dish_ID) not in (select order_id, dish_ID from cooks);');
+		
+		return inv_list;
+	},
+
+	async get_orders_to_serve()
+	{	
+		var inv_list = await db.query('SELECT orders.order_ID as order_id, orders.dish_ID as dish_id, quantity_ordered as qty, cost as cost FROM orders,cooks where (orders.order_ID, orders.dish_ID) = (cooks.order_ID,cooks.dish_ID) and cooks.completed = 1 and (orders.order_ID, orders.dish_ID) not in (select order_id, dish_ID from delivers);');
+		
+		return inv_list;
+	},
+
 	async add_inv(id, aname)
 	{	
 		await db.query('INSERT INTO INGREDIENTS VALUES ($1, $2);', [id, aname]);
