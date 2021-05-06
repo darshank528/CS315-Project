@@ -30,9 +30,9 @@
         <% if (editing) { %>
         <input type="hidden" value="<%= product.id %>" name="id">
         <input type="hidden" value="<%= product.name %>" name="name">
+        <% } %>
         <input type="hidden" value="<%= o_id %>" name="o_id">
         <input type="hidden" value="<%= d_id %>" name="d_id">
-        <% } %>
 
         <button class="btn" type="submit">Add</button>
         
