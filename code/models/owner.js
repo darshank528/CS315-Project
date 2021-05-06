@@ -36,14 +36,14 @@ module.exports = {
 
 	async get_cooks_all()
 	{	
-		var inv_list = await db.query('SELECT staff.name_FN as name, count(*) as num_orders FROM orders, cooks, staff where cooks.dish_id = orders.dish_id and cooks.order_id = orders.order_id and cooks.id = staff.id group by staff.name_FN;');
+		var inv_list = await db.query('SELECT staff.name_FN as name, count(*) as num_orders FROM orders, cooks, staff where cooks.dish_id = orders.dish_id and cooks.order_id = orders.order_id and cooks.id = staff.id group by staff.name_FN order by num_orders DESC;');
 		
 		return inv_list;
 	},
 
 	async get_serves_all()
 	{	
-		var inv_list = await db.query('SELECT staff.name_FN as name, count(*) as num_orders FROM orders, delivers, staff where delivers.dish_id = orders.dish_id and delivers.order_id = orders.order_id and delivers.id = staff.id group by staff.name_FN;');
+		var inv_list = await db.query('SELECT staff.name_FN as name, count(*) as num_orders FROM orders, delivers, staff where delivers.dish_id = orders.dish_id and delivers.order_id = orders.order_id and delivers.id = staff.id group by staff.name_FN order by num_orders DESC;');
 		
 		return inv_list;
 	},

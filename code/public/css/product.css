@@ -27,4 +27,5 @@ color: #000000;
 .product__description {
     text-align: center;
 color: black;
+font-size: small;
 }
