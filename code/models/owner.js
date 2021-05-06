@@ -76,7 +76,7 @@ module.exports = {
 	},
 
 	async insert_into_delivers(waiter_id,waiter_name,order_id,dish_id){
-		await db.query('INSERT into delivers values ($1, $2, $3, 0);', [waiter_id, waiter_name, dish_id]);
+		await db.query('INSERT into delivers values ($1, $2, $3, 0);', [waiter_id, order_id, dish_id]);
 		
 		return Promise.resolve(0);
 	},

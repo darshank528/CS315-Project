@@ -87,7 +87,7 @@
             <td>
                 <form action="/upp_allotcook1" method="post">
                   <input type="hidden" name="order_id" value="<%= order_left.order_id %>">
-                  <input type="hidden" name="order_id" value="<%= order_left.dish_id %>">
+                  <input type="hidden" name="dish_id" value="<%= order_left.dish_id %>">
                     <button class="btn" type="submit">Allot Order</button> 
                    
                 </form>
@@ -127,7 +127,7 @@
             <td>
                 <form action="/upp_allotwaiter1" method="post">
                   <input type="hidden" name="order_id" value="<%= order_left.order_id %>">
-                  <input type="hidden" name="order_id" value="<%= order_left.dish_id %>">
+                  <input type="hidden" name="dish_id" value="<%= order_left.dish_id %>">
                     <button class="btn" type="submit">Allot Serve Order</button> 
                    
                 </form>
