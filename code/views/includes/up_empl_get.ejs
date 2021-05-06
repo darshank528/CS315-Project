@@ -12,47 +12,47 @@
 <%- include('nav.ejs') %>
 <main>
 
-    <form class="product-form" action="/empl" method="POST">
+    <form class="product-form" action="/up_empl" method="POST">
         
         <div class="form-control">
             <label for="id">ID (Don't change)</label>
-            <input type="number" name="id" id="id" value="<%= idd[0].id %>">
+            <input type="number" name="id" id="id" value="<%= info[0].id %>">
         </div>
 
         <div class="form-control">
             <label for="name">Name</label>
-            <input type="text" name="name" id="name" value="<% if (editing) { %><%= product.name %><% } %>">
+            <input type="text" name="name" id="name" value="<% if (editing) { %><%= product.name %><% } else { %> <%= info[0].name %>  <% } %>">">
         </div>
         <div class="form-control">
             <label for="gender">Gender</label>
-            <input type="text" name="gender" id="gender" value="<% if (editing) { %><%= product.gender %><% } %>">
+            <input type="text" name="gender" id="gender" value="<% if (editing) { %><%= product.gender %><% } else { %> <%= info[0].gender %>  <% } %>">">
         </div>
         <div class="form-control">
             <label for="age">Age</label>
-            <input type="number" name="age" id="age" value="<% if (editing) { %><%= product.age %><% } %>">
+            <input type="number" name="age" id="age" value="<% if (editing) { %><%= product.age %><% } else { %> <%= info[0].age %>  <% } %>">">
         </div>
         <div class="form-control">
             <label for="salary">Salary</label>
-            <input type="text" name="salary" id="salary" value="<% if (editing) { %><%= product.salary %><% } %>">
+            <input type="text" name="salary" id="salary" value="<% if (editing) { %><%= product.salary %><% } else { %> <%= info[0].salary %>  <% } %>">">
         </div>
         <div class="form-control">
             <label for="role">Role</label>
-            <input type="text" name="role" id="role" value="<% if (editing) { %><%= product.role %><% } %>">
+            <input type="text" name="role" id="role" value="<% if (editing) { %><%= product.role %><% } else { %> <%= info[0].role %>  <% } %>">">
         </div>
         <div class="form-control">
             <label for="exp">Experience</label>
-            <input type="number" step="1" name="exp" id="exp" value="<% if (editing) { %><%= product.exp %><% } %>">
+            <input type="number" step="1" name="exp" id="exp" value="<% if (editing) { %><%= product.exp %><% } else { %> <%= info[0].experience %>  <% } %>">">
         </div>
         <div class="form-control">
             <label for="occ">Occupied?</label>
-            <input type="number" name="occ" id="occ" value="<% if (editing) { %><%= product.occ %><% } %>">
+            <input type="number" name="occ" id="occ" value="<% if (editing) { %><%= product.occ %><%} else { %> <%= info[0].occupied %>  <% } %>">
         </div>
         <div class="form-control">
             <label for="tcdm">TCDM</label>
-            <input type="number" name="tcdm" id="tcdm" value="<% if (editing) { %><%= product.tcdm %><% } %>">
+            <input type="number" name="tcdm" id="tcdm" value="<% if (editing) { %><%= product.tcdm %><% } else { %> <%= info[0].tcdm %>  <% } %>">">
         </div>
 
-        <input type="hidden" value="<%= idd[0].id %>" name="id">
+        <input type="hidden" value="<%= info[0].id %>" name="id">
         <% if (editing) { %>
         <input type="hidden" value="<%= product.name %>" name="name">
         <input type="hidden" value="<%= product.gender %>" name="gender">
@@ -62,6 +62,16 @@
         <input type="hidden" value="<%= product.exp %>" name="exp">
         <input type="hidden" value="<%= product.occ %>" name="occ">
         <input type="hidden" value="<%= product.tcdm %>" name="tcdm">
+        <%} else { %>
+
+            <input type="hidden" value="<%= info[0].name %>" name="name">
+            <input type="hidden" value="<%= info[0].gender %>" name="gender">
+            <input type="hidden" value="<%= info[0].age %>" name="age">
+            <input type="hidden" value="<%= info[0].salary %>" name="salary">
+            <input type="hidden" value="<%= info[0].role %>" name="role">
+            <input type="hidden" value="<%= info[0].exp %>" name="exp">
+            <input type="hidden" value="<%= info[0].occ %>" name="occ">
+            <input type="hidden" value="<%= info[0].tcdm %>" name="tcdm">
         <% } %>
 
         <button class="btn" type="submit">Add</button>

@@ -13,6 +13,13 @@ module.exports = {
 		return employee_list;
 	},
 
+	async getinfo(id)
+	{	
+		var employee = await db.query('SELECT * FROM Staff where id=$1;', [id]);
+		
+		return employee;
+	},
+
 	async get_inv_all()
 	{	
 		var inv_list = await db.query('SELECT * FROM ingredients;');
@@ -34,9 +41,24 @@ module.exports = {
 		return Promise.resolve(0);
 	},
 
-	async add_empl(aname, gender, age, salary, role, exp, occ, tcdm)
+	async getid()
 	{	
-		await db.query('INSERT INTO STAFF (NAME_fn, gender, age, salary, role, experience, occupied, tcdm) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) returning id;', [aname, gender, age, salary, role, exp, occ, tcdm]);
+		var idd = await db.query('SELECT MAX(ID)+1 as id FROM STAFF;');
+		
+		return idd;
+	},
+
+
+	async add_empl(id, aname, gender, age, salary, role, exp, occ, tcdm)
+	{	
+		await db.query('INSERT INTO STAFF (id, NAME_fn, gender, age, salary, role, experience, occupied, tcdm) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9);', [id, aname, gender, age, salary, role, exp, occ, tcdm]);
+		
+		return Promise.resolve(0);
+	},
+
+	async up_empl(id, aname, gender, age, salary, role, exp, occ, tcdm)
+	{	
+		await db.query('UPDATE STAFF SET NAME_fn=$2, gender=$3, age=$4, salary=$5, role=$6, experience=$7, occupied=$8, tcdm=$9) WHERE ID=$1;', [id, aname, gender, age, salary, role, exp, occ, tcdm]);
 		
 		return Promise.resolve(0);
 	},

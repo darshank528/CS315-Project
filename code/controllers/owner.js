@@ -55,13 +55,82 @@ module.exports = {
   OrderHistory: function(req,res){
 
   },
+  UpdateEmpl: function(req, res){
+
+    const id = req.body.id;
+    const name = req.body.name;
+    const gender = req.body.gender;
+    const age = req.body.age;
+    const salary = BigInt(req.body.salary);
+    const role = req.body.role;
+    const exp = req.body.exp;
+    const occ = req.body.occ;
+    const tcdm = req.body.tcdm;
+
+
+    Owner
+    .add_empl(id, name, gender, age, salary, role, exp, occ, tcdm)
+    .then(()=>{
+      setTimeout(function(){ res.redirect('/owner'); }, 1000);      
+    })
+    .catch(err=>console.log(err));
+
+  },
 
   Add_Empl: function(req, res){
+    
+    Owner
+    .getid()
+    .then((value)=>{
     res.render('./includes/add_empl' , {
       pageTitle: 'Add Employee',
       path: '/includes/add_empl',
-      editing: false         
+      editing: false,  
+      idd:value.rows       
     });
+  })
+  .catch(err=>console.log(err));
+
+  },
+
+  upemp_post: function(req, res){
+
+    const id = req.body.id;
+    const name = req.body.name;
+    const gender = req.body.gender;
+    const age = req.body.age;
+    const salary = BigInt(req.body.salary);
+    const role = req.body.role;
+    const exp = req.body.exp;
+    const occ = req.body.occ;
+    const tcdm = req.body.tcdm;
+
+
+    Owner
+    .up_empl(id, name, gender, age, salary, role, exp, occ, tcdm)
+    .then(()=>{
+      setTimeout(function(){ res.redirect('/owner'); }, 1000);      
+    })
+    .catch(err=>console.log(err));
+
+  },
+
+  upemp_get: function(req, res){
+    
+    console.log(req.body.id);
+
+    Owner
+    .getinfo(req.body.id)
+    .then((value)=>{
+    res.render('./includes/up_empl_get' , {
+      pageTitle: 'Update Employee',
+      path: '/includes/up_empl_get',
+      editing: false,  
+      info:value.rows       
+    });
+  })
+  .catch(err=>console.log(err));
+
   },
 
   Add_Inv: function(req, res){
