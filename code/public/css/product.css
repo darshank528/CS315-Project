@@ -12,8 +12,9 @@
 }
 
 .product__title {
-    font-size: 1.2rem;
+    font-size: 2rem;
     text-align: center;
+    font-weight: bold;
 color: #000000;
 }
 

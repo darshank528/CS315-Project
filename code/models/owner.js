@@ -50,7 +50,7 @@ module.exports = {
 
 	async get_users_all()
 	{	
-		var inv_list = await db.query('SELECT customers.name_FN as name, count(*) as num_orders FROM orders, customers where customers.id = orders.id group by customers.id;');
+		var inv_list = await db.query('SELECT customers.name_FN as name, count(*) as num_orders FROM orders, customers where customers.id = orders.id group by customers.id order by num_orders limit 20;');
 		
 		return inv_list;
 	},
