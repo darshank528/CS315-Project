@@ -123,16 +123,16 @@ module.exports = {
 
   upemp_post: function(req, res){
 
+    console.log(req.body);
     const id = req.body.id;
-    const name = req.body.name;
-    const gender = req.body.gender;
-    const age = req.body.age;
-    //const salary = BigInt(req.body.salary);
-    const salary = BigInt("0");
-    const role = req.body.role;
-    const exp = req.body.exp;
-    const occ = req.body.occ;
-    const tcdm = req.body.tcdm;
+    const name = req.body.name[0];
+    const gender = req.body.gender[0];
+    const age = req.body.age[0];
+    const salary = BigInt(req.body.salary[0]);
+    const role = req.body.role[0];
+    const exp = req.body.exp[0];
+    const occ = req.body.occ[0];
+    const tcdm = req.body.tcdm[0];
 
 
     Owner
