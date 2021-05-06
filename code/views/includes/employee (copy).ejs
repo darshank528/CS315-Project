@@ -23,53 +23,62 @@
                   
 						<div class="form-group row">
             
-							<label for="name" class="col-sm-6 col-form-label">Name</label>
-							<div class="col-sm-6">
+							<label for="name" class="col-sm-2 col-form-label">Name</label>
+							<div class="col-sm-10">
 							<input type="text" disabled="disabled" name="name" id="name" value="<%= pro.name_fn %>">
 							</div>
 						
 						</div>
 						<div class="form-group row">
             
-							<label for="gender" class="col-sm-6 col-form-label">Gender</label>
-							<div class="col-sm-6">
-							<input type="text" disabled="disabled" name="gender" id="gender" value="<%= pro.gender %>">
+							<label for="name" class="col-sm-2 col-form-label">Name</label>
+							<div class="col-sm-10">
+							<input type="text" disabled="disabled" name="name" id="name" value="<%= pro.name_fn %>">
 							</div>
 						
 						</div>
 						<div class="form-group row">
             
-							<label for="age" class="col-sm-6 col-form-label">Age</label>
-							<div class="col-sm-6">
-							<input type="text" disabled="disabled" name="age" id="age" value="<%= pro.age %>">
+							<label for="name" class="col-sm-2 col-form-label">Name</label>
+							<div class="col-sm-10">
+							<input type="text" disabled="disabled" name="name" id="name" value="<%= pro.name_fn %>">
 							</div>
 						
 						</div>
 						<div class="form-group row">
             
-							<label for="name" class="col-sm-6 col-form-label">Experience</label>
-							<div class="col-sm-6">
-							<input type="text" disabled="disabled" name="exp" id="exp" value="<%= pro.experience %>">
+							<label for="name" class="col-sm-2 col-form-label">Name</label>
+							<div class="col-sm-10">
+							<input type="text" disabled="disabled" name="name" id="name" value="<%= pro.name_fn %>">
 							</div>
 						
 						</div>
 						<div class="form-group row">
             
-							<label for="name" class="col-sm-6 col-form-label">Salary</label>
-							<div class="col-sm-6">
-							<input type="text" disabled="disabled" name="salary" id="salary" value="<%= pro.salary %>">
+							<label for="name" class="col-sm-2 col-form-label">Name</label>
+							<div class="col-sm-10">
+							<input type="text" disabled="disabled" name="name" id="name" value="<%= pro.name_fn %>">
 							</div>
 						
 						</div>
-						<div class="form-group row">
-            
-							<label for="name" class="col-sm-6 col-form-label">Role</label>
-							<div class="col-sm-6">
-							<input type="text" disabled="disabled" name="role" id="role" value="<%= pro.role %>">
-							</div>
-						
-						</div>
-					
+                        <h3 class="product__description">Name: 
+                            <%= pro.name_fn %>
+                        </h3>
+						<h3 class="product__description">Gender: 
+                            <%= pro.gender %>
+                        </h3>
+                        <h3 class="product__description">Age: 
+                            <%= pro.age %>
+                        </h3>
+						<h3 class="product__description">Experience: 
+                            <%= pro.experience %>
+                        </h3>
+						<h3 class="product__description">Salary: 
+                            <%= pro.salary %>
+                        </h3>
+						<h3 class="product__description">Role: 
+                            <%= pro.role %>
+                        </h3>
                     </div>
     </article>
         <% } %>
