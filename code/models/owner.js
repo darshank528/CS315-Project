@@ -48,6 +48,12 @@ module.exports = {
 		return idd;
 	},
 
+	async get_inv_id()
+	{	
+		var idd = await db.query('SELECT MAX(ingredient_ID)+1 as id FROM ingredients;');
+		
+		return idd;
+	},
 
 	async add_empl(id, aname, gender, age, salary, role, exp, occ, tcdm)
 	{	

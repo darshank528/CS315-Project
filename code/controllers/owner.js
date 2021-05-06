@@ -154,11 +154,19 @@ module.exports = {
   },
 
   Add_Inv: function(req, res){
+    
+    Owner
+    .get_inv_id()
+    .then((value)=>{
+    
     res.render('./includes/add_inv' , {
       pageTitle: 'Add Inventory',
       path: '/includes/add_inv',
-      editing: false          
+      editing: false,
+      idd:value.rows   
     });
+  })
+  .catch(err=>console.log(err));
   },
 
   AllotOrderToChef: function(req,res){
