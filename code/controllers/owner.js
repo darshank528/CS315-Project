@@ -537,7 +537,7 @@ module.exports = {
     })
     .then((value10)=>{
       m = value10;
-      return get_acc_range_info(s_date,e_date);
+      return get_acc_range_info(s_date, e_date);
     })
     .then((value9)=>{
       h = value9;
