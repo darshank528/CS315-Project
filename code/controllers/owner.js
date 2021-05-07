@@ -232,17 +232,22 @@ module.exports = {
     const dish_id = req.body.dish_id;
     console.log(order_id);
 
+    Owner.get_cook_id()
+    .then((value)=>{
+      res.render('./includes/allotcook1' , {
+        pageTitle: 'Allot Order to Chef',
+        path: '/includes/allotcook1',
+        editing: false,  
+        // info:value.rows,
+        o_id: order_id,
+        d_id: dish_id,
+        variable:value.rows      
+      });
+    })
     // Owner
     // .getinfo(id)
     // .then((value)=>{
-    res.render('./includes/allotcook1' , {
-      pageTitle: 'Allot Order to Chef',
-      path: '/includes/allotcook1',
-      editing: false,  
-      // info:value.rows,
-      o_id: order_id,
-      d_id: dish_id       
-    });
+ 
   // })
   // .catch(err=>console.log(err));
 

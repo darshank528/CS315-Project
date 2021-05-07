@@ -221,4 +221,10 @@ module.exports = {
 		var expmax = await db.query('SELECT cast(avg(Total_food_wasted) as decimal(8,2)) as avg_waste, cast(stddev(Total_food_wasted) as decimal(8,2)) as sd_waste from accounts;');
 		return expmax;
 	},
+
+	async get_cook_id()
+	{
+		var cook_id = await db.query('SELECT ID, name_fn, name_ln from staff where role="chef";');
+		return cook_id;
+	}
 }

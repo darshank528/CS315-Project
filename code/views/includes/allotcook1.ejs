@@ -25,7 +25,35 @@
         
             </div>
         </div>
-
+        <div>
+            Cooks list:<br>
+            <table class="w3-table w3-striped w3-bordered">
+                <thead>
+                  <tr style="background-color:coral;">
+            
+                    <th scope="col">ID</th>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                  </tr>
+                </thead>
+        
+                <tbody>
+            
+            <% for (var i = 0; i < product.cooks.length; i++) { %>
+                <% var cook = product.cooks[i]; %>
+                <tr>
+                
+                    <td> <%= cook.id %></td>
+                    <td> <%= cook.name_fn %></td>
+                    <td> <%= cook.name_ln %></td>
+        
+                    </tr>
+        
+        
+                <% } %>
+                </tbody>
+                </table>
+        </div>
         <input type="hidden" value="<%= o_id %>" name="o_id">
         <input type="hidden" value="<%= d_id %>" name="d_id">
         <% if (editing) { %>
