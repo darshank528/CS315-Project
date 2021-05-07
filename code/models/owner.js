@@ -91,7 +91,7 @@ module.exports = {
 
 	async get_acc_range_info(s,e)
 	{	
-		var inv_list = await db.query('SELECT * from accounts where $1 <= work_date AND work_date<=$2 order by work_date desc;',[s,e]);
+		var inv_list = await db.query('SELECT * from accounts where $1 <= work_date AND work_date<=$2 order by work_date asc;',[s,e]);
 		
 		return inv_list;
 	},
@@ -143,6 +143,8 @@ module.exports = {
 		return idd;
 	},
 
+	
+
 	async add_empl(id, aname, gender, age, salary, role, exp, occ, tcdm)
 	{	
 		await db.query('INSERT INTO STAFF (id, NAME_fn, gender, age, salary, role, experience, occupied, tcdm) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9);', [id, aname, gender, age, salary, role, exp, occ, tcdm]);
@@ -155,6 +157,62 @@ module.exports = {
 		await db.query('UPDATE STAFF SET NAME_fn=$2, gender=$3, age=$4, salary=$5, role=$6, experience=$7, occupied=$8, tcdm=$9 WHERE ID=$1;', [id, aname, gender, age, salary, role, exp, occ, tcdm]);
 		
 		return Promise.resolve(0);
+	},
+
+	async get_max_exp()
+	{
+		var expmax = await db.query('SELECT * from accounts where expenditure in (select max(expenditure) from accounts);');
+		return expmax;
+	},
+
+	async get_min_exp()
+	{
+		var expmax = await db.query('SELECT * from accounts where expenditure in (select min(expenditure) from accounts);');
+		return expmax;
+	},
+
+	async get_avg_exp()
+	{
+		var expmax = await db.query('SELECT avg(expenditure) as avg_exp, stddev(expenditure) as sd_exp from accounts;');
+		return expmax;
+	},
+
+	async get_max_prof()
+	{
+		var expmax = await db.query('SELECT * from accounts where restaurant_profit in (select max(restaurant_profit) from accounts);');
+		return expmax;
+	},
+
+	async get_min_prof()
+	{
+		var expmax = await db.query('SELECT * from accounts where restaurant_profit in (select min(restaurant_profit) from accounts);');
+		return expmax;
+	},
+
+
+	async get_avg_prof()
+	{
+		var expmax = await db.query('SELECT avg(restaurant_profit) as avg_prof, stddev(restaurant_profit) as sd_prof from accounts;');
+		return expmax;
+	},
+
+	async get_max_waste()
+	{
+		var expmax = await db.query('SELECT * from accounts where Total_food_wasted in (select max(Total_food_wasted) from accounts);');
+		return expmax;
+	},
+
+	async get_min_waste()
+	{
+		var expmax = await db.query('SELECT * from accounts where Total_food_wasted in (select min(Total_food_wasted) from accounts);');
+		return expmax;
+	},
+
+
+	async get_avg_waste()
+	{
+		var expmax = await db.query('SELECT avg(Total_food_wasted) as avg_waste, stddev(restaurant_profit) as sd_waste from accounts;');
+		return expmax;
 	},
 
 	create: function(data) {
