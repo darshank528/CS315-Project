@@ -39,7 +39,7 @@ module.exports = {
 		var orders_list_by_date = await db.query('SELECT work_date, name, sum(quantity_ordered) as qty, cast(avg(review) as decimal(4,2)) as rev from orders, dishes where orders.dish_id=dishes.dish_id and $1<=work_date and work_Date<=$2 group by work_date, orders.dish_id, dishes.name order by work_date desc;',[s,e]);
 		return orders_list_by_date;
 	},
-	
+
 	async get_cooks_all()
 	{	
 		var inv_list = await db.query('SELECT staff.name_FN as name, count(*) as num_orders FROM orders, cooks, staff where cooks.dish_id = orders.dish_id and cooks.order_id = orders.order_id and cooks.id = staff.id group by staff.name_FN order by num_orders DESC;');
@@ -85,6 +85,13 @@ module.exports = {
 	async get_acc_info()
 	{	
 		var inv_list = await db.query('SELECT * from accounts order by work_date desc;');
+		
+		return inv_list;
+	},
+
+	async get_acc_range_info(s,e)
+	{	
+		var inv_list = await db.query('SELECT * from accounts where $1 <= work_date AND work_date<=$2 order by work_date asc;',[s,e]);
 		
 		return inv_list;
 	},

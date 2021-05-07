@@ -19,6 +19,7 @@ const uppallotwaiter1 = require('./routes/upp_allotwaiter1');
 const delemp = require('./routes/del_empl');
 const delinv = require('./routes/del_inv');
 const rang = require('./routes/rangequery');
+const accrang = require('./routes/rangequery');
 var moment = require('moment');
 
 const app = express();
@@ -42,5 +43,6 @@ app.use('/upp_allotwaiter1', uppallotwaiter1);
 app.use('/del_empl',delemp);
 app.use('/del_inv',delinv);
 app.use('/rangequery',rang);
+app.use('/accountrange',accrang);
 
 app.listen(3000);
