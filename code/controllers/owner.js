@@ -244,13 +244,13 @@ module.exports = {
         cooks:value.rows      
       });
     })
-    .catch(err=>console.log(err));
-
     // Owner
     // .getinfo(id)
     // .then((value)=>{
  
   // })
+  .catch(err=>console.log(err));
+
   },
 
   allotcook1_get: function(req, res){
@@ -261,9 +261,9 @@ module.exports = {
     Owner
     .getinfo(id)
     .then((value)=>{
-    res.render('./includes/up_empl_get' , {
-      pageTitle: 'Update Employee',
-      path: '/includes/up_empl_get',
+      res.render('./includes/allotcook1' , {
+        pageTitle: 'Allot Order to Chef',
+        path: '/includes/allotcook1',
       editing: false,  
       info:value.rows       
     });
@@ -344,9 +344,9 @@ module.exports = {
     Owner
     .getinfo(id)
     .then((value)=>{
-    res.render('./includes/up_empl_get' , {
-      pageTitle: 'Update Employee',
-      path: '/includes/up_empl_get',
+      res.render('./includes/allotwaiter1' , {
+        pageTitle: 'Allot Order to Waiter',
+        path: '/includes/allotwaiter1',
       editing: false,  
       info:value.rows       
     });
@@ -371,10 +371,10 @@ module.exports = {
       // info:value.rows,
       o_id: order_id,
       d_id: dish_id,
-      waiters: value.rows     
+      waiters: value.rows    
     });
   })
-  //.catch(err=>console.log(err));
+  .catch(err=>console.log(err));
 
   },
 

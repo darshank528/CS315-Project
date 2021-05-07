@@ -234,4 +234,3 @@ module.exports = {
 		return waiter_id;
 	}
 }
-}
