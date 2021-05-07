@@ -36,7 +36,7 @@ module.exports = {
 
 	async get_orders_by_date(s,e)
 	{	
-		var orders_list_by_date = await db.query('SELECT name, count(*) as num_orders FROM orders, dishes where dishes.dish_id = orders.dish_id AND s<=Work_Date AND Work_Date <=e group by dishes.dish_id;');
+		var orders_list_by_date = await db.query('SELECT work_date, name, sum(quantity_ordered) as qty, cast(avg(review) as decimal(4,2)) as rev from orders, dishes where orders.dish_id=dishes.dish_id and $1<=work_date and work_Date<=$2 group by work_date, orders.dish_id, dishes.name order by work_date desc;',[s,e]);
 		return orders_list_by_date;
 	},
 	

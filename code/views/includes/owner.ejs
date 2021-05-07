@@ -321,16 +321,31 @@
     <a id="user_anal"><h1 class="product__title"> Time series
     </h1></a>
 
-    <form action = "/rangequery" method="POST">
+    <form class="product-form" action = "/rangequery" method="POST">
+      <div class="form-group row">
+            
       <label for="range_start">Start date:</label>
       <input type="date" id="range_start" name="range_start"
-         value="2020-01-01"
+         value="<% if (editing) { %><%= product.range_start %><% } %>"
          min="2020-01-01" max="2021-12-31">
+        </div>
+
+      <div class="form-group row">
+            
       <label for="range_end">End date:</label>
       <input type="date" id="range_end" name="range_end"
-          value="2021-12-31"
+          value="<% if (editing) { %><%= product.range_end %><% } %>"
           min="2020-01-01" max="2021-12-31">
-        <p><button>Submit</button></p>
+      </div>
+
+      <% if (editing) { %>
+        <input type="hidden" value="<%= product.range_start %>" name="range_start">
+        <input type="hidden" value="<%= product.range_end %>" name="range_end">
+      <% } %>
+
+
+      <p><button class="btn" type="submit">Filter</button></p>
+
     </form>
     
   </div>

@@ -1,4 +1,4 @@
-const { get_all, get_orders_all, get_cooks_all, get_serves_all, get_users_all, get_orders_left, get_orders_to_serve, get_acc_info, get_order_history } = require('./../models/owner');
+const { get_all, get_orders_all, get_cooks_all, get_serves_all, get_users_all, get_orders_left, get_orders_to_serve, get_acc_info, get_order_history, get_orders_by_date } = require('./../models/owner');
 var Owner = require('./../models/owner');
 var moment = require('moment');
 
@@ -424,10 +424,70 @@ module.exports = {
     const s_date = req.body.range_start;
     const e_date = req.body.range_end;
 
+    var a=0;
+    var b=0;
+    var c=0;
+    var d=0;
+    var e=0;
+    var f=0;
+    var g=0;
+    var h=0;
+
     Owner
-    .get_orders_by_date(s_date, e_date)
+    .get_inv_all()
     .then((value1)=>{
-      setTimeout(function(){ res.redirect('/owner'); }, 1000);      
+      a = value1;
+      return get_all();
+    })
+    .then((value2)=>{
+      b = value2;
+      return get_orders_all();
+    })
+    .then((value3)=>{
+      c = value3;
+      return get_cooks_all();
+    })
+    .then((value4)=>{
+      d = value4;
+      return get_serves_all();
+    })
+    .then((value5)=>{
+      e = value5;
+      return get_users_all();
+    })
+    .then((value6)=>{
+      f = value6;
+      return get_orders_left();
+    })
+    .then((value7)=>{
+      g = value7;
+      return get_orders_by_date(s_date, e_date);
+    })
+    .then((value10)=>{
+      m = value10;
+      return get_acc_info();
+    })
+    .then((value9)=>{
+      h = value9;
+      return get_orders_to_serve();
+    })
+    .then((value8)=> {
+      res.render('./includes/owner' , {
+        pageTitle: 'Owner\'s page',
+        path: '/includes/owner',
+        editing:false,
+        empl: b.rows,
+        invs: a.rows,          
+        orders_all: c.rows,
+        cooks_all: d.rows,
+        serves_all: e.rows,
+        users_all: f.rows,
+        orders_left: g.rows,
+        accs: h.rows,
+        hist: m.rows,
+        orders_to_serve: value8.rows,
+        moment: moment
+      });
     })
     .catch(err=>console.log(err));
   }
