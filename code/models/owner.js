@@ -63,14 +63,14 @@ module.exports = {
 
 	async get_orders_left()
 	{	
-		var inv_list = await db.query('SELECT order_ID as order_id, dish_ID as dish_id, quantity_ordered as qty, cost as cost FROM orders where (order_ID, dish_ID) not in (select order_id, dish_ID from cooks) order by order_id, dish_ID;');
+		var inv_list = await db.query('SELECT order_ID as order_id, dishes.dish_ID as dish_id, name as dish, quantity_ordered as qty, dishes.cost as cost FROM orders, dishes where dishes.dish_id = orders.dish_id and (order_ID, dishes.dish_ID) not in (select order_id, dishes.dish_ID from cooks) order by order_id, dishes.dish_ID;');
 		
 		return inv_list;
 	},
 
 	async get_orders_to_serve()
 	{	
-		var inv_list = await db.query('SELECT orders.order_ID as order_id, orders.dish_ID as dish_id, quantity_ordered as qty, cost as cost FROM orders,cooks where (orders.order_ID, orders.dish_ID) = (cooks.order_ID,cooks.dish_ID) and cooks.completed = 1 and (orders.order_ID, orders.dish_ID) not in (select order_id, dish_ID from delivers) order by order_id, dish_ID;');
+		var inv_list = await db.query('SELECT orders.order_ID as order_id, name as dish, orders.dish_ID as dish_id, quantity_ordered as qty FROM orders,cooks, dishes where dishes.dish_id = orders.dish_id and (orders.order_ID, orders.dish_ID) = (cooks.order_ID,cooks.dish_ID) and cooks.completed = 1 and (orders.order_ID, orders.dish_ID) not in (select order_id, dish_ID from delivers) order by order_id, dish_ID;');
 		
 		return inv_list;
 	},

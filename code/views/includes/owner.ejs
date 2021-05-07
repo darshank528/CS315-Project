@@ -107,8 +107,8 @@
           <tr style="background-color:coral;">
             <th scope="col">Order_ID</th>
             <th scope="col">Dish_ID</th>
+            <th scope="col">Dish Name</th>
             <th scope="col">Quantity_Ordered</th>
-            <th scope="col">Cost</th>
             <th scope="col">Allot Order</th>
           </tr>
         </thead>
@@ -120,8 +120,8 @@
         <tr>
             <th scope="row"><%= order_left.order_id %></th>
             <td> <%= order_left.dish_id %></td>
+            <td> <%= order_left.dish %></td>
             <td> <%= order_left.qty %></td>
-            <td> <%= order_left.cost %></td>
             <td>
                 <form action="/upp_allotcook1" method="post">
                   <input type="hidden" name="order_id" value="<%= order_left.order_id %>">
@@ -152,8 +152,8 @@
           <tr style="background-color:coral;">
             <th scope="col">Order_ID</th>
             <th scope="col">Dish_ID</th>
+            <th scope="col">Dish Name</th>
             <th scope="col">Quantity_Ordered</th>
-            <th scope="col">Cost</th>
             <th scope="col">Allot serve order</th>
           </tr>
         </thead>
@@ -165,8 +165,8 @@
         <tr>
             <th scope="row"><%= serve_order.order_id %></th>
             <td> <%= serve_order.dish_id %></td>
+            <td> <%= serve_order.dish %></td>
             <td> <%= serve_order.qty %></td>
-            <td> <%= serve_order.cost %></td>
             <td>
                 <form action="/upp_allotwaiter1" method="post">
                   <input type="hidden" name="order_id" value="<%= serve_order.order_id %>">
