@@ -1,5 +1,9 @@
-
-#top-nav ul {
+.order_btn{
+  margin-left: 8em;
+  height: 2.5em;
+  margin-top: 0.8em;
+}
+ul {
   float: right;
   list-style-type: none;
   padding: 10px;
@@ -7,11 +11,11 @@
   overflow: hidden;
 }
 
-#top-nav ul li {
+ul li {
   display: inline-block;
 }
 
-#top-nav ul li a {
+ul li a {
   font-family: "Roboto", sans-serif;
   font-weight: 600;
   font-size: 14px;
@@ -22,7 +26,7 @@
   color: black;
 }
 
-#top-nav .top-button {
+.top-button {
   padding: 9px 34px;
   border: 0px;
   border-radius: 4px;
@@ -54,7 +58,16 @@
    background-color: rgb(170, 210, 54);
 
 }
+.bootstrap-select .bs-ok-default::after {
+    width: 0.3em;
+    height: 0.6em;
+    border-width: 0 0.1em 0.1em 0;
+    transform: rotate(45deg) translateY(0.5rem);
+}
 
+.btn.dropdown-toggle:focus {
+    outline: none !important;
+}
 /* The search field */
 .myInput {
   box-sizing: border-box;

@@ -6,62 +6,113 @@
  <link rel="stylesheet" href="/css/forms.css">
  <link rel="stylesheet" href="/css/product.css">
 </head>
-
+<%- include('nav.ejs') %>
 <body>
 
-<%- include('nav.ejs') %>
 
-<main>
-<div id="section-8">
+
+<div>
  <ul class="section8-ul">
-  				<li class="section8-li">
+	<% for (var i = 0; i < menu.length; i++) { %>
 
-    			  <a class="section8-a" href="#section-8">
-                  <img src="images/dish.jpg" style="height:10em; width:15em; display:block;margin: auto; ">
-    			  <h2 class="section8-h2">Dish 1</h2>
-    			  <p class="section8-p"></p>
-    			  </a>
-  				</li>
-  				<li class="section8-li">
-    				<a class="section8-a" href="#section-8">
-                    <img src="images/dish.jpg" style="height:10em; width:15em;display:block;margin:auto;">
-    			    <h2 class="section8-h2" >Dish 2</h2>
-    		        <p class="section8-p"></p>
-    				</a>
-  				</li>
-			</ul>
-    </div>
+	<li class="section8-li">
 
+	<a class="section8-a" href="#section-8">
+	<img src="images/dish.jpg" style="height:10em; width:15em; display:block;margin: auto; ">
+	  <h2 class="section8-h2"> <%= menu[i].name %> </h2>
+	  <p class="section8-p"><%= menu[i].cuisine %>, <%= menu[i].category %>, <%= menu[i].cost %></p>
+	  <form action="/order" method="post" >
+		<input type="hidden" name="id" value="<%= menu[i].dish_id %>">
+		
+		<div class="col-sm-2" style="display:flex">
+			
+			<div class="input-group">
+				<span class="input-group-btn">
+					<button onclick="decrement('quantity_<%= menu[i].dish_id %>')" type="button" class="quantity-left-minus btn btn-danger btn-number"  data-type="minus" data-field="">
+					<span class="glyphicon glyphicon-minus"></span>
+					</button>
+				</span>
+				<input type="text" style="width:4em;height:2.5em; margin-bottom:1em" id="quantity_<%= menu[i].dish_id %>" name="quantity" class="form-control input-number" value="0">
+				<span class="input-group-btn">
+					<button onclick="increment('quantity_<%= menu[i].dish_id %>')" type="button" class="quantity-right-plus btn btn-success btn-number" data-type="plus" data-field="">
+						<span class="glyphicon glyphicon-plus"></span>
+					</button>
+				</span>
+			</div>
+		</div>
+	  	<button class="order_btn" type="submit">Order</button>
+	  </form>
+	  </a>
+		</li>
+	<% } %>
 
-	<div class="grid">
+</ul>
+</div>
+<div>
+	
 		<h1 class="product__title"> My Order History
 		</h1>
-		<% for (var i = 0; i < orders.length; i++) { %>
-		<% var order = orders[i]; %>
-		<article class="card product-item">
-		<header class="card__header">
-		<h1 class="product__title"> Order ID  <%= order.order_id %>
-		</h1>
-		</header>
 		
-		<div class="card__content">
-		
-		<h3 class="product__description">Dish: 
-		<%= order.dish %>
-		</h3>
-		<h3 class="product__description">Quantity Ordered: 
-		<%= order.qty %>
-		</h3>
-		<h3 class="product__description">Review: 
-		<%= order.review %>
-		</h3>
-		<h3 class="product__description">Cost: 
-		<%= order.cost %>
-		</h3>
-		</div>
-		</article>
-		<% } %>
-		</div>
+		<div class="grid">
+			
 
-	</main>
+		<table class="table table-bordered table-dark">
+			<thead>
+				<tr>
+				<th scope="col">Order No.</th>
+				<th scope="col">Order ID</th>
+				<th scope="col">Date</th>
+				<th scope="col">Dish</th>
+				<th scope="col">Quantity</th>
+				<th scope="col">Review</th>
+				<th scope="col">Cost</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% for (var i = 0; i < orders.length; i++) { %>
+					<% var order = orders[i]; %>
+						<tr>
+						<th scope="row"><%= i+1 %></th>
+						<td> <%= order.order_id %></td>
+						<td> <%= order.work_date.getDate() %>/<%= order.work_date.getMonth() %>/<%= order.work_date.getFullYear() %></td>
+						<td> <%= order.dish %></td>
+						<td>  <%= order.qty %>
+						</td>
+						<td> <%= order.review %>
+						</td>
+						<td> <%= order.cost %></td>
+					</tr>
+					<% } %>
+			</tbody>
+		</table>
+	
+		
+		</div>
+</div>
+
+	
+
+<script>
+			
+
+	
+	function increment(e){
+			
+			e = "#".concat(e);
+			console.log(e);
+			var quantity = parseInt($(e).val());
+			console.log(quantity);
+			$(e).val(quantity + 1);
+
+	};
+
+	function decrement(e){
+			e = "#".concat(e);
+			var quantity = parseInt($(e).val());
+			if(quantity>0){
+				$(e).val(quantity - 1);
+			}
+	};
+		
+</script>
 </body>

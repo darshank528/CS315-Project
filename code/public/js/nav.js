@@ -17,3 +17,29 @@ function filterFunction(i) {
     }
   }
 }
+
+$(function () {
+    $('.selectpicker').selectpicker();
+});
+
+function filter(){
+  var cui = $('#cuisine').val();
+  var cat = $('#category').val();
+
+  var cost = $('#cost').val();
+  console.log(cui,cat,cost);
+
+  const data = JSON.stringify({
+  cui: cui,
+  cat:cat,
+  cost:cost
+  })
+
+  
+  var xhr = new XMLHttpRequest();
+  xhr.open("POST", "/", true);
+  xhr.setRequestHeader('Content-Type', 'application/json');
+  xhr.send( data
+  );
+
+}
