@@ -7,6 +7,13 @@ const { promiseImpl } = require('ejs');
 
 module.exports = {
 
+	async getProfile(user_id)
+	{	
+		var user_list = await db.query('SELECT * FROM customers where id = $1;', [user_id]);
+		
+		return user_list;
+	},
+
 	async getOrders(user_id)
 	{	
 		

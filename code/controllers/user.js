@@ -32,6 +32,8 @@ module.exports = {
         var cost = !req.body.cost? null: req.body.cost;
         console.log(cuisine,category,cost);
         
+        User1.getProfile(uname)
+        .then((proff)=>{
         User1.getTopDishes(uname)
         .then((topd)=>{
         User1.getOrders(uname)
@@ -47,6 +49,7 @@ module.exports = {
                 orders: value.rows,
                 menu: menu.rows,
                 topds: topd.rows,
+                prof: proff.rows,
                 isAuth: req.cookies.isAuth  
               });
           }).catch(err=>console.log(err));
@@ -54,6 +57,8 @@ module.exports = {
         .catch(err=>console.log(err));
       })
       .catch(err=>console.log(err));
+    })
+    .catch(err=>console.log(err));
       
   },
   loadhome2: function(req,res){
@@ -158,7 +163,9 @@ module.exports = {
     return res.redirect("/login");
     return Promise.resolve(0);
   },
-  GetProfile: function(req, res){
+  user_prof_get: function(req, res){
+
+
 
   },
 

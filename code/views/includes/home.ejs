@@ -121,7 +121,62 @@
 		
 		</div>
 </div>
-	
+
+<a id = "user_profile">
+</a>
+<div style="width:800px; margin:0 auto; padding: 100px;">
+	<% for (var i = 0; i < prof.length; i++) { %>
+	<% var pro = prof[i]; %>
+<form class="product-form" action="/employee" method="GET">
+
+					<h1 class="product__title"> My Profile 
+					</h1>
+			  
+					<div class="form-group row">
+		
+						<label for="name" class="col-sm-6 col-form-label">First Name</label>
+						<div class="col-sm-6">
+						<input type="text" disabled="disabled" name="name_fn" id="name_fn" value="<%= pro.name_fn %>">
+						</div>
+					
+					</div>
+					<div class="form-group row">
+		
+						<label for="name" class="col-sm-6 col-form-label">Middle Name</label>
+						<div class="col-sm-6">
+						<input type="text" disabled="disabled" name="name_mn" id="name_mn" value="<%= pro.name_mn %>">
+						</div>
+					
+					</div>
+					<div class="form-group row">
+		
+						<label for="name" class="col-sm-6 col-form-label">Last Name</label>
+						<div class="col-sm-6">
+						<input type="text" disabled="disabled" name="name_ln" id="name_ln" value="<%= pro.name_ln %>">
+						</div>
+					
+					</div>
+					<div class="form-group row">
+		
+						<label for="gender" class="col-sm-6 col-form-label">Gender</label>
+						<div class="col-sm-6">
+						<input type="text" disabled="disabled" name="gender" id="gender" value="<%= pro.gender %>">
+						</div>
+					
+					</div>
+					<div class="form-group row">
+		
+						<label for="age" class="col-sm-6 col-form-label">Age</label>
+						<div class="col-sm-6">
+						<input type="text" disabled="disabled" name="age" id="age" value="<%= pro.age %>">
+						</div>
+					
+					</div>
+				
+				
+			</form>
+	<% } %>
+</div>
 
 <script>
 			
