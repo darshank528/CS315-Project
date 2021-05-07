@@ -31,19 +31,16 @@ module.exports = {
 	async getcost(did){
 		return await db.query("SELECT cost from dishes where dish_id=$1",[did]);
 	},
-	async addOrder(uid,did,date,time,day,quant, cost, ord_id)
+	addOrder(uid,did,date,time,day,quant, cost, ord_id)
 	{
 				
-		await db.query('UPDATE INGREDIENTS SET QUANTITY = QUANTITY-$1 WHERE ingredient_id in (select ingredient_id from contains where dish_id = $2);',[quant, did])
+		db.query('UPDATE INGREDIENTS SET QUANTITY = QUANTITY-$1 WHERE ingredient_id in (select ingredient_id from contains where dish_id = $2);',[quant, did])
 		.then(()=>{
-			return db.query('INSERT INTO orders( order_id, id ,dish_id,work_date,work_time,day,quantity_ordered,review,cost ) VALUES ($1, $2, $3, $4, $5,$6,$7, $8, $9);', [ord_id,uid, did,date,time,day,quant,1,cost.rows[0].cost*quant])
+			db.query('INSERT INTO orders( order_id, id ,dish_id,work_date,work_time,day,quantity_ordered,review,cost ) VALUES ($1, $2, $3, $4, $5,$6,$7, $8, $9);', [ord_id,uid, did,date,time,day,quant,1,cost.rows[0].cost*quant])
 		})
-		.then(()=>{
-				console.log(res);
-				return  Promise.resolve(res);
-			}) 
-			.catch(err=>console.log(err));
+		.catch(err=>console.log(err));
 		
+		return  Promise.resolve(0);
 	}
 
 }
