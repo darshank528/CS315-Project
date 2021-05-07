@@ -18,6 +18,7 @@ const allotwaiter1 = require('./routes/allotwaiter1');
 const uppallotwaiter1 = require('./routes/upp_allotwaiter1');
 const delemp = require('./routes/del_empl');
 const delinv = require('./routes/del_inv');
+const incinv = require('./routes/inc_inv');
 const rang = require('./routes/rangequery');
 const accrang = require('./routes/accountrange');
 const analrep1 = require('./routes/analreport1')
@@ -45,6 +46,7 @@ app.use('/allotwaiter1',allotwaiter1);
 app.use('/upp_allotwaiter1', uppallotwaiter1);
 app.use('/del_empl',delemp);
 app.use('/del_inv',delinv);
+app.use('/inc_inv',incinv);
 app.use('/rangequery',rang);
 app.use('/accountrange',accrang);
 app.use('/analreport1',analrep1);

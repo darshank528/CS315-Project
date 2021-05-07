@@ -63,14 +63,14 @@ module.exports = {
 
 	async get_orders_left()
 	{	
-		var inv_list = await db.query('SELECT order_ID as order_id, dish_ID as dish_id, quantity_ordered as qty, cost as cost FROM orders where (order_ID, dish_ID) not in (select order_id, dish_ID from cooks) order by order_id, dish_ID;');
+		var inv_list = await db.query('SELECT order_ID as order_id, dishes.dish_ID as dish_id, name as dish, quantity_ordered as qty, dishes.cost as cost FROM orders, dishes where dishes.dish_id = orders.dish_id and (order_ID, dishes.dish_ID) not in (select order_id, dishes.dish_ID from cooks) order by order_id, dishes.dish_ID;');
 		
 		return inv_list;
 	},
 
 	async get_orders_to_serve()
 	{	
-		var inv_list = await db.query('SELECT orders.order_ID as order_id, orders.dish_ID as dish_id, quantity_ordered as qty, cost as cost FROM orders,cooks where (orders.order_ID, orders.dish_ID) = (cooks.order_ID,cooks.dish_ID) and cooks.completed = 1 and (orders.order_ID, orders.dish_ID) not in (select order_id, dish_ID from delivers) order by order_id, dish_ID;');
+		var inv_list = await db.query('SELECT orders.order_ID as order_id, name as dish, orders.dish_ID as dish_id, quantity_ordered as qty FROM orders,cooks, dishes where dishes.dish_id = orders.dish_id and (orders.order_ID, orders.dish_ID) = (cooks.order_ID,cooks.dish_ID) and cooks.completed = 1 and (orders.order_ID, orders.dish_ID) not in (select order_id, dish_ID from delivers) order by order_id, dish_ID;');
 		
 		return inv_list;
 	},
@@ -110,7 +110,7 @@ module.exports = {
 
 	async add_inv(id, aname)
 	{	
-		await db.query('INSERT INTO INGREDIENTS VALUES ($1, $2);', [id, aname]);
+		await db.query('INSERT INTO INGREDIENTS VALUES ($1, $2, 1);', [id, aname]);
 		
 		return Promise.resolve(0);
 	},
@@ -118,6 +118,13 @@ module.exports = {
 	async del_inv(id)
 	{	
 		await db.query('DELETE FROM INGREDIENTS WHERE ingredient_ID=$1;', [id]);
+		
+		return Promise.resolve(0);
+	},
+
+	async inc_inv(id)
+	{	
+		await db.query('UPDATE INGREDIENTS SET QUANTITY = QUANTITY+1 WHERE ingredient_ID=$1;', [id]);
 		
 		return Promise.resolve(0);
 	},
@@ -214,4 +221,16 @@ module.exports = {
 		var expmax = await db.query('SELECT cast(avg(Total_food_wasted) as decimal(8,2)) as avg_waste, cast(stddev(Total_food_wasted) as decimal(8,2)) as sd_waste from accounts;');
 		return expmax;
 	},
+
+	async get_cook_id()
+	{
+		var cook_id = await db.query('SELECT distinct cooks.ID as id, name_fn, name_ln from staff, cooks where cooks.id = staff.id;');
+		return cook_id;
+	},
+
+	async get_waiter_id()
+	{
+		var waiter_id = await db.query('SELECT distinct delivers.ID as id, name_fn, name_ln from staff, delivers where delivers.id = staff.id;');
+		return waiter_id;
+	}
 }

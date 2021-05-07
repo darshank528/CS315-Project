@@ -232,19 +232,24 @@ module.exports = {
     const dish_id = req.body.dish_id;
     console.log(order_id);
 
+    Owner.get_cook_id()
+    .then((value)=>{
+      res.render('./includes/allotcook1' , {
+        pageTitle: 'Allot Order to Chef',
+        path: '/includes/allotcook1',
+        editing: false,  
+        // info:value.rows,
+        o_id: order_id,
+        d_id: dish_id,
+        cooks:value.rows      
+      });
+    })
     // Owner
     // .getinfo(id)
     // .then((value)=>{
-    res.render('./includes/allotcook1' , {
-      pageTitle: 'Allot Order to Chef',
-      path: '/includes/allotcook1',
-      editing: false,  
-      // info:value.rows,
-      o_id: order_id,
-      d_id: dish_id       
-    });
+ 
   // })
-  // .catch(err=>console.log(err));
+  .catch(err=>console.log(err));
 
   },
 
@@ -256,9 +261,9 @@ module.exports = {
     Owner
     .getinfo(id)
     .then((value)=>{
-    res.render('./includes/up_empl_get' , {
-      pageTitle: 'Update Employee',
-      path: '/includes/up_empl_get',
+      res.render('./includes/allotcook1' , {
+        pageTitle: 'Allot Order to Chef',
+        path: '/includes/allotcook1',
       editing: false,  
       info:value.rows       
     });
@@ -314,6 +319,22 @@ module.exports = {
     
 
   },
+
+
+  incinv_post: function(req, res){
+    
+    const id = req.body.id;
+    console.log(req.body);
+
+    Owner
+    .inc_inv(id)
+    .then(()=>{
+      setTimeout(function(){ res.redirect('/owner'); }, 1000);  
+    })
+  .catch(err=>console.log(err));
+    
+
+  },
   // Waiter
   upallotwaiter1_get: function(req, res){
     
@@ -323,9 +344,9 @@ module.exports = {
     Owner
     .getinfo(id)
     .then((value)=>{
-    res.render('./includes/up_empl_get' , {
-      pageTitle: 'Update Employee',
-      path: '/includes/up_empl_get',
+      res.render('./includes/allotwaiter1' , {
+        pageTitle: 'Allot Order to Waiter',
+        path: '/includes/allotwaiter1',
       editing: false,  
       info:value.rows       
     });
@@ -340,19 +361,20 @@ module.exports = {
     const dish_id = req.body.dish_id;
     console.log(order_id);
 
-    // Owner
-    // .getinfo(id)
-    // .then((value)=>{
+    Owner
+    .get_waiter_id()
+    .then((value)=>{
     res.render('./includes/allotwaiter1' , {
       pageTitle: 'Allot Order to Waiter',
       path: '/includes/allotwaiter1',
       editing: false,  
       // info:value.rows,
       o_id: order_id,
-      d_id: dish_id       
+      d_id: dish_id,
+      waiters: value.rows    
     });
-  // })
-  // .catch(err=>console.log(err));
+  })
+  .catch(err=>console.log(err));
 
   },
 

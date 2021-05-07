@@ -5,6 +5,9 @@
 <link rel="stylesheet" href="/css/home.css">
  <link rel="stylesheet" href="/css/forms.css">
  <link rel="stylesheet" href="/css/product.css">
+ <link rel="stylesheet" href="/css/table.css">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 
 <body>
@@ -37,6 +40,42 @@
         
     </form>
     </div>
+
+    <div class="grid">
+    
+          <br>
+          <br>
+          <br>
+          <br><h1 class="product__title"> Waiters List for Reference
+        </h1>
+    
+    <table class="w3-table w3-striped w3-bordered">
+        <thead>
+          <tr style="background-color:coral;">
+    
+            <th scope="col">ID</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+          </tr>
+        </thead>
+
+        <tbody>
+    
+    <% for (var i = 0; i < waiters.length; i++) { %>
+        <% var waiter = waiters[i]; %>
+        <tr>
+            
+            <th scope="row"><%= waiter.id %></th>
+            <td> <%= waiter.name_fn %></td>
+            <td> <%= waiter.name_ln %></td>
+
+            </tr>
+
+
+        <% } %>
+        </tbody>
+        </table>
+        </div>
 
 </main>
 </body>

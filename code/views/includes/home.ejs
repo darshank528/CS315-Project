@@ -10,9 +10,42 @@
 
 <body>
 
+	<div>
+		<!-- {forlopp}
+		document.getElementbyId().append("<options>$(cook.id)</options>") -->
+			<h1 class="product__title"> Recommended Dishes
+			</h1>
+			
+			<div class="grid" id="auto">
+				
+	
+			<table class="table table-bordered table-dark">
+				<thead>
+					<tr>
+					<th scope="col">Dish </th>
+					<th scope="col">#Orders</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% for (var i = 0; i < topds.length; i++) { %>
+						<% var topd = topds[i]; %>
+							<tr>
+							<th scope="row"><%= topd.dish %></th>
+							<td> <%= topd.num_ordered %></td>
+						</tr>
+						<% } %>
+				</tbody>
+			</table>
+		
+			
+			</div>
+	</div>
 
 
 <div>
+	<a id="order">
+
+	</a>
  <ul class="section8-ul">
 	<% for (var i = 0; i < menu.length; i++) { %>
 
@@ -66,7 +99,6 @@
 				<th scope="col">Date</th>
 				<th scope="col">Dish</th>
 				<th scope="col">Quantity</th>
-				<th scope="col">Review</th>
 				<th scope="col">Cost</th>
 				</tr>
 			</thead>
@@ -80,8 +112,6 @@
 						<td> <%= order.dish %></td>
 						<td>  <%= order.qty %>
 						</td>
-						<td> <%= order.review %>
-						</td>
 						<td> <%= order.cost %></td>
 					</tr>
 					<% } %>
@@ -92,7 +122,61 @@
 		</div>
 </div>
 
-	
+<a id = "user_profile">
+</a>
+<div style="width:800px; margin:0 auto; padding: 100px;">
+	<% for (var i = 0; i < prof.length; i++) { %>
+	<% var pro = prof[i]; %>
+<form class="product-form" action="/employee" method="GET">
+
+					<h1 class="product__title"> My Profile 
+					</h1>
+			  
+					<div class="form-group row">
+		
+						<label for="name" class="col-sm-6 col-form-label">First Name</label>
+						<div class="col-sm-6">
+						<input type="text" disabled="disabled" name="name_fn" id="name_fn" value="<%= pro.name_fn %>">
+						</div>
+					
+					</div>
+					<div class="form-group row">
+		
+						<label for="name" class="col-sm-6 col-form-label">Middle Name</label>
+						<div class="col-sm-6">
+						<input type="text" disabled="disabled" name="name_mn" id="name_mn" value="<%= pro.name_mn %>">
+						</div>
+					
+					</div>
+					<div class="form-group row">
+		
+						<label for="name" class="col-sm-6 col-form-label">Last Name</label>
+						<div class="col-sm-6">
+						<input type="text" disabled="disabled" name="name_ln" id="name_ln" value="<%= pro.name_ln %>">
+						</div>
+					
+					</div>
+					<div class="form-group row">
+		
+						<label for="gender" class="col-sm-6 col-form-label">Gender</label>
+						<div class="col-sm-6">
+						<input type="text" disabled="disabled" name="gender" id="gender" value="<%= pro.gender %>">
+						</div>
+					
+					</div>
+					<div class="form-group row">
+		
+						<label for="age" class="col-sm-6 col-form-label">Age</label>
+						<div class="col-sm-6">
+						<input type="text" disabled="disabled" name="age" id="age" value="<%= pro.age %>">
+						</div>
+					
+					</div>
+				
+				
+			</form>
+	<% } %>
+</div>
 
 <script>
 			

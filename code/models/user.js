@@ -7,6 +7,13 @@ const { promiseImpl } = require('ejs');
 
 module.exports = {
 
+	async getProfile(user_id)
+	{	
+		var user_list = await db.query('SELECT * FROM customers where id = $1;', [user_id]);
+		
+		return user_list;
+	},
+
 	async getOrders(user_id)
 	{	
 		
@@ -14,6 +21,14 @@ module.exports = {
 		
 		return order_list;
 	},
+
+	async getTopDishes(user_id)
+	{
+		var order_list = await db.query('SELECT dishes.dish_id, dishes.name as dish, count(*) as num_ordered  FROM  orders,dishes where id = $1 and dishes.dish_id = orders.dish_id group by dishes.dish_id, dishes.name order by num_ordered desc limit 5;', [user_id]);
+		
+		return order_list;
+	},
+	
 	async getMenu(cuisine, category, cost)
 	{	
 		if(cost!=null){
@@ -33,16 +48,14 @@ module.exports = {
 	},
 	async addOrder(uid,did,date,time,day,quant, cost, ord_id)
 	{
+				
+		await db.query('UPDATE INGREDIENTS SET QUANTITY = QUANTITY-$1 WHERE ingredient_id in (select ingredient_id from contains where dish_id = $2);',[quant, did])
+		//.then(()=>{
+		await db.query('INSERT INTO orders( order_id, id ,dish_id,work_date,work_time,day,quantity_ordered,review,cost ) VALUES ($1, $2, $3, $4, $5,$6,$7, $8, $9);', [ord_id,uid, did,date,time,day,quant,1,cost.rows[0].cost*quant])
+		//})
+		//.catch(err=>console.log(err));
 		
-			
-			return await db.query('INSERT INTO orders( order_id, id ,dish_id,work_date,work_time,day,quantity_ordered,review,cost ) VALUES ($1, $2, $3, $4, $5,$6,$7, $8, $9);', [ord_id,uid, did,date,time,day,quant,1,cost.rows[0].cost*quant])
-			.then((res)=>{
-				console.log(res);
-				return  Promise.resolve(res);
-			}) 
-			.catch(err=>console.log(err));
-		
-		
+		return  Promise.resolve(0);
 	}
 
 }
