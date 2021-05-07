@@ -314,6 +314,22 @@ module.exports = {
     
 
   },
+
+
+  incinv_post: function(req, res){
+    
+    const id = req.body.id;
+    console.log(req.body);
+
+    Owner
+    .inc_inv(id)
+    .then(()=>{
+      setTimeout(function(){ res.redirect('/owner'); }, 1000);  
+    })
+  .catch(err=>console.log(err));
+    
+
+  },
   // Waiter
   upallotwaiter1_get: function(req, res){
     

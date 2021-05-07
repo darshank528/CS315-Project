@@ -110,7 +110,7 @@ module.exports = {
 
 	async add_inv(id, aname)
 	{	
-		await db.query('INSERT INTO INGREDIENTS VALUES ($1, $2);', [id, aname]);
+		await db.query('INSERT INTO INGREDIENTS VALUES ($1, $2, 1);', [id, aname]);
 		
 		return Promise.resolve(0);
 	},
@@ -118,6 +118,13 @@ module.exports = {
 	async del_inv(id)
 	{	
 		await db.query('DELETE FROM INGREDIENTS WHERE ingredient_ID=$1;', [id]);
+		
+		return Promise.resolve(0);
+	},
+
+	async inc_inv(id)
+	{	
+		await db.query('UPDATE INGREDIENTS SET QUANTITY = QUANTITY+1 WHERE ingredient_ID=$1;', [id]);
 		
 		return Promise.resolve(0);
 	},

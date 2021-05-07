@@ -25,6 +25,10 @@
 <main>
 <div class="grid">
     <a id="my_employees">
+      <br>
+      <br>
+      <br>
+      <br>
     <h1 class="product__title"> My Employees
     </h1>
     </a>
@@ -83,7 +87,11 @@
   </div>
 
   <div class="grid">
-    <a id= "allot_order_left"><h1 class="product__title"> Allot Order Left
+    <a id= "allot_order_left">
+      <br>
+      <br>
+      <br>
+      <br><h1 class="product__title"> Allot Order Left
     </h1></a>
 
     <table class="w3-table w3-striped w3-bordered">
@@ -123,7 +131,12 @@
   </div>
 
   <div class="grid">
-    <a id= "allot_order_serve"><h1 class="product__title"> Allot Order to Serve
+    <a id= "allot_order_serve">
+      <br>
+      <br>
+      <br>
+      <br>
+      <h1 class="product__title"> Allot Order to Serve
     </h1></a>
 
     <table class="w3-table w3-striped w3-bordered">
@@ -163,7 +176,11 @@
   </div>
 
   <div class="grid">
-    <a id= "inventory"><h1 class="product__title"> Inventory
+    <a id= "inventory">
+      <br>
+      <br>
+      <br>
+      <br><h1 class="product__title"> Inventory
     </h1></a>
 
     <form action="/invent" method="get">
@@ -175,6 +192,7 @@
           <tr style="background-color:coral;">
             <th scope="col">ID</th>
             <th scope="col">Name</th>
+            <th scope="col">Quantity</th>
             <th scope="col">Increment</th>
             <th scope="col">Delete</th>
           </tr>
@@ -187,10 +205,12 @@
         <tr>
             <th scope="row"><%= inv.ingredient_id %></th>
             <td> <%= inv.ingredient_name %></td>
+            <td> <%= inv.quantity %></td>
             <td>
-                
+              <form action="/inc_inv" method="post">
+                <input type="hidden" name="id" value="<%= inv.ingredient_id %>">
                     <button class="btn" type="submit">Increment</button> 
-                    
+                  </form>
             </td>
             <td>
               <form action="/del_inv" method="post">
@@ -209,7 +229,11 @@
   </div>
   
   <div class="grid">
-    <a id= "order_anal"><h1 class="product__title"> Order History and Analytics
+    <a id= "order_anal">
+      <br>
+      <br>
+      <br>
+      <br><h1 class="product__title"> Order History and Analytics
     </h1></a>
 
     <table class="w3-table w3-striped w3-bordered">
@@ -236,7 +260,11 @@
   </div>
 
   <div class="grid">
-    <a id= "chef_anal"><h1 class="product__title"> Chef Analytics
+    <a id= "chef_anal">
+      <br>
+      <br>
+      <br>
+      <br><h1 class="product__title"> Chef Analytics
     </h1></a>
 
     <table class="w3-table w3-striped w3-bordered">
@@ -263,7 +291,11 @@
   </div>
 
   <div class="grid">
-    <a id= "waiter_anal"><h1 class="product__title"> Waiter Analytics
+    <a id= "waiter_anal">
+      <br>
+      <br>
+      <br>
+      <br><h1 class="product__title"> Waiter Analytics
     </h1></a>
 
     <table class="w3-table w3-striped w3-bordered">
@@ -290,7 +322,11 @@
   </div>
 
   <div class="grid">
-    <a id="user_anal"><h1 class="product__title"> User Analytics - Top 20 users
+    <a id="user_anal"><br>
+      <br>
+      <br>
+      <br>
+      <h1 class="product__title"> User Analytics - Top 20 users
     </h1></a>
 
     <table class="w3-table w3-striped w3-bordered">
@@ -320,7 +356,11 @@
   
 
   <div class="grid">
-    <a id="acc_info"><h1 class="product__title"> Time series
+    <a id="acc_info">
+      <br>
+      <br>
+      <br>
+      <br><h1 class="product__title"> Time series
     </h1></a>
 
     <form class="product-form" action = "/accountrange" method="POST">
@@ -361,7 +401,11 @@
   
 
   <div class="grid">
-    <a id= "acc_info1"><h1 class="product__title"> Restaurant Details
+    <a id= "acc_info1">
+      <br>
+      <br>
+      <br>
+      <br><h1 class="product__title"> Restaurant Details
     </h1></a>
 
     <table class="w3-table w3-striped w3-bordered">
@@ -393,7 +437,11 @@
 
 
   <div class="grid">
-    <a id="hist"><h1 class="product__title"> Time series
+    <a id="hist">
+      <br>
+      <br>
+      <br>
+      <br><h1 class="product__title"> Time series
     </h1></a>
 
     <form class="product-form" action = "/rangequery" method="POST">
@@ -425,7 +473,11 @@
   </div>
 
   <div class="grid">
-    <a id= "hist1"><h1 class="product__title"> Order History
+    <a id= "hist1">
+      <br>
+      <br>
+      <br>
+      <br><h1 class="product__title"> Order History
     </h1></a>
 
     <table class="w3-table w3-striped w3-bordered">
