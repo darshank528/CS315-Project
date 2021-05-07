@@ -1,7 +1,7 @@
 const { getinfo, get_acc_range_info, get_all, get_inv_all,
 get_orders_all, get_cooks_all, get_serves_all, 
 get_users_all, get_orders_left, get_orders_to_serve, 
-get_acc_info, get_order_history, get_orders_by_date } = require('./../models/owner');
+get_acc_info, get_order_history, get_orders_by_date, get_max_prof, get_min_prof, get_avg_prof, get_max_waste, get_min_waste , get_min_exp, get_avg_exp, get_avg_waste, get_max_exp} = require('./../models/owner');
 
 var Owner = require('./../models/owner');
 var moment = require('moment');
@@ -563,6 +563,72 @@ module.exports = {
         hist: m.rows,
         orders_to_serve: value8.rows,
         moment: moment
+      });
+    })
+    .catch(err=>console.log(err));
+  },
+
+  dispReport1: function(req,res){
+
+    var max_exp=0;
+    var min_exp=0;
+    var avg_exp=0;
+    var max_prof=0;
+    var min_prof=0;
+    var avg_prof=0;
+    var max_waste=0;
+    var min_waste=0;
+    var avg_waste=0;
+
+    Owner
+    .get_max_exp()
+    .then((value1)=>{
+      max_exp = value1;
+      return get_min_exp();
+    })
+    .then((value2)=>{
+      min_exp = value2;
+      return get_avg_exp();
+    })
+    .then((value3)=>{
+      avg_exp = value3;
+      return get_max_prof();
+    })
+    .then((value4)=>{
+      max_prof = value4;
+      return get_min_prof();
+    })
+    .then((value5)=>{
+      min_prof = value5;
+      return get_avg_prof();
+    })
+    .then((value6)=>{
+      avg_prof = value6;
+      return get_max_waste();
+    })
+    .then((value7)=>{
+      max_waste = value7;
+      return get_min_waste();
+    })
+    .then((value10)=>{
+      min_waste = value10;
+      return get_avg_waste();
+    })
+    .then((avg_waste)=> {
+      res.render('./includes/report1' , {
+        pageTitle: 'Report page',
+        path: '/includes/report1',
+        editing:false,
+        max_exp: max_exp.rows, 
+        min_exp: min_exp.rows, 
+        avg_exp: avg_exp.rows, 
+        max_prof: max_prof.rows, 
+        min_prof: min_prof.rows, 
+        avg_prof: avg_prof.rows, 
+        max_waste: max_waste.rows, 
+        min_waste: min_waste.rows, 
+        avg_waste: avg_waste.rows, 
+        moment:moment
       });
     })
     .catch(err=>console.log(err));

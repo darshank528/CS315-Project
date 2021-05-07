@@ -173,7 +173,7 @@ module.exports = {
 
 	async get_avg_exp()
 	{
-		var expmax = await db.query('SELECT avg(expenditure) as avg_exp, stddev(expenditure) as sd_exp from accounts;');
+		var expmax = await db.query('SELECT cast(avg(expenditure) as decimal(8,2)) as avg_exp, cast(stddev(expenditure) as decimal(8,2)) as sd_exp from accounts;');
 		return expmax;
 	},
 
@@ -192,7 +192,7 @@ module.exports = {
 
 	async get_avg_prof()
 	{
-		var expmax = await db.query('SELECT avg(restaurant_profit) as avg_prof, stddev(restaurant_profit) as sd_prof from accounts;');
+		var expmax = await db.query('SELECT cast(avg(restaurant_profit) as decimal(8,2)) as avg_prof, cast(stddev(restaurant_profit) as decimal(8,2)) as sd_prof from accounts;');
 		return expmax;
 	},
 
@@ -211,7 +211,7 @@ module.exports = {
 
 	async get_avg_waste()
 	{
-		var expmax = await db.query('SELECT avg(Total_food_wasted) as avg_waste, stddev(restaurant_profit) as sd_waste from accounts;');
+		var expmax = await db.query('SELECT cast(avg(Total_food_wasted) as decimal(8,2)) as avg_waste, cast(stddev(Total_food_wasted) as decimal(8,2)) as sd_waste from accounts;');
 		return expmax;
 	},
 

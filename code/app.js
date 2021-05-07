@@ -20,6 +20,7 @@ const delemp = require('./routes/del_empl');
 const delinv = require('./routes/del_inv');
 const rang = require('./routes/rangequery');
 const accrang = require('./routes/accountrange');
+const analrep1 = require('./routes/analreport1')
 var moment = require('moment');
 
 const app = express();
@@ -44,5 +45,6 @@ app.use('/del_empl',delemp);
 app.use('/del_inv',delinv);
 app.use('/rangequery',rang);
 app.use('/accountrange',accrang);
+app.use('/analreport1',analrep1);
 
 app.listen(3000);
