@@ -3,6 +3,7 @@ npm install express
 npm install pg  
 npm install bcrypt  
 npm install ejs  
+npm install moment --save
   
 SET UP the database.js file, Create a database called "restaurant"  
 Run node app.js after starting up postgres in another terminal  
