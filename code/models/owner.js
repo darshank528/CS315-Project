@@ -12,7 +12,9 @@ module.exports = {
 		
 		return employee_list;
 	},
-
+	async ing_to_be_ordered(){
+		return await db.query('select * from ingredients where quantity<10');
+	},
 	async getinfo(id)
 	{	
 		var employee = await db.query('SELECT * FROM Staff where id=$1;', [id]);

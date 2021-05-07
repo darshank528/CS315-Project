@@ -17,12 +17,12 @@ module.exports = {
 	async getOrders(staff_id, cook)
 	{	
 		if(cook){
-			var order_list = await db.query('SELECT cooks.id as id, order_id, cooks.dish_id as dish_id, completed, dishes.name as dish FROM cooks, dishes where id = $1 and dishes.dish_id = cooks.dish_id order by order_id, dish_id;', [staff_id]);
+			var order_list = await db.query('SELECT cooks.id as id, order_id, cooks.dish_id as dish_id, completed, dishes.name as dish FROM cooks, dishes where id = $1 and dishes.dish_id = cooks.dish_id order by order_id desc, dish_id ;', [staff_id]);
 		
 			return order_list;
 		}
 		else{
-			var order_list = await db.query('SELECT delivers.id as id, order_id, delivers.dish_id as dish_id, completed, dishes.name as dish FROM Delivers, dishes where id = $1 and dishes.dish_id = delivers.dish_id order by order_id, dish_id;', [staff_id]);
+			var order_list = await db.query('SELECT delivers.id as id, order_id, delivers.dish_id as dish_id, completed, dishes.name as dish FROM Delivers, dishes where id = $1 and dishes.dish_id = delivers.dish_id order by order_id desc, dish_id;', [staff_id]);
 		
 			return order_list;
 		}

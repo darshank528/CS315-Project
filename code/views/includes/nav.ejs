@@ -44,31 +44,38 @@
             <label class="text-white mb-3 lead">Filter by Cuisine</label>
             <!-- Multiselect dropdown -->
             <select id="cuisine" multiple data-style="bg-white rounded-pill px-4 py-3 shadow-sm " class="selectpicker w-100">
-                <option> Indian </option>
-                <option> Chinese </option>
+                <option value="indian"> Indian </option>
+                <option value="chinese"> Chinese </option>
             </select><!-- End -->
         </div>
         <div class="col-lg-3 mx-auto">
             <label class="text-white mb-3 lead">Meal Type</label>
             <!-- Multiselect dropdown -->
             <select id="category" multiple data-style="bg-white rounded-pill px-4 py-3 shadow-sm " class="selectpicker w-100">
-                <option> Starter </option>
-                <option> Main </option>
-                <option> Dessert </option>
+                <option value="starter"> Starter </option>
+                <option value="main"> Main </option>
+                <option value="dessert"> Dessert </option>
             </select><!-- End -->
         </div>
         <div class="col-lg-3 mx-auto">
             <label class="text-white mb-3 lead">Cost( Upper Cap)</label>
             <!-- Multiselect dropdown -->
             <select id="cost" data-style="bg-white rounded-pill px-4 py-3 shadow-sm " class="selectpicker w-100">
-                <option> 100 </option>
-                <option> 150 </option>
-                <option> 200 </option>
-                <option> 500 </option>
+                <option value="100"> 100 </option>
+                <option value="125"> 125 </option>
+                <option value="150"> 150 </option>
+                <option value="200"> 200 </option>
+                <option value="300"> 300 </option>
+                <option value="400"> 400 </option>
+                <option value="500"> 500 </option>
             </select><!-- End -->
         </div>
-        <form action="/">
-        <ul><li><button class="top-button" onclick=filter()> Filter </a></li?</ul>
+        <form method="POST" action="/filter">
+        <input type="hidden" name="cui" id="filter_cui"/>
+        <input type="hidden" name="cat" id="filter_cat"/>
+        <input type="hidden" name="cost" id="filter_cost"/>
+        <ul><li><button class="top-button" onclick="filter()"> Filter </a></li></ul>
+
         </form>
 </div>
 <link rel="stylesheet" href="/css/nav.css">

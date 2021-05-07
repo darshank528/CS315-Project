@@ -1,7 +1,7 @@
 const { getinfo, get_acc_range_info, get_all, get_inv_all,
 get_orders_all, get_cooks_all, get_serves_all, 
 get_users_all, get_orders_left, get_orders_to_serve, 
-get_acc_info, get_order_history, get_orders_by_date, get_max_prof, get_min_prof, get_avg_prof, get_max_waste, get_min_waste , get_min_exp, get_avg_exp, get_avg_waste, get_max_exp} = require('./../models/owner');
+get_acc_info, get_order_history, get_orders_by_date, get_max_prof, get_min_prof, get_avg_prof, get_max_waste, get_min_waste , get_min_exp, get_avg_exp, get_avg_waste, get_max_exp, ing_to_be_ordered} = require('./../models/owner');
 
 var Owner = require('./../models/owner');
 var moment = require('moment');
@@ -72,6 +72,10 @@ module.exports = {
       h = value9;
       return get_orders_to_serve();
     })
+    .then((value11)=>{
+      orders_to_serve = value11;
+      return ing_to_be_ordered();
+    })
     .then((value8)=> {
       res.render('./includes/owner' , {
         pageTitle: 'Owner\'s page',
@@ -86,7 +90,8 @@ module.exports = {
         orders_left: g.rows,
         accs: h.rows,
         hist: m.rows,
-        orders_to_serve: value8.rows,
+        orders_to_serve: orders_to_serve.rows,
+        ing_to_order: value8.rows,
         moment: moment,
         isAuth: req.cookies.isAuth  
 
@@ -463,7 +468,7 @@ module.exports = {
     var f=0;
     var g=0;
     var h=0;
-
+    var orders_to_serve;
     Owner
     .get_inv_all()
     .then((value1)=>{
@@ -502,6 +507,10 @@ module.exports = {
       h = value9;
       return get_orders_to_serve();
     })
+    .then((value11)=>{
+      orders_to_serve = value11;
+      return ing_to_be_ordered();
+    })
     .then((value8)=> {
       res.render('./includes/owner' , {
         pageTitle: 'Owner\'s page',
@@ -516,7 +525,8 @@ module.exports = {
         orders_left: g.rows,
         accs: h.rows,
         hist: m.rows,
-        orders_to_serve: value8.rows,
+        ing_to_order: value8.rows,
+        orders_to_serve: orders_to_serve.rows,
         moment: moment
       });
     })
@@ -535,7 +545,7 @@ module.exports = {
     var f=0;
     var g=0;
     var h=0;
-
+    var orders_to_serve;
     Owner
     .get_inv_all()
     .then((value1)=>{
@@ -574,6 +584,10 @@ module.exports = {
       h = value9;
       return get_orders_to_serve();
     })
+    .then((value11)=>{
+      orders_to_serve = value11;
+      return ing_to_be_ordered();
+    })
     .then((value8)=> {
       res.render('./includes/owner' , {
         pageTitle: 'Owner\'s page',
@@ -588,7 +602,8 @@ module.exports = {
         orders_left: g.rows,
         accs: h.rows,
         hist: m.rows,
-        orders_to_serve: value8.rows,
+        ing_to_order: value8.rows,
+        orders_to_serve: orders_to_serve.rows,
         moment: moment
       });
     })

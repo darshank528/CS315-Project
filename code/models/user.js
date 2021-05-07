@@ -24,18 +24,41 @@ module.exports = {
 
 	async getTopDishes(user_id)
 	{
-		var order_list = await db.query('SELECT dishes.dish_id, dishes.name as dish, count(*) as num_ordered  FROM  orders,dishes where id = $1 and dishes.dish_id = orders.dish_id group by dishes.dish_id, dishes.name order by num_ordered desc limit 5;', [user_id]);
+		var order_list = await db.query('SELECT dishes.dish_id, dishes.name as dish, sum(orders.quantity_ordered) as num_ordered  FROM  orders,dishes where id = $1 and dishes.dish_id = orders.dish_id group by dishes.dish_id, dishes.name order by num_ordered desc limit 5;', [user_id]);
 		
 		return order_list;
 	},
-	
+//	SELECT *  FROM  dishes where (cuisine in ("indian" , "chinese")) and  (category in ("main")) and (cost<=200);
 	async getMenu(cuisine, category, cost)
 	{	
 		if(cost!=null){
 			cost=parseInt(cost);
 		}
-		console.log("abc",cuisine,category,cost);
-		var order_list = await db.query('SELECT *  FROM  dishes where ( (cuisine=$1) or ($1 is null)) and ( (category=$2) or ($2 is null) ) and (cost<=$3 or $3 is null);',[cuisine,category,(cost)]);
+		var query = "SELECT *  FROM  dishes where";
+		if(cuisine!=null)
+			{
+				query+="(";
+				for( var i in cuisine){
+					console.log(i, cuisine[i]);
+					query+="cuisine=\'"+cuisine[i]+"\' OR ";
+				}
+				console.log(cuisine);
+				query = query.slice(0,-3)+") and ";
+				// cuisine = new Set(cuisine);//"'"+cuisine.join("' , '")+"'";
+		}
+		if(category!=null){
+			query+=" (";
+			for(var i in category){
+				query+="category=\'"+category[i]+"\' OR ";
+			}
+			query = query.slice(0,-3)+") and ";
+
+		}
+		
+		
+		console.log(query);
+		
+		var order_list = await db.query( query+' (cost<= $1 or $1 is null);',[(cost)]);
 		
 		return order_list;
 	},

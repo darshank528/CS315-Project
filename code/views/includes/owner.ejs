@@ -100,6 +100,40 @@
       <br>
       <br>
       <br>
+      <br><h1 class="product__title"> Ingredients Needed
+    </h1></a>
+
+    <table class="w3-table w3-striped w3-bordered">
+        <thead>
+          <tr style="background-color:coral;">
+            <th scope="col">Ing ID</th>
+            <th scope="col">Ing Name</th>
+            <th scope="col">Quantity</th>
+          </tr>
+        </thead>
+
+        <tbody>
+        
+        <% for (var i = 0; i < ing_to_order.length; i++) { %>
+        <% var order_left = ing_to_order[i]; %>
+        <tr>
+            <th scope="row"><%= order_left.ingredient_id %></th>
+            <td> <%= order_left.ingredient_name %></td>
+            <td> <%= order_left.quantity %></td>
+            
+            
+        </tr>
+
+
+        <% } %>
+        </table>
+  </div>
+
+  <div class="grid">
+    <a id= "allot_order_left">
+      <br>
+      <br>
+      <br>
       <br><h1 class="product__title"> Allot Order Left
     </h1></a>
 

@@ -20,8 +20,7 @@ module.exports = {
       });
   },
   loadhome: function(req,res){
-  	//res.render('./includes/home',{'pageTitle':"Home"});
-        //var topd = 0;
+  
         var uname = req.cookies.user;
         if(!uname){
           return res.redirect("/login");
@@ -62,28 +61,44 @@ module.exports = {
       
   },
   loadhome2: function(req,res){
-  	//res.render('./includes/home',{'pageTitle':"Home"});
+    console.log("pqrs",req.body,req.body.cui,req.body.cost,req.body.cat);
+    var uname = req.cookies.user;
+    if(!uname){
+      return res.redirect("/login");
+    }
+    console.log("isAuth",req.cookies.isAuth);
+    var cuisine = !req.body.cui? null: req.body.cui.split(",");
+    var category = !req.body.cat? null: req.body.cat.split(",");
+    var cost = !req.body.cost? null: req.body.cost;
+    console.log(cuisine,category,cost);
     
-        console.log(req.method,req.body);
-        var cuisine = !req.body.cui? null: req.body.cui;
-        var category = !req.body.cat? null: req.body.cat;
-        var cost = !req.body.cost? null: req.body.cost;
-        console.log(cuisine,category,cost);
-        User1.getOrders(20)
-        .then((value)=> {
-          User1.getMenu(cuisine,category,cost)
-          .then((menu)=> {
-              console.log("homemenu", menu.rows);
-              res.render('./includes/home' , {
-                pageTitle: 'My Profile',
-                path: '/includes/home',
-                editing:false,
-                orders: value.rows,
-                menu: menu.rows    
-              });
-          }).catch(err=>console.log(err));
-        })
-        .catch(err=>console.log(err));
+    User1.getProfile(uname)
+    .then((proff)=>{
+    User1.getTopDishes(uname)
+    .then((topd)=>{
+    User1.getOrders(uname)
+    .then((value)=> {
+      // console.log("ORDERS",value.rows);
+      User1.getMenu(cuisine,category,cost)
+      .then((menu)=> {
+          console.log("homemenu", menu.rows);
+          return res.render('./includes/home' , {
+            pageTitle: 'My Profile',
+            path: '/includes/home',
+            editing:false,
+            orders: value.rows,
+            menu: menu.rows,
+            topds: topd.rows,
+            prof: proff.rows,
+            isAuth: req.cookies.isAuth  
+          });
+      }).catch(err=>console.log(err));
+    })
+    .catch(err=>console.log(err));
+  })
+  .catch(err=>console.log(err));
+})
+.catch(err=>console.log(err))
       
   },
   loginPage: function(req,res){
@@ -131,6 +146,7 @@ module.exports = {
   },
   PlaceOrder: function(req, res){
     const dish_id=req.body.id;
+    console.log("ABCD",req.body);
     const quantity = req.body.quantity;
     console.log(quantity);
     var curr = new Date();

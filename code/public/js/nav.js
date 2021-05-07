@@ -28,6 +28,10 @@ function filter(){
 
   var cost = $('#cost').val();
   console.log(cui,cat,cost);
+  $('#filter_cui').val(cui);
+  $('#filter_cat').val(cat);
+  $('#filter_cost').val(cost);
+  console.log(cui,cat,cost);
 
   const data = JSON.stringify({
   cui: cui,
@@ -36,10 +40,10 @@ function filter(){
   })
 
   
-  var xhr = new XMLHttpRequest();
-  xhr.open("POST", "/", true);
-  xhr.setRequestHeader('Content-Type', 'application/json');
-  xhr.send( data
-  );
+  // var xhr = new XMLHttpRequest();
+  // xhr.open("POST", "/filter", true);
+  // xhr.setRequestHeader('Content-Type', 'application/json');
+  // xhr.send( data);
+  
 
 }

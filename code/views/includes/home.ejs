@@ -10,7 +10,7 @@
 
 <body>
 
-	<div>
+	<div style="margin:auto; left: 5vw;position: relative">
 		<!-- {forlopp}
 		document.getElementbyId().append("<options>$(cook.id)</options>") -->
 			<h1 class="product__title"> Recommended Dishes
@@ -32,6 +32,29 @@
 							<tr>
 							<th scope="row"><%= topd.dish %></th>
 							<td> <%= topd.num_ordered %></td>
+							<td>
+							<form action="/order" method="post" >
+								<input type="hidden" name="id" value="<%= topd.dish_id %>">
+								
+								<div class="col-sm-2" style="display:flex">
+									
+									<div class="input-group">
+										<span class="input-group-btn">
+											<button onclick="decrement('quantity_<%= topd.dish_id %>11')" type="button" class="quantity-left-minus btn btn-danger btn-number"  data-type="minus" data-field="">
+											<span class="glyphicon glyphicon-minus"></span>
+											</button>
+										</span>
+										<input type="text" style="width:4em;height:2.5em; margin-bottom:1em" id="quantity_<%= topd.dish_id %>11" name="quantity" class="form-control input-number" value="0">
+										<span class="input-group-btn">
+											<button onclick="increment('quantity_<%= topd.dish_id %>11')" type="button" class="quantity-right-plus btn btn-success btn-number" data-type="plus" data-field="">
+												<span class="glyphicon glyphicon-plus"></span>
+											</button>
+										</span>
+									</div>
+								</div>
+								  <button class="order_btn" type="submit">Order</button>
+							  </form>
+							</td>
 						</tr>
 						<% } %>
 				</tbody>
@@ -108,7 +131,7 @@
 						<tr>
 						<th scope="row"><%= i+1 %></th>
 						<td> <%= order.order_id %></td>
-						<td> <%= order.work_date.getDate() %>/<%= order.work_date.getMonth() %>/<%= order.work_date.getFullYear() %></td>
+						<td> <%= order.work_date.getDate() %>/<%= order.work_date.getMonth()+1 %>/<%= order.work_date.getFullYear() %></td>
 						<td> <%= order.dish %></td>
 						<td>  <%= order.qty %>
 						</td>
