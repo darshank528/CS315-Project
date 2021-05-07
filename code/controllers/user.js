@@ -1,5 +1,9 @@
 var User = require('./../models/login');
 var User1 = require('./../models/user');
+var employee = require('./../models/user');
+var moment = require('moment');
+const { request } = require('express');
+
 module.exports = {
   createUser: function(req, res) {
     User.create(req.body)
@@ -17,23 +21,29 @@ module.exports = {
   },
   loadhome: function(req,res){
   	//res.render('./includes/home',{'pageTitle':"Home"});
-    
-        console.log(req.method,req.body);
+        
+        var uname = req.cookies.user;
+        if(!uname){
+          return res.redirect("/login");
+        }
+        console.log("isAuth",req.cookies.isAuth);
         var cuisine = !req.body.cui? null: req.body.cui;
         var category = !req.body.cat? null: req.body.cat;
         var cost = !req.body.cost? null: req.body.cost;
         console.log(cuisine,category,cost);
-        User1.getOrders(20)
+        User1.getOrders(uname)
         .then((value)=> {
+          console.log("ORDERS",value.rows);
           User1.getMenu(cuisine,category,cost)
           .then((menu)=> {
               console.log("homemenu", menu.rows);
-              res.render('./includes/home' , {
+              return res.render('./includes/home' , {
                 pageTitle: 'My Profile',
                 path: '/includes/home',
                 editing:false,
                 orders: value.rows,
-                menu: menu.rows    
+                menu: menu.rows,
+                isAuth: req.cookies.isAuth  
               });
           }).catch(err=>console.log(err));
         })
@@ -74,7 +84,7 @@ module.exports = {
     var uname = req.body.username;
     var passwd = req.body.password;
     var isAuth = -1; var val1;
-    var id = 1;
+    
     User.authenticate_customer(uname,passwd).then((val)=>{
       val1 = val;
         return User.authenticate_employee(uname,passwd);
@@ -84,33 +94,28 @@ module.exports = {
       
         isAuth = Math.max(ret,val1);
         console.log("isAuth", isAuth);
+        res.cookie('isAuth', isAuth, {expire: 360000 + Date.now()}); 
+
         if(isAuth==1){
-            User1.getOrders(id)
-            .then((value)=> {
-              console.log("VALUEE", value.rows);
-              User1.getMenu(null,null,null)          
-              .then((menu)=> {
-                  console.log("homemenu", menu.rows);
-                  res.render('./includes/home' , {
-                    pageTitle: 'My Profile',
-                    path: '/includes/home',
-                    editing:false,
-                    orders: value.rows,
-                    menu: menu.rows,
-                    user_id : uname, 
-                  });
-              }).catch(err=>console.log(err));
-            })
-            .catch(err=>console.log(err));
+            
+            res.cookie('user', uname, {expire: 360000 + Date.now()}); 
+            return res.redirect("/");
+            
+           
         }
-        else if(isAuth==2){
-
+        else if(isAuth==2 || isAuth==3){
+          res.cookie('user', uname, {expire: 360000 + Date.now()}); 
+          return res.redirect("/employee");
+          
         }
-        else if(isAuth==3){
-
+        else if(isAuth==4){
+          res.cookie('user', uname, {expire: 360000 + Date.now()}); 
+          return res.redirect("/owner");
+          
         }
         else {console.log("Invalid email id/passwd");
-        res.render('./includes/login');}
+        res.render('./includes/login');
+      }
     })
   },
   PlaceOrder: function(req, res){
@@ -122,7 +127,7 @@ module.exports = {
     var date = curr.toLocaleDateString();
     console.log(date,time);
     var day = curr.getDay();
-    var id = 236; //req.body.user_id
+    var id = req.cookies.user; //req.body.user_id
     var cost1, ord_id1;
     User1.getcost(dish_id)
     .then((cost)=>{
@@ -130,36 +135,23 @@ module.exports = {
 			 return User1.getCountOfOrders();
 		})
     .then((ord_id)=>{
-      console.log(ord_id);
+      
       ord_id1 = parseInt(ord_id.rows[0]['?column?']);
       console.log(cost1,ord_id1);
       return User1.addOrder(id, dish_id,date,time, day, quantity, cost1, ord_id1)
       .then((val)=>{
-        console.log("ABCD",val);
-
-       User1.getOrders(id)
-        .then((value)=> {
-          console.log("VALUEE", value.rows);
-          User1.getMenu(null,null,null)          
-          .then((menu)=> {
-              console.log("homemenu", menu.rows);
-              res.render('./includes/home' , {
-                pageTitle: 'My Profile',
-                path: '/includes/home',
-                editing:false,
-                orders: value.rows,
-                menu: menu.rows    
-              });
-          }).catch(err=>console.log(err));
-        })
-        .catch(err=>console.log(err));
-        return res;
+        return res.redirect("/");
       })
     })
    
 
   },
-
+  logout: function(req,res){
+    res.clearCookie('user');
+    res.clearCookie('isAuth');
+    return res.redirect("/login");
+    return Promise.resolve(0);
+  },
   GetProfile: function(req, res){
 
   },

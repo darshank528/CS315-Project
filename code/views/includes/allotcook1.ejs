@@ -1,0 +1,42 @@
+<%- include('base.ejs') %>
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
+<link rel="stylesheet" href="/css/home.css">
+ <link rel="stylesheet" href="/css/forms.css">
+ <link rel="stylesheet" href="/css/product.css">
+</head>
+
+<body>
+
+<main>
+    <div style="width:800px; margin:0 auto; padding: 100px;">
+    <form class="product-form" action="allotcook1" method="POST">
+        <div class="form-group row">
+            <label for="id" class="col-sm-4 col-form-label">Cook ID</label>
+            <div class="col-sm-8">
+                <input type="number" name="id" id="id" value="<% if (editing) { %><%= product.id %><% } %>">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="name" class="col-sm-4 col-form-label">Cook Name</label>
+            <div class="col-sm-8">
+            <input type="text" name="name" id="name" value="<% if (editing) { %><%= product.name %><% } %>">
+        
+            </div>
+        </div>
+
+        <input type="hidden" value="<%= o_id %>" name="o_id">
+        <input type="hidden" value="<%= d_id %>" name="d_id">
+        <% if (editing) { %>
+        <input type="hidden" value="<%= product.id %>" name="id">
+        <input type="hidden" value="<%= product.name %>" name="name">
+        <% } %>
+
+        <button class="btn" type="submit">Add</button>
+        
+    </form>
+    </div>
+
+</main>
+</body>

@@ -1,5 +1,5 @@
 .product-form {
-    width: 20rem;
+    width: 50rem;
     max-width: 90%;
     margin: auto;
     display: block;
@@ -12,8 +12,9 @@
 }
 
 .product__title {
-    font-size: 1.2rem;
+    font-size: 2rem;
     text-align: center;
+    font-weight: bold;
 color: #000000;
 }
 
@@ -26,4 +27,5 @@ color: #000000;
 .product__description {
     text-align: center;
 color: black;
+font-size: small;
 }

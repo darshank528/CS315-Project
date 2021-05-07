@@ -5,23 +5,37 @@
 <link rel="stylesheet" href="/css/home.css">
  <link rel="stylesheet" href="/css/forms.css">
  <link rel="stylesheet" href="/css/product.css">
- 
+ <link rel="stylesheet" href="/css/table.css">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+ <style>
+  td {
+        text-align: center;
+      }
+  
+  th {
+        text-align: center;
+      }
+ </style>
 </head>
 
 <body>
-<%- include('nav.ejs') %>
+<%- include('owner_nav.ejs') %>
 <main>
 <div class="grid">
+    <a id="my_employees">
     <h1 class="product__title"> My Employees
     </h1>
+    </a>
 
     <form action="/empl" method="get">
         <button class="btn" type="submit">Add New Employee</button>
     </form>
 
-    <table class="table table-bordered table-dark">
+    <table class="w3-table w3-striped w3-bordered">
         <thead>
-          <tr>
+          <tr style="background-color:coral;">
             <th scope="col">Employee ID</th>
             <th scope="col">Name</th>
             <th scope="col">Gender</th>
@@ -30,6 +44,7 @@
             <th scope="col">Experience</th>
             <th scope="col">Role</th>
             <th scope="col">Update</th>
+            <th scope="col">Delete</th>
           </tr>
         </thead>
 
@@ -52,27 +67,116 @@
                    
                 </form>
             </td>
+            <td>
+              <form action="/del_empl" method="post">
+                <input type="hidden" name="id" value="<%= emp.id %>">
+                  <button class="btn" type="submit">Delete</button> 
+                 
+              </form>
+          </td>
 
             </tr>
 
 
         <% } %>
+        </table>
   </div>
 
   <div class="grid">
-    <h1 class="product__title"> Inventory
-    </h1>
+    <a id= "allot_order_left"><h1 class="product__title"> Allot Order Left
+    </h1></a>
+
+    <table class="w3-table w3-striped w3-bordered">
+        <thead>
+          <tr style="background-color:coral;">
+            <th scope="col">Order_ID</th>
+            <th scope="col">Dish_ID</th>
+            <th scope="col">Quantity_Ordered</th>
+            <th scope="col">Cost</th>
+            <th scope="col">Allot Order</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+        <% for (var i = 0; i < orders_left.length; i++) { %>
+        <% var order_left = orders_left[i]; %>
+        <tr>
+            <th scope="row"><%= order_left.order_id %></th>
+            <td> <%= order_left.dish_id %></td>
+            <td> <%= order_left.qty %></td>
+            <td> <%= order_left.cost %></td>
+            <td>
+                <form action="/upp_allotcook1" method="post">
+                  <input type="hidden" name="order_id" value="<%= order_left.order_id %>">
+                  <input type="hidden" name="dish_id" value="<%= order_left.dish_id %>">
+                    <button class="btn" type="submit">Allot Order</button> 
+                   
+                </form>
+            </td>
+
+            </tr>
+
+
+        <% } %>
+        </table>
+  </div>
+
+  <div class="grid">
+    <a id= "allot_order_serve"><h1 class="product__title"> Allot Order to Serve
+    </h1></a>
+
+    <table class="w3-table w3-striped w3-bordered">
+        <thead>
+          <tr style="background-color:coral;">
+            <th scope="col">Order_ID</th>
+            <th scope="col">Dish_ID</th>
+            <th scope="col">Quantity_Ordered</th>
+            <th scope="col">Cost</th>
+            <th scope="col">Allot serve order</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+        <% for (var i = 0; i < orders_to_serve.length; i++) { %>
+        <% var serve_order = orders_to_serve[i]; %>
+        <tr>
+            <th scope="row"><%= serve_order.order_id %></th>
+            <td> <%= serve_order.dish_id %></td>
+            <td> <%= serve_order.qty %></td>
+            <td> <%= serve_order.cost %></td>
+            <td>
+                <form action="/upp_allotwaiter1" method="post">
+                  <input type="hidden" name="order_id" value="<%= serve_order.order_id %>">
+                  <input type="hidden" name="dish_id" value="<%= serve_order.dish_id %>">
+                    <button class="btn" type="submit">Allot Serve Order</button> 
+                   
+                </form>
+            </td>
+
+            </tr>
+
+
+        <% } %>
+        </table>
+  </div>
+
+  <div class="grid">
+    <a id= "inventory"><h1 class="product__title"> Inventory
+    </h1></a>
 
     <form action="/invent" method="get">
         <button class="btn" type="submit">Add New Inventory</button>
     </form>
 
-    <table class="table table-bordered table-dark">
+    <table class="w3-table w3-striped w3-bordered">
         <thead>
-          <tr>
+          <tr style="background-color:coral;">
             <th scope="col">ID</th>
             <th scope="col">Name</th>
             <th scope="col">Increment</th>
+            <th scope="col">Delete</th>
           </tr>
         </thead>
 
@@ -87,23 +191,30 @@
                 
                     <button class="btn" type="submit">Increment</button> 
                     
-                   
-                
             </td>
+            <td>
+              <form action="/del_inv" method="post">
+                <input type="hidden" name="id" value="<%= inv.ingredient_id %>">
+                  <button class="btn" type="submit">Delete</button> 
+                 
+              </form>
+          </td>
+            
 
             </tr>
 
 
         <% } %>
+        </table>
   </div>
   
   <div class="grid">
-    <h1 class="product__title"> Order History and Analytics
-    </h1>
+    <a id= "order_anal"><h1 class="product__title"> Order History and Analytics
+    </h1></a>
 
-    <table class="table table-bordered table-dark">
+    <table class="w3-table w3-striped w3-bordered">
         <thead>
-          <tr>
+          <tr style="background-color:coral;">
             <th scope="col">Dish Name</th>
             <th scope="col">Number of Orders</th>
           </tr>
@@ -121,6 +232,227 @@
 
 
         <% } %>
+      </table>
+  </div>
+
+  <div class="grid">
+    <a id= "chef_anal"><h1 class="product__title"> Chef Analytics
+    </h1></a>
+
+    <table class="w3-table w3-striped w3-bordered">
+        <thead>
+          <tr style="background-color:coral;">
+            <th scope="col">Chef Name</th>
+            <th scope="col">Number of Orders Prepared</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+        <% for (var i = 0; i < cooks_all.length; i++) { %>
+        <% var cooks = cooks_all[i]; %>
+        <tr>
+            <th scope="row"><%= cooks.name %></th>
+            <td> <%= cooks.num_orders %></td>
+
+            </tr>
+
+
+        <% } %>
+      </table>
+  </div>
+
+  <div class="grid">
+    <a id= "waiter_anal"><h1 class="product__title"> Waiter Analytics
+    </h1></a>
+
+    <table class="w3-table w3-striped w3-bordered">
+        <thead>
+          <tr style="background-color:coral;">
+            <th scope="col">Waiter Name</th>
+            <th scope="col">Number of Orders Served</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+        <% for (var i = 0; i < serves_all.length; i++) { %>
+        <% var serves = serves_all[i]; %>
+        <tr>
+            <th scope="row"><%= serves.name %></th>
+            <td> <%= serves.num_orders %></td>
+
+            </tr>
+
+
+        <% } %>
+      </table>
+  </div>
+
+  <div class="grid">
+    <a id="user_anal"><h1 class="product__title"> User Analytics - Top 20 users
+    </h1></a>
+
+    <table class="w3-table w3-striped w3-bordered">
+        <thead>
+          <tr style="background-color:coral;">
+            <th scope="col">User Name</th>
+            <th scope="col">Number of Orders Placed</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+        <% for (var i = 0; i < users_all.length; i++) { %>
+        <% var user = users_all[i]; %>
+        <tr>
+            <th scope="row"><%= user.name %></th>
+            <td> <%= user.num_orders %></td>
+
+            </tr>
+
+
+        <% } %>
+      </table>
+  </div>
+
+
+  
+
+  <div class="grid">
+    <a id="acc_info"><h1 class="product__title"> Time series
+    </h1></a>
+
+    <form class="product-form" action = "/accountrange" method="POST">
+      <div class="form-group row">
+            
+      <label for="range_start">Start date:</label>
+      <input type="date" id="range_start" name="range_start"
+         value="<% if (editing) { %><%= product.range_start %><% } %>"
+         min="2020-01-01" max="2021-12-31">
+        </div>
+
+      <div class="form-group row">
+            
+      <label for="range_end">End date:</label>
+      <input type="date" id="range_end" name="range_end"
+          value="<% if (editing) { %><%= product.range_end %><% } %>"
+          min="2020-01-01" max="2021-12-31">
+      </div>
+
+      <% if (editing) { %>
+        <input type="hidden" value="<%= product.range_start %>" name="range_start">
+        <input type="hidden" value="<%= product.range_end %>" name="range_end">
+      <% } %>
+
+
+      <p><button class="btn" type="submit">Filter</button></p>
+
+    </form>
+    
+  </div>
+
+  <div class="grid">
+    <h3 class = "product__title"><u><i>Analysis of Food and Finances</i></u></h3>
+    <form class="product-form" action = "/analreport1" method="POST">
+      <p><button class="btn" type="submit"><marquee>Get Analytics_Report</marquee></button></p>
+    </form>
+  </div>
+  
+
+  <div class="grid">
+    <a id= "acc_info1"><h1 class="product__title"> Restaurant Details
+    </h1></a>
+
+    <table class="w3-table w3-striped w3-bordered">
+        <thead>
+          <tr style="background-color:coral;">
+            <th scope="col">Date (in yyyy-mm-dd)</th>
+            <th scope="col">Profit</th>
+            <th scope="col">Expenditure</th>
+            <th scope="col">Wastage</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+        <% for (var i = 0; i < accs.length; i++) { %>
+        <% var acc = accs[i]; %>
+        <tr>
+            <th scope="row"><%= moment(acc.work_date).format('YYYY-MM-DD') %></th>
+            <td> <%= acc.restaurant_profit %></td>
+            <td> <%= acc.expenditure %></td>
+            <td> <%= acc.total_food_wasted %></td>
+
+            </tr>
+
+
+        <% } %>
+      </table>
+  </div>
+
+
+  <div class="grid">
+    <a id="hist"><h1 class="product__title"> Time series
+    </h1></a>
+
+    <form class="product-form" action = "/rangequery" method="POST">
+      <div class="form-group row">
+            
+      <label for="range_start">Start date:</label>
+      <input type="date" id="range_start" name="range_start"
+         value="<% if (editing) { %><%= product.range_start %><% } %>"
+         min="2020-01-01" max="2021-12-31">
+        </div>
+
+      <div class="form-group row">
+            
+      <label for="range_end">End date:</label>
+      <input type="date" id="range_end" name="range_end"
+          value="<% if (editing) { %><%= product.range_end %><% } %>"
+          min="2020-01-01" max="2021-12-31">
+      </div>
+
+      <% if (editing) { %>
+        <input type="hidden" value="<%= product.range_start %>" name="range_start">
+        <input type="hidden" value="<%= product.range_end %>" name="range_end">
+      <% } %>
+
+
+      <p><button class="btn" type="submit">Filter</button></p>
+
+    </form>
+  </div>
+
+  <div class="grid">
+    <a id= "hist1"><h1 class="product__title"> Order History
+    </h1></a>
+
+    <table class="w3-table w3-striped w3-bordered">
+        <thead>
+          <tr style="background-color:coral;">
+            <th scope="col">Date (in yyyy-mm-dd)</th>
+            <th scope="col">Dish Name</th>
+            <th scope="col">Total quantity</th>
+            <th scope="col">Avg Review (out of 5)</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+        <% for (var i = 0; i < hist.length; i++) { %>
+        <% var hi = hist[i]; %>
+        <tr>
+            <th scope="row"><%= moment(hi.work_date).format('YYYY-MM-DD') %></th>
+            <td> <%= hi.name %></td>
+            <td> <%= hi.qty %></td>
+            <td> <%= hi.rev %></td>
+
+            </tr>
+
+
+        <% } %>
+      </table>
   </div>
 
 </main>

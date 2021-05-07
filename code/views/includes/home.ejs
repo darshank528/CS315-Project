@@ -5,8 +5,9 @@
 <link rel="stylesheet" href="/css/home.css">
  <link rel="stylesheet" href="/css/forms.css">
  <link rel="stylesheet" href="/css/product.css">
+ <%- include('nav.ejs') %>
 </head>
-<%- include('nav.ejs') %>
+
 <body>
 
 
@@ -49,11 +50,12 @@
 </ul>
 </div>
 <div>
-	
+	<!-- {forlopp}
+	document.getElementbyId().append("<options>$(cook.id)</options>") -->
 		<h1 class="product__title"> My Order History
 		</h1>
 		
-		<div class="grid">
+		<div class="grid" id="orderhistory">
 			
 
 		<table class="table table-bordered table-dark">

@@ -6,9 +6,29 @@
 	
         <ul>
           
-         
-            <li>
-            <a class="top-button" href="/profile">Profile</a></li>
+            
+                <%if (isAuth==1) { %>
+                <li>
+                    <a class="top-button" href="/profile">Profile</a>
+                </li>
+                <li>
+                    <a class="top-button" href="#orderhistory">Order History</a>
+                </li>
+                <% } %>
+                
+                <%if (isAuth==2 || isAuth==3) { %>
+                <li>
+                    <a class="top-button" href="/employee">Profile</a>
+                </li>
+                <% } %>
+                
+                <%if (isAuth==4) { %>
+                <li>
+                    <a class="top-button" href="/owner">Profile</a>
+                </li>
+                <% } %>
+            
+            <li><a class="top-button" href="/logout">Logout</a></li>
          
         </ul>
 </div>

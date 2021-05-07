@@ -25,8 +25,9 @@ module.exports = {
 						return Promise.resolve(0);
 					}
 					else{
-						return  Promise.resolve(res.rows[0].role=="owner"?3:2);
+						return  Promise.resolve(res.rows[0].role=="owner"?4:res.rows[0].role=="chef"?3:2);
 					}
+					//user -1, waiter -2, chef - 3, owner - 4
 		})
 
 	},

@@ -5,42 +5,98 @@
 <link rel="stylesheet" href="/css/home.css">
  <link rel="stylesheet" href="/css/forms.css">
  <link rel="stylesheet" href="/css/product.css">
+ <link rel="stylesheet" href="/css/table.css">
+ <link rel="stylesheet" href="/css/nav.css">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
  
+
+ <style>
+	td {
+		  text-align: center;
+		}
+	
+	th {
+		  text-align: center;
+		}
+   </style>
 </head>
 
 <body>
 
-<%- include('nav.ejs') %>
-
 <main>
-    <div class="grid">
+	
+	
+	<div style="margin-top:2em; right: 30em" class="owner_navbar">
+		<div class="dropdown">
+		
+		  <div>
+		  <a href = "/"><button class="top-button">Home</button></a>
+		  </div>
+
+		  <div>
+			<a href = "/logout"><button class="top-button">Logout</button></a>
+			</div>
+		</div>
+	</div>
+	
+    <div style="width:800px; margin:0 auto; padding: 100px;">
         <% for (var i = 0; i < prof.length; i++) { %>
         <% var pro = prof[i]; %>
-    <article class="card product-item">
-                    <header class="card__header">
+	<form class="product-form" action="/employee" method="GET">
+
                         <h1 class="product__title"> My Profile 
                         </h1>
-                    </header>
-                    
-                    <div class="card__content">
-                        <h3 class="product__description">Name: 
-                            <%= pro.name_fn %>
-                        </h3>
-						<h3 class="product__description">Gender: 
-                            <%= pro.gender %>
-                        </h3>
-                        <h3 class="product__description">Age: 
-                            <%= pro.age %>
-                        </h3>
-						<h3 class="product__description">Experience: 
-                            <%= pro.experience %>
-                        </h3>
-						<h3 class="product__description">Salary: 
-                            <%= pro.salary %>
-                        </h3>
-						<h3 class="product__description">Role: 
-                            <%= pro.role %>
-                        </h3>
+                  
+						<div class="form-group row">
+            
+							<label for="name" class="col-sm-6 col-form-label">Name</label>
+							<div class="col-sm-6">
+							<input type="text" disabled="disabled" name="name" id="name" value="<%= pro.name_fn %>">
+							</div>
+						
+						</div>
+						<div class="form-group row">
+            
+							<label for="gender" class="col-sm-6 col-form-label">Gender</label>
+							<div class="col-sm-6">
+							<input type="text" disabled="disabled" name="gender" id="gender" value="<%= pro.gender %>">
+							</div>
+						
+						</div>
+						<div class="form-group row">
+            
+							<label for="age" class="col-sm-6 col-form-label">Age</label>
+							<div class="col-sm-6">
+							<input type="text" disabled="disabled" name="age" id="age" value="<%= pro.age %>">
+							</div>
+						
+						</div>
+						<div class="form-group row">
+            
+							<label for="name" class="col-sm-6 col-form-label">Experience</label>
+							<div class="col-sm-6">
+							<input type="text" disabled="disabled" name="exp" id="exp" value="<%= pro.experience %>">
+							</div>
+						
+						</div>
+						<div class="form-group row">
+            
+							<label for="name" class="col-sm-6 col-form-label">Salary</label>
+							<div class="col-sm-6">
+							<input type="text" disabled="disabled" name="salary" id="salary" value="<%= pro.salary %>">
+							</div>
+						
+						</div>
+						<div class="form-group row">
+            
+							<label for="name" class="col-sm-6 col-form-label">Role</label>
+							<div class="col-sm-6">
+							<input type="text" disabled="disabled" name="role" id="role" value="<%= pro.role %>">
+							</div>
+						
+						</div>
+					
                     </div>
     </article>
         <% } %>
@@ -49,13 +105,13 @@
 		<h1 class="product__title"> My Orders
 		</h1>
 
-		<table class="table table-bordered table-dark">
+		<table class="w3-table w3-striped w3-bordered" style = "border: 2px single brown;">
 			<thead>
-			  <tr>
+			  <tr style="background-color:coral;">
 				<th scope="col">Order No.</th>
 				<th scope="col">Order ID</th>
 				<th scope="col">Dish</th>
-				<th scope="col">Comleted</th>
+				<th scope="col">Completed</th>
 				<th scope="col">Button</th>
 			  </tr>
 			</thead>
@@ -63,7 +119,7 @@
 			<tbody>
 		<% for (var i = 0; i < orders.length; i++) { %>
 			<% var order = orders[i]; %>
-				<tr>
+				<tr style = "border: 2px single brown;">
 				<th scope="row"><%= i+1 %></th>
 				<td> <%= order.order_id %></td>
 				<td> <%= order.dish %></td>

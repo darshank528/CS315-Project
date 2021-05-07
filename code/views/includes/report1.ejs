@@ -1,0 +1,108 @@
+<%- include('base.ejs') %>
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
+<link rel="stylesheet" href="/css/home.css">
+ <link rel="stylesheet" href="/css/forms.css">
+ <link rel="stylesheet" href="/css/product.css">
+</head>
+
+<body bgcolor="cyan">
+
+<main>
+    
+    <form class="product-form" action="/owner" method="GET">
+        <marquee><h1>Report of Statistical Data</h1></marquee>
+        <h2 align=left>Expenditure</h2>
+        <div class="form-group row">
+            <label for="id" class="col-sm-4 col-form-label">Average</label>
+            <div class="col-sm-8">
+            <input type="number" disabled="disabled" name="id" id="id" value="<%= avg_exp[0].avg_exp %>">
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="id" class="col-sm-4 col-form-label">Standard Deviation</label>
+            <div class="col-sm-8">
+            <input type="number" disabled="disabled" name="id" id="id" value="<%= avg_exp[0].sd_exp %>">
+            </div>
+        </div>
+
+        <div>
+            <b>Maximum:</b><br>
+            Date:  <input type="text" disabled="disabled" name="id" id="id" value="<%=moment(max_exp[0].work_date).format('YYYY-MM-DD')%>">     <br>    
+            Value: <input type="text" disabled="disabled" name="id" id="id" value=" <%=max_exp[0].expenditure%>">
+              
+            <br>
+            <b>Minimum:</b><br>
+            Date:  <input type="text" disabled="disabled" name="id" id="id" value="<%=moment(min_exp[0].work_date).format('YYYY-MM-DD')%>">     <br>    
+            Value: <input type="text" disabled="disabled" name="id" id="id" value=" <%=min_exp[0].expenditure%>">
+            <br>
+        </div>
+        <br>
+
+
+        <h2 align=left>Profit</h2>
+        <div class="form-group row">
+            <label for="id" class="col-sm-4 col-form-label">Average</label>
+            <div class="col-sm-8">
+            <input type="number" disabled="disabled" name="id" id="id" value="<%= avg_prof[0].avg_prof %>">
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="id" class="col-sm-4 col-form-label">Standard Deviation</label>
+            <div class="col-sm-8">
+            <input type="number" disabled="disabled" name="id" id="id" value="<%= avg_prof[0].sd_prof %>">
+            </div>
+        </div>
+
+        <div>
+            <b>Maximum:</b><br>
+            Date:  <input type="text" disabled="disabled" name="id" id="id" value="<%=moment(max_prof[0].work_date).format('YYYY-MM-DD')%>">     <br>    
+            Value: <input type="text" disabled="disabled" name="id" id="id" value=" <%=max_prof[0].restaurant_profit%>">
+              
+            <br>
+            <b>Minimum:</b><br>
+            Date:  <input type="text" disabled="disabled" name="id" id="id" value="<%=moment(min_prof[0].work_date).format('YYYY-MM-DD')%>">     <br>    
+            Value: <input type="text" disabled="disabled" name="id" id="id" value=" <%=min_prof[0].restaurant_profit%>">
+            <br>
+        </div>
+        <br>
+
+
+        <h2 align=left>Food Wastage</h2>
+        <div class="form-group row">
+            <label for="id" class="col-sm-4 col-form-label">Average</label>
+            <div class="col-sm-8">
+            <input type="number" disabled="disabled" name="id" id="id" value="<%= avg_waste[0].avg_waste %>">
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="id" class="col-sm-4 col-form-label">Standard Deviation</label>
+            <div class="col-sm-8">
+            <input type="number" disabled="disabled" name="id" id="id" value="<%= avg_waste[0].sd_waste %>">
+            </div>
+        </div>
+
+        <div>
+            <b>Maximum:</b><br>
+            Date:  <input type="text" disabled="disabled" name="id" id="id" value="<%=moment(max_waste[0].work_date).format('YYYY-MM-DD')%>">     <br>    
+            Value: <input type="text" disabled="disabled" name="id" id="id" value=" <%=max_waste[0].total_food_wasted%>">
+              
+            <br>
+            <b>Minimum:</b><br>
+            Date:  <input type="text" disabled="disabled" name="id" id="id" value="<%=moment(min_waste[0].work_date).format('YYYY-MM-DD')%>">     <br>    
+            Value: <input type="text" disabled="disabled" name="id" id="id" value=" <%=min_waste[0].total_food_wasted%>">
+            <br>
+        </div>
+        <br>
+        <a href = "./owner"><button type="submit">Back to Owner</button></a>
+        
+        
+    </form>
+
+
+</main>
+</body>

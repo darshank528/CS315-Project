@@ -14,4 +14,5 @@ router.get('/login',userCon.loginPage);
 router.post('/login',userCon.login);
 router.post('/',userCon.loadhome);
 router.post("/order",userCon.PlaceOrder);
+router.get("/logout",userCon.logout);
 module.exports = router;

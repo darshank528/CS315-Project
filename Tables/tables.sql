@@ -41,7 +41,7 @@ CREATE Table Staff (
 CREATE Table Staff_Contact(
 	Contact bigint PRIMARY KEY CHECK(Contact>=1000000000 and Contact<=9999999999),
 	ID int,
-	foreign key(ID) references Staff on delete set null
+	foreign key(ID) references Staff on delete cascade
 );
 
 -- CREATE Table Chef (
@@ -71,8 +71,8 @@ CREATE Table Contains (
 	Dish_ID int CHECK(Dish_ID>=1),
 	Quantity_used int,
 	PRIMARY KEY (Ingredient_ID, Dish_ID),
-	foreign key (Dish_ID) references Dishes on delete set null,
-	foreign key (Ingredient_ID) references Ingredients on delete set null
+	foreign key (Dish_ID) references Dishes on delete cascade,
+	foreign key (Ingredient_ID) references Ingredients on delete cascade
 );
 
 CREATE Table Non_waiting_customer (
@@ -92,8 +92,8 @@ CREATE Table Orders (
 	Review int CHECK(Review>=1 and Review<=5),
 	Cost int CHECK(Cost>=0),
 	PRIMARY KEY (Order_ID, Dish_ID),
-	foreign key (ID) references Non_waiting_customer on delete set null,
-	foreign key (Dish_ID) references Dishes on delete set null
+	foreign key (ID) references Customers on delete cascade,
+	foreign key (Dish_ID) references Dishes on delete cascade
 );
 
 CREATE Table Cooks (
@@ -102,8 +102,8 @@ CREATE Table Cooks (
 	Dish_ID int,
 	Completed int CHECK(Completed>=0 and Completed<=1),
 	PRIMARY KEY (ID, Dish_ID, Order_ID),
-	foreign key (ID) references Staff on delete set null,
-	foreign key (Order_ID, Dish_ID) references Orders on delete set null
+	foreign key (ID) references Staff on delete cascade,
+	foreign key (Order_ID, Dish_ID) references Orders on delete cascade
 );
 
 CREATE Table Customers (
@@ -119,7 +119,7 @@ CREATE Table Customers (
 CREATE Table Customers_Contact(
 	Contact bigint PRIMARY KEY CHECK(Contact>=1000000000 and Contact<=9999999999),
 	ID int,
-	foreign key(ID) references Customers on delete set null
+	foreign key(ID) references Customers on delete cascade
 );
 
 CREATE Table Payment (
@@ -136,8 +136,8 @@ CREATE Table Pay_By (
 	Invoice_description varchar(50),
 	Status varchar(50),
 	PRIMARY KEY (ID, Bill_ID), -- will only Bill_ID work ?
-	foreign key (ID) references Non_waiting_customer on delete set null,
-	foreign key (Bill_ID) references Payment on delete set null
+	foreign key (ID) references Non_waiting_customer on delete cascade,
+	foreign key (Bill_ID) references Payment on delete cascade
 );
 
 CREATE Table Sit_Table (
@@ -150,16 +150,16 @@ CREATE Table Sit_Table (
 CREATE Table Sitting (
 	ID int PRIMARY KEY,
 	Table_ID int CHECK(Table_ID>=0),
-	foreign key (ID) references Non_waiting_customer on delete set null,
-	foreign key (Table_ID) references Sit_Table on delete set null
+	foreign key (ID) references Non_waiting_customer on delete cascade,
+	foreign key (Table_ID) references Sit_Table on delete cascade
 );
 
 CREATE Table Tracks (
 	ID int,
 	Work_Date Date,
 	PRIMARY KEY (ID, Work_Date),
-	foreign key (ID) references Staff on delete set null,
-	foreign key (Work_Date) references Accounts on delete set null
+	foreign key (ID) references Staff on delete cascade,
+	foreign key (Work_Date) references Accounts on delete cascade
 );
 
 CREATE Table Delivers (
@@ -168,8 +168,8 @@ CREATE Table Delivers (
 	Dish_ID int,
 	Completed int CHECK(Completed>=0 and Completed<=1),
 	PRIMARY KEY (ID, Dish_ID, Order_ID),
-	foreign key (ID) references Staff on delete set null,
-	foreign key (Order_ID, Dish_ID) references Orders on delete set null
+	foreign key (ID) references Staff on delete cascade,
+	foreign key (Order_ID, Dish_ID) references Orders on delete cascade
 );
 
 CREATE Table Waiting_customer (

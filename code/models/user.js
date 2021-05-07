@@ -9,7 +9,8 @@ module.exports = {
 
 	async getOrders(user_id)
 	{	
-		var order_list = await db.query('SELECT order_id as order_id, CAST(work_date AS DATE), quantity_ordered as qty, review as review, dishes.cost as cost ,dishes.name as dish  FROM  orders,dishes where id = $1 and dishes.dish_id = orders.dish_id order by work_date desc;', [user_id]);
+		
+		var order_list = await db.query('SELECT order_id as order_id, CAST(work_date AS DATE), quantity_ordered as qty, review as review, dishes.cost as cost ,dishes.name as dish  FROM  orders,dishes where id = $1 and dishes.dish_id = orders.dish_id order by order_id desc;', [user_id]);
 		
 		return order_list;
 	},
@@ -33,9 +34,8 @@ module.exports = {
 	async addOrder(uid,did,date,time,day,quant, cost, ord_id)
 	{
 		
-		
-		
-			return await db.query('INSERT INTO orders( order_id, id ,dish_id,work_date,work_time,day,quantity_ordered,review,cost ) VALUES ($1, $2, $3, $4, $5,$6,$7, $8, $9);', [ord_id,uid, did,date,time,day,quant,1,cost.rows[0].cost])
+			
+			return await db.query('INSERT INTO orders( order_id, id ,dish_id,work_date,work_time,day,quantity_ordered,review,cost ) VALUES ($1, $2, $3, $4, $5,$6,$7, $8, $9);', [ord_id,uid, did,date,time,day,quant,1,cost.rows[0].cost*quant])
 			.then((res)=>{
 				console.log(res);
 				return  Promise.resolve(res);

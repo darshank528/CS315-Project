@@ -19,11 +19,15 @@ module.exports = {
   loadhome: function(req,res){
   	//res.render('./includes/home',{'pageTitle':"Home"});
     var a = 0;
-
-    Employee.getProfile(10)
+    var uname = req.cookies.user;
+    if(!uname){
+      return res.redirect("/login");
+    }
+    var isAuth = req.cookies.isAuth ;
+    Employee.getProfile(uname)
       .then((value1)=> {
         a = value1;
-        return getOrders(10);
+        return getOrders(uname,(isAuth==3));
       })
       .then((value2)=>{
         res.render('./includes/employee' , {
@@ -31,7 +35,9 @@ module.exports = {
           path: '/includes/employee',
           editing:false,
           prof: a.rows,
-          orders: value2.rows          
+          orders: value2.rows,
+          isAuth: req.cookies.isAuth  
+       
 
         });
       })
@@ -40,7 +46,7 @@ module.exports = {
   },
   GetProfile: function(req,res){
 
-    Employee.getProfile(20)
+    Employee.getProfile(14)
       .then((value)=> {
         res.render('./includes/employee' , {
           pageTitle: 'My Profile',
@@ -58,9 +64,9 @@ module.exports = {
     const order_id = req.body.order_id;
     const id = req.body.id;
     const dish_id = req.body.dish_id;
-
+    var isAuth = req.cookies.isAuth;
     Employee
-    .update_cookserve(id, order_id, dish_id)
+    .update_cookserve(id, order_id, dish_id, (isAuth==3))
     .then(()=> {
       setTimeout(function(){ res.redirect('/employee'); }, 1000);      
 

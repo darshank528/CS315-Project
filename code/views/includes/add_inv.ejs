@@ -9,14 +9,13 @@
 
 <body>
 
-<%- include('nav.ejs') %>
 <main>
-
+    <div style="width:800px; margin:0 auto; padding: 100px;">
     <form class="product-form" action="invent" method="POST">
         <div class="form-group row">
-            <label for="id" class="col-sm-2 col-form-label">ID</label>
+            <label for="id" class="col-sm-2 col-form-label">ID (Don't change)</label>
             <div class="col-sm-10">
-            <input type="text" name="id" id="id" value="<% if (editing) { %><%= product.id %><% } %>">
+                <input type="number" disabled="disabled" name="id" id="id" value="<%= idd[0].id %>">
             </div>
         </div>
         <div class="form-group row">
@@ -27,15 +26,15 @@
             </div>
         </div>
 
+        <input type="hidden" value="<%= idd[0].id %>" name="id">
         <% if (editing) { %>
-        <input type="hidden" value="<%= product.id %>" name="id">
         <input type="hidden" value="<%= product.name %>" name="name">
         <% } %>
 
         <button class="btn" type="submit">Add</button>
         
     </form>
-
+    </div>
 
 </main>
 </body>
