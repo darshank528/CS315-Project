@@ -419,5 +419,16 @@ module.exports = {
       setTimeout(function(){ res.redirect('/owner'); }, 1000);      
     })
     .catch(err=>console.log(err));
+  },
+  OrderRangeInfo: function(req,res){
+    const s_date = req.body.range_start;
+    const e_date = req.body.range_end;
+
+    Owner
+    .get_orders_by_date(s_date, e_date)
+    .then((value1)=>{
+      setTimeout(function(){ res.redirect('/owner'); }, 1000);      
+    })
+    .catch(err=>console.log(err));
   }
 }

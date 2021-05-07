@@ -34,6 +34,12 @@ module.exports = {
 		return inv_list;
 	},
 
+	async get_orders_by_date(s,e)
+	{	
+		var orders_list_by_date = await db.query('SELECT name, count(*) as num_orders FROM orders, dishes where dishes.dish_id = orders.dish_id AND s<=Work_Date AND Work_Date <=e group by dishes.dish_id;');
+		return orders_list_by_date;
+	},
+	
 	async get_cooks_all()
 	{	
 		var inv_list = await db.query('SELECT staff.name_FN as name, count(*) as num_orders FROM orders, cooks, staff where cooks.dish_id = orders.dish_id and cooks.order_id = orders.order_id and cooks.id = staff.id group by staff.name_FN order by num_orders DESC;');
