@@ -61,6 +61,7 @@
             <label class="text-white mb-3 lead">Cost( Upper Cap)</label>
             <!-- Multiselect dropdown -->
             <select id="cost" data-style="bg-white rounded-pill px-4 py-3 shadow-sm " class="selectpicker w-100">
+                <option value="" disabled selected>Amount in INR</option>
                 <option value="100"> 100 </option>
                 <option value="125"> 125 </option>
                 <option value="150"> 150 </option>
@@ -76,6 +77,9 @@
         <input type="hidden" name="cost" id="filter_cost"/>
         <ul><li><button class="top-button" onclick="filter()"> Filter </a></li></ul>
 
+        </form>
+        <form method="POST" action="/filter">
+        <ul><li><button class="top-button" type="submit"> Remove Filters </a></li></ul>
         </form>
 </div>
 <link rel="stylesheet" href="/css/nav.css">
