@@ -1,4 +1,8 @@
-const { get_all, get_orders_all, get_cooks_all, get_serves_all, get_users_all, get_orders_left, get_orders_to_serve, get_acc_info, get_order_history, get_orders_by_date } = require('./../models/owner');
+const { getinfo, get_acc_range_info, get_all, get_inv_all,
+get_orders_all, get_cooks_all, get_serves_all, 
+get_users_all, get_orders_left, get_orders_to_serve, 
+get_acc_info, get_order_history, get_orders_by_date } = require('./../models/owner');
+
 var Owner = require('./../models/owner');
 var moment = require('moment');
 

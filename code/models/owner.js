@@ -91,7 +91,7 @@ module.exports = {
 
 	async get_acc_range_info(s,e)
 	{	
-		var inv_list = await db.query('SELECT * from accounts where $1 <= work_date AND work_date<=$2 order by work_date asc;',[s,e]);
+		var inv_list = await db.query('SELECT * from accounts where $1 <= work_date AND work_date<=$2 order by work_date desc;',[s,e]);
 		
 		return inv_list;
 	},
