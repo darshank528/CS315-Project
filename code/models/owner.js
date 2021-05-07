@@ -69,6 +69,20 @@ module.exports = {
 		return inv_list;
 	},
 
+	async get_order_history()
+	{	
+		var inv_list = await db.query('SELECT work_date, name, sum(quantity_ordered) as qty, cast(avg(review) as decimal(4,2)) as rev from orders, dishes where orders.dish_id=dishes.dish_id group by work_date, orders.dish_id, dishes.name order by work_date desc;');
+		
+		return inv_list;
+	},
+
+	async get_acc_info()
+	{	
+		var inv_list = await db.query('SELECT * from accounts order by work_date desc;');
+		
+		return inv_list;
+	},
+
 	async insert_into_cooks(cook_id,cook_name,order_id,dish_id){
 		await db.query('INSERT into cooks values ($1, $2, $3, 0);', [cook_id, order_id, dish_id]);
 		

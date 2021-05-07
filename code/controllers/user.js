@@ -1,5 +1,7 @@
 var User = require('./../models/login');
 var User1 = require('./../models/user');
+var moment = require('moment');
+
 module.exports = {
   createUser: function(req, res) {
     User.create(req.body)
@@ -25,7 +27,8 @@ module.exports = {
         pageTitle: 'My Profile',
         path: '/includes/home',
         editing:false,
-        orders: value.rows          
+        orders: value.rows,
+        moment: moment          
       });
     })
     .catch(err=>console.log(err));

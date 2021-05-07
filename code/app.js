@@ -18,6 +18,7 @@ const allotwaiter1 = require('./routes/allotwaiter1');
 const uppallotwaiter1 = require('./routes/upp_allotwaiter1');
 const delemp = require('./routes/del_empl');
 const delinv = require('./routes/del_inv');
+var moment = require('moment');
 
 const app = express();
 app.set('view engine', 'ejs');

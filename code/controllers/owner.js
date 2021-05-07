@@ -1,5 +1,6 @@
-const { get_all, get_orders_all, get_cooks_all, get_serves_all, get_users_all, get_orders_left, get_orders_to_serve } = require('./../models/owner');
+const { get_all, get_orders_all, get_cooks_all, get_serves_all, get_users_all, get_orders_left, get_orders_to_serve, get_acc_info, get_order_history } = require('./../models/owner');
 var Owner = require('./../models/owner');
+var moment = require('moment');
 
 module.exports = {
   createOwner: function(req, res) {
@@ -24,6 +25,7 @@ module.exports = {
     var e=0;
     var f=0;
     var g=0;
+    var h=0;
 
     Owner
     .get_inv_all()
@@ -53,6 +55,14 @@ module.exports = {
     })
     .then((value7)=>{
       g = value7;
+      return get_order_history();
+    })
+    .then((value10)=>{
+      m = value10;
+      return get_acc_info();
+    })
+    .then((value9)=>{
+      h = value9;
       return get_orders_to_serve();
     })
     .then((value8)=> {
@@ -67,7 +77,10 @@ module.exports = {
         serves_all: e.rows,
         users_all: f.rows,
         orders_left: g.rows,
-        orders_to_serve: value8.rows
+        accs: h.rows,
+        hist: m.rows,
+        orders_to_serve: value8.rows,
+        moment: moment
       });
     })
     .catch(err=>console.log(err));

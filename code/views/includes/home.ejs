@@ -46,7 +46,7 @@
 		
 		<div class="card__content">
 		<h3 class="product__description">Date: 
-		<%= order.work_date %>	
+		<%= moment(order.work_date).format('YYYY-MM-DD') %>	
 		</h3>
 		<h3 class="product__description">Dish: 
 		<%= order.dish %>

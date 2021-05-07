@@ -81,6 +81,9 @@
 .owner_navbar{
   position:fixed;
   width = 10%;
+  margin-left: auto;
+margin-right: auto;
+  
 }
 .owner_navbar1{
   position:relative;
