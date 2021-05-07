@@ -17,7 +17,7 @@ module.exports = {
 
 	async getTopDishes(user_id)
 	{
-		var order_list = await db.query('SELECT order_id as order_id, CAST(work_date AS DATE), quantity_ordered as qty, review as review, dishes.cost as cost ,dishes.name as dish  FROM  orders,dishes where id = $1 and dishes.dish_id = orders.dish_id order by order_id desc;', [user_id]);
+		var order_list = await db.query('SELECT dishes.dish_id, dishes.name as dish, count(*) as num_ordered  FROM  orders,dishes where id = $1 and dishes.dish_id = orders.dish_id group by dishes.dish_id, dishes.name order by num_ordered desc limit 5;', [user_id]);
 		
 		return order_list;
 	},

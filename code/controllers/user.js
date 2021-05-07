@@ -21,7 +21,7 @@ module.exports = {
   },
   loadhome: function(req,res){
   	//res.render('./includes/home',{'pageTitle':"Home"});
-        
+        //var topd = 0;
         var uname = req.cookies.user;
         if(!uname){
           return res.redirect("/login");
@@ -31,6 +31,9 @@ module.exports = {
         var category = !req.body.cat? null: req.body.cat;
         var cost = !req.body.cost? null: req.body.cost;
         console.log(cuisine,category,cost);
+        
+        User1.getTopDishes(uname)
+        .then((topd)=>{
         User1.getOrders(uname)
         .then((value)=> {
           console.log("ORDERS",value.rows);
@@ -43,11 +46,14 @@ module.exports = {
                 editing:false,
                 orders: value.rows,
                 menu: menu.rows,
+                topds: topd.rows,
                 isAuth: req.cookies.isAuth  
               });
           }).catch(err=>console.log(err));
         })
         .catch(err=>console.log(err));
+      })
+      .catch(err=>console.log(err));
       
   },
   loadhome2: function(req,res){

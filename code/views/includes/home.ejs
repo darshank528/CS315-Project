@@ -10,9 +10,42 @@
 
 <body>
 
+	<div>
+		<!-- {forlopp}
+		document.getElementbyId().append("<options>$(cook.id)</options>") -->
+			<h1 class="product__title"> Recommended Dishes
+			</h1>
+			
+			<div class="grid" id="auto">
+				
+	
+			<table class="table table-bordered table-dark">
+				<thead>
+					<tr>
+					<th scope="col">Dish </th>
+					<th scope="col">#Orders</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% for (var i = 0; i < topds.length; i++) { %>
+						<% var topd = topds[i]; %>
+							<tr>
+							<th scope="row"><%= topd.dish %></th>
+							<td> <%= topd.num_ordered %></td>
+						</tr>
+						<% } %>
+				</tbody>
+			</table>
+		
+			
+			</div>
+	</div>
 
 
 <div>
+	<a id="order">
+
+	</a>
  <ul class="section8-ul">
 	<% for (var i = 0; i < menu.length; i++) { %>
 
@@ -66,7 +99,6 @@
 				<th scope="col">Date</th>
 				<th scope="col">Dish</th>
 				<th scope="col">Quantity</th>
-				<th scope="col">Review</th>
 				<th scope="col">Cost</th>
 				</tr>
 			</thead>
@@ -80,8 +112,6 @@
 						<td> <%= order.dish %></td>
 						<td>  <%= order.qty %>
 						</td>
-						<td> <%= order.review %>
-						</td>
 						<td> <%= order.cost %></td>
 					</tr>
 					<% } %>
@@ -91,7 +121,6 @@
 		
 		</div>
 </div>
-
 	
 
 <script>
