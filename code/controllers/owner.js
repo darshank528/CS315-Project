@@ -241,16 +241,16 @@ module.exports = {
         // info:value.rows,
         o_id: order_id,
         d_id: dish_id,
-        variable:value.rows      
+        cooks:value.rows      
       });
     })
+    .catch(err=>console.log(err));
+
     // Owner
     // .getinfo(id)
     // .then((value)=>{
  
   // })
-  // .catch(err=>console.log(err));
-
   },
 
   allotcook1_get: function(req, res){
@@ -361,19 +361,20 @@ module.exports = {
     const dish_id = req.body.dish_id;
     console.log(order_id);
 
-    // Owner
-    // .getinfo(id)
-    // .then((value)=>{
+    Owner
+    .get_waiter_id()
+    .then((value)=>{
     res.render('./includes/allotwaiter1' , {
       pageTitle: 'Allot Order to Waiter',
       path: '/includes/allotwaiter1',
       editing: false,  
       // info:value.rows,
       o_id: order_id,
-      d_id: dish_id       
+      d_id: dish_id,
+      waiters: value.rows     
     });
-  // })
-  // .catch(err=>console.log(err));
+  })
+  //.catch(err=>console.log(err));
 
   },
 
