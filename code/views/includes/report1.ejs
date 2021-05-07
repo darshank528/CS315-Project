@@ -100,20 +100,68 @@
             <br>
         </div>
         <br>
-        <a href = "./owner"><button type="submit">Back to Owner</button></a>
-        <button onclick=saveaspdf() class="top-button">SAVE AS PDF</button>
+        <a href = "./owner"><button class="top_button1" type="submit">Back to Owner</button></a>
+       
         
     </form>
-
+    <button onclick=saveaspdf() class="top_button2">SAVE AS PDF</button>
 
 </main>
 <script>
     function saveaspdf(){
         var element = document.getElementById('fullpage');
-        console.log(element);
         html2pdf(element);
-        console.log("done");
     }
     
 </script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+    <script type="text/javascript">
+        function Export() {
+            html2canvas(document.getElementById('fullpage'), {
+                onrendered: function (canvas) {
+                    var data = canvas.toDataURL();
+                    var docDefinition = {
+                        content: [{
+                            image: data,
+                            width: 500
+                        }]
+                    };
+                    pdfMake.createPdf(docDefinition).download("expenditure.pdf");
+                }
+            });
+        }
+    </script>
+    <style>
+        .top_button1 {
+        padding: 9px 34px;
+        border: 0px;
+        position:relative;
+        left: 20vw;
+        
+        height: 5em;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 12px;
+        font-weight: 600;
+        color: black;
+        outline: none;
+        background-color:coral;
+      }
+      .top_button2 {
+        padding: 9px 34px;
+        border: 0px;
+        position:relative;
+        left: 35vw;
+        top: -5em;
+        height: 5em;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 12px;
+        font-weight: 600;
+        color: black;
+        outline: none;
+        background-color:coral;
+      }
+      </style>
 </body>

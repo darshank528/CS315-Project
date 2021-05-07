@@ -39,9 +39,9 @@
         </ul>
 </div>
 
- <div class="row filter" style="display: flex">
+ <div class="row filter" style="display: flex; margin-left:3em;">
         <div class="col-lg-3 mx-auto">
-            <label class="text-white mb-3 lead">Filter by Cuisine</label>
+            <label class="text-white mb-3 lead">Filter by Cuisine</label><br>
             <!-- Multiselect dropdown -->
             <select id="cuisine" multiple data-style="bg-white rounded-pill px-4 py-3 shadow-sm " class="selectpicker w-100">
                 <option value="indian"> Indian </option>
@@ -49,7 +49,7 @@
             </select><!-- End -->
         </div>
         <div class="col-lg-3 mx-auto">
-            <label class="text-white mb-3 lead">Meal Type</label>
+            <label class="text-white mb-3 lead">Meal Type</label><br>
             <!-- Multiselect dropdown -->
             <select id="category" multiple data-style="bg-white rounded-pill px-4 py-3 shadow-sm " class="selectpicker w-100">
                 <option value="starter"> Starter </option>
@@ -58,7 +58,7 @@
             </select><!-- End -->
         </div>
         <div class="col-lg-3 mx-auto">
-            <label class="text-white mb-3 lead">Cost( Upper Cap)</label>
+            <label class="text-white mb-3 lead">Cost( Upper Cap)</label><br>
             <!-- Multiselect dropdown -->
             <select id="cost" data-style="bg-white rounded-pill px-4 py-3 shadow-sm " class="selectpicker w-100">
                 <option value="" disabled selected>Amount in INR</option>
@@ -71,6 +71,7 @@
                 <option value="500"> 500 </option>
             </select><!-- End -->
         </div>
+        <div style="display:flex">
         <form method="POST" action="/filter">
         <input type="hidden" name="cui" id="filter_cui"/>
         <input type="hidden" name="cat" id="filter_cat"/>
@@ -81,6 +82,7 @@
         <form method="POST" action="/filter">
         <ul><li><button class="top-button" type="submit"> Remove Filters </a></li></ul>
         </form>
+        </div>
 </div>
 <link rel="stylesheet" href="/css/nav.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

@@ -29,12 +29,13 @@ ul li a {
 .top-button {
   padding: 9px 34px;
   border: 0px;
+  height: 4em;
   border-radius: 4px;
   margin-right: 30px;
   cursor: pointer;
   font-size: 12px;
   font-weight: 600;
-  color: white;
+  color: black;
   outline: none;
   background-color: rgb(170, 210, 54);
 }

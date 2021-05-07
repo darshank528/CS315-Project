@@ -25,13 +25,7 @@
 <%- include('owner_nav.ejs') %>
 <main>
 
-  <div style="margin-top:2em; right: 20em" class="owner_navbar">
-		<div class="dropdown">
-		  <div>
-			<a href = "/logout"><button class="top-button">Logout</button></a>
-			</div>
-		</div>
-	</div>
+
 <div class="grid">
     <a id="my_employees">
       <br>
@@ -310,6 +304,7 @@
       <br>
       <br><h1 class="product__title"> Chef Analytics
     </h1></a>
+    <canvas id="chef_analytics" class="graphs"></canvas>
 
     <table class="w3-table w3-striped w3-bordered">
         <thead>
@@ -341,6 +336,7 @@
       <br>
       <br><h1 class="product__title"> Waiter Analytics
     </h1></a>
+    <canvas id="waiter_analytics" class="graphs"></canvas>
 
     <table class="w3-table w3-striped w3-bordered">
         <thead>
@@ -372,6 +368,7 @@
       <br>
       <h1 class="product__title"> User Analytics - Top 20 users
     </h1></a>
+    <canvas id="user_analytics" class="graphs"></canvas>
 
     <table class="w3-table w3-striped w3-bordered">
         <thead>
@@ -399,7 +396,7 @@
 
   
 
-  <div class="grid">
+  <div class="grid" style="align-items: center; ">
     <a id="acc_info">
       <br>
       <br>
@@ -407,13 +404,13 @@
       <br><h1 class="product__title"> Time series
     </h1></a>
 
-    <form class="product-form" action = "/accountrange" method="POST">
-      <div class="form-group row">
+    <form class="product-form" style="margin-left:40em;" action = "/accountrange" method="POST">
+      <div class="form-group row" >
             
       <label for="range_start">Start date:</label>
       <input type="date" id="range_start" name="range_start"
-         value="<% if (editing) { %><%= product.range_start %><% } %>"
-         min="2020-01-01" max="2021-12-31">
+          value="<% if (editing) { %><%= product.range_start %><% } %>"
+          min="2020-01-01" max="2021-12-31">
         </div>
 
       <div class="form-group row">
@@ -430,7 +427,7 @@
       <% } %>
 
 
-      <p><button class="btn" type="submit">Filter</button></p>
+      <p ><button class="btn" style="margin-left:5em" type="submit">Filter</button></p>
 
     </form>
     
@@ -439,7 +436,7 @@
   <div class="grid">
     <h3 class = "product__title"><u><i>Analysis of Food and Finances</i></u></h3>
     <form class="product-form" action = "/analreport1" method="POST">
-      <p><button class="btn" type="submit"><marquee>Get Analytics_Report</marquee></button></p>
+      <button class="btn" style="margin-left:20em;" type="submit"><marquee>Get Analytics_Report</marquee></button>
     </form>
   </div>
   
@@ -555,13 +552,101 @@
 <script>
   var ctx = document.getElementById('dish_vs_orders').getContext('2d');
   var orders = <%-JSON.stringify(orders_all)%>;
-  const x = []; const y= [];
+  var x = []; var y= [];
   for(var i in orders){
-    console.log(i);
     x.push(orders[i].name); y.push(orders[i].num_orders);
   }
-  console.log(x,y);
-  // var Chart = require('chart.js');
+  
+  
+  var myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+          labels: x,
+          datasets: [{
+              label: '# of Orders',
+              data: y,
+              backgroundColor: [
+              "green",
+              ],
+              borderWidth: 1
+          }]
+      },
+      options: {
+          scales: {
+              y: {
+                  beginAtZero: true
+              }
+          }
+      }
+  });
+
+  var ctx = document.getElementById('chef_analytics').getContext('2d');
+  var orders = <%-JSON.stringify(cooks_all)%>;
+  x = []; y= [];
+  for(var i in orders){
+    x.push(orders[i].name); y.push(orders[i].num_orders);
+  }
+  
+  
+  var myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+          labels: x,
+          datasets: [{
+              label: '# of Orders',
+              data: y,
+              backgroundColor: [
+              "green",
+              ],
+              borderWidth: 1
+          }]
+      },
+      options: {
+          scales: {
+              y: {
+                  beginAtZero: true
+              }
+          }
+      }
+  });
+
+  var ctx = document.getElementById('waiter_analytics').getContext('2d');
+  var orders = <%-JSON.stringify(serves_all)%>;
+  x = [];  y= [];
+  for(var i in orders){
+    x.push(orders[i].name); y.push(orders[i].num_orders);
+  }
+  
+  
+  var myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+          labels: x,
+          datasets: [{
+              label: '# of Orders',
+              data: y,
+              backgroundColor: [
+              "green",
+              ],
+              borderWidth: 1
+          }]
+      },
+      options: {
+          scales: {
+              y: {
+                  beginAtZero: true
+              }
+          }
+      }
+  });
+
+  var ctx = document.getElementById('user_analytics').getContext('2d');
+  var orders = <%-JSON.stringify(users_all)%>;
+   x = [];  y= [];
+  for(var i in orders){
+    x.push(orders[i].name); y.push(orders[i].num_orders);
+  }
+    
   var myChart = new Chart(ctx, {
       type: 'bar',
       data: {
@@ -584,5 +669,6 @@
       }
   });
   </script>
+  
 </body>
 
