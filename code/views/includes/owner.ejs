@@ -8,6 +8,7 @@
  <link rel="stylesheet" href="/css/table.css">
  <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
  <style>
   td {
@@ -221,6 +222,7 @@
         </thead>
 
         <tbody>
+        <canvas id="dish_vs_orders" class="graphs"></canvas>
 
         <% for (var i = 0; i < orders_all.length; i++) { %>
         <% var order = orders_all[i]; %>
@@ -456,4 +458,37 @@
   </div>
 
 </main>
+<script>
+  var ctx = document.getElementById('dish_vs_orders').getContext('2d');
+  var orders = <%-JSON.stringify(orders_all)%>;
+  const x = []; const y= [];
+  for(var i in orders){
+    console.log(i);
+    x.push(orders[i].name); y.push(orders[i].num_orders);
+  }
+  console.log(x,y);
+  // var Chart = require('chart.js');
+  var myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+          labels: x,
+          datasets: [{
+              label: '# of Orders',
+              data: y,
+              backgroundColor: [
+              "green",
+              ],
+              borderWidth: 1
+          }]
+      },
+      options: {
+          scales: {
+              y: {
+                  beginAtZero: true
+              }
+          }
+      }
+  });
+  </script>
 </body>
+

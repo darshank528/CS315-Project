@@ -2,9 +2,11 @@
   "name": "code",
   "dependencies": {
     "bcrypt": "^5.0.1",
+    "chart.js": "^3.2.1",
     "cookie-parser": "^1.4.5",
     "ejs": "^3.1.6",
     "express": "^4.17.1",
+    "html2pdf.js": "^0.9.3",
     "moment": "^2.29.1",
     "pg": "^8.6.0"
   }

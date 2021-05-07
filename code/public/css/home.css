@@ -74,3 +74,8 @@ ul.section8-ul{
 ul.section8-ul, li.section8-li{
   margin:1em;
 }
+.graphs{
+  margin: auto;
+  height: 20vh;
+  width: 50vw;
+}

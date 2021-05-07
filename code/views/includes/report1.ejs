@@ -5,11 +5,13 @@
 <link rel="stylesheet" href="/css/home.css">
  <link rel="stylesheet" href="/css/forms.css">
  <link rel="stylesheet" href="/css/product.css">
+ <script src="/js/html2pdf.bundle.min.js"></script>
+
 </head>
 
 <body bgcolor="cyan">
 
-<main>
+<main id="fullpage">
     
     <form class="product-form" action="/owner" method="GET">
         <marquee><h1>Report of Statistical Data</h1></marquee>
@@ -99,10 +101,19 @@
         </div>
         <br>
         <a href = "./owner"><button type="submit">Back to Owner</button></a>
-        
+        <button onclick=saveaspdf() class="top-button">SAVE AS PDF</button>
         
     </form>
 
 
 </main>
+<script>
+    function saveaspdf(){
+        var element = document.getElementById('fullpage');
+        console.log(element);
+        html2pdf(element);
+        console.log("done");
+    }
+    
+</script>
 </body>
