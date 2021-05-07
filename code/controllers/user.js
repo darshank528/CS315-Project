@@ -140,7 +140,7 @@ module.exports = {
       console.log(cost1,ord_id1);
       return User1.addOrder(id, dish_id,date,time, day, quantity, cost1, ord_id1)
       .then((val)=>{
-        return res.redirect("/");
+        setTimeout(function(){ res.redirect('/'); }, 1000);  
       })
     })
    
