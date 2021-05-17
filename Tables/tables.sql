@@ -44,13 +44,6 @@ CREATE Table Staff_Contact(
 	foreign key(ID) references Staff on delete cascade
 );
 
--- CREATE Table Chef (
--- 	ID int PRIMARY KEY CHECK(ID>=1),
--- 	Salary bigint CHECK(Salary>=1),
--- 	Experience int CHECK(Experience>=0),
--- 	TCDM int CHECK(TCDM>=1),
--- 	Occupied bit
--- );
 
 CREATE Table Dishes (
 	Dish_ID int PRIMARY KEY,
