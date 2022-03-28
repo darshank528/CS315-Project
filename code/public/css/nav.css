@@ -1,4 +1,4 @@
-.order_btn{
+.order_btn {
   margin-left: 8em;
   height: 2.5em;
   margin-top: 0.8em;
@@ -55,24 +55,24 @@ ul li a {
 }
 
 /* Dropdown button on hover & focus */
-.dropbtn:hover, .dropbtn:focus {
-   background-color: rgb(170, 210, 54);
-
+.dropbtn:hover,
+.dropbtn:focus {
+  background-color: rgb(170, 210, 54);
 }
 .bootstrap-select .bs-ok-default::after {
-    width: 0.3em;
-    height: 0.6em;
-    border-width: 0 0.1em 0.1em 0;
-    transform: rotate(45deg) translateY(0.5rem);
+  width: 0.3em;
+  height: 0.6em;
+  border-width: 0 0.1em 0.1em 0;
+  transform: rotate(45deg) translateY(0.5rem);
 }
 
 .btn.dropdown-toggle:focus {
-    outline: none !important;
+  outline: none !important;
 }
 /* The search field */
 .myInput {
   box-sizing: border-box;
-  
+
   background-position: 14px 12px;
   background-repeat: no-repeat;
   font-size: 16px;
@@ -82,26 +82,26 @@ ul li a {
 }
 
 /* The search field when it gets focus/clicked on */
-.myInput:focus {outline: 3px solid #ddd;}
+.myInput:focus {
+  outline: 3px solid #ddd;
+}
 
 /* The container <div> - needed to position the dropdown content */
 .dropdown {
   position: relative;
-  left:18vw;
-
   display: flex;
+  justify-content: center;
 }
 
-.owner_navbar{
-  position:fixed;
-  width : 10%;
+.owner_navbar {
+  position: fixed;
+  width: 100%;
   margin-left: auto;
-margin-right: auto;
-  
+  margin-right: auto;
+  background: white;
 }
-.owner_navbar1{
-  position:relative;
- 
+.owner_navbar1 {
+  position: relative;
 }
 
 /* Dropdown Content (Hidden by Default) */
@@ -128,7 +128,11 @@ margin-right: auto;
 }
 
 /* Change color of dropdown links on hover */
-.dropdown-content a:hover {background-color: #f1f1f1}
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
 
 /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
-.show {display:block;}
+.show {
+  display: block;
+}
