@@ -37,10 +37,8 @@ module.exports = {
         .then((topd)=>{
         User1.getOrders(uname)
         .then((value)=> {
-          console.log("ORDERS",value.rows);
           User1.getMenu(cuisine,category,cost)
           .then((menu)=> {
-              console.log("homemenu", menu.rows);
               return res.render('./includes/home' , {
                 pageTitle: 'My Profile',
                 path: '/includes/home',
@@ -146,16 +144,13 @@ module.exports = {
   },
   PlaceOrder: function(req, res){
     const dish_id=req.body.id;
-    console.log("ABCD",req.body);
     const quantity = req.body.quantity;
-    console.log(quantity);
-    var curr = new Date();
-    var time = curr.toLocaleTimeString();
-    var date = curr.toLocaleDateString();
-    console.log(date,time);
-    var day = curr.getDay();
-    var id = req.cookies.user; //req.body.user_id
-    var cost1, ord_id1;
+    const curr = new Date();
+    const time = curr.toLocaleTimeString();
+    const date = curr.toLocaleDateString();
+    const day = curr.getDay();
+    const id = req.cookies.user; //req.body.user_id
+    let cost1, ord_id1;
     User1.getcost(dish_id)
     .then((cost)=>{
         cost1 = cost;

@@ -11,8 +11,6 @@
 <body>
 
 	<div style="margin:auto; left: 5vw;position: relative">
-		<!-- {forlopp}
-		document.getElementbyId().append("<options>$(cook.id)</options>") -->
 			<h1 class="product__title"> Recommended Dishes
 			</h1>
 			
@@ -75,7 +73,7 @@
 	<li class="section8-li">
 
 	<a class="section8-a" href="#section-8">
-	<img src="images/dish.jpg" style="height:10em; width:15em; display:block;margin: auto; ">
+	<img src="<%= menu[i].image_link %>" style="height:10em; width:15em; display:block;margin:auto;object-fit: cover;">
 	  <h2 class="section8-h2"> <%= menu[i].name %> </h2>
 	  <p class="section8-p"><%= menu[i].cuisine %>, <%= menu[i].category %>, <%= menu[i].cost %></p>
 	  <form action="/order" method="post" >

@@ -1,4 +1,4 @@
-body{
+body {
   overflow-x: hidden;
   background-image: url("../images/home.jpg");
   height: 100vh;
@@ -6,16 +6,13 @@ body{
 
   background-size: cover;
 }
-.body::before{
-      background-color: rgba(0,0,0,0.25);
-
+.body::before {
+  background-color: rgba(0, 0, 0, 0.25);
 }
 #section-8 {
-  top:30vh;
-  
+  top: 30vh;
+
   width: 100%;
-  
-  
 }
 
 #section8-heading {
@@ -28,53 +25,57 @@ body{
 
 #section8-body {
   margin: 20px auto;
-  font-family: 'Lato';
-  background:#666;
-  color:#fff;
+  font-family: "Lato";
+  background: #666;
+  color: #fff;
 }
- 
+
 /*.*{*/
-  /*margin:0;*/
-  /*padding:0;*/
+/*margin:0;*/
+/*padding:0;*/
 /*}*/
- 
+
 h2.section8-h2 {
   font-weight: bold;
   font-size: 2rem;
   text-align: center;
   position: relative;
   bottom: 0.8em;
+  text-transform: capitalize;
 }
- 
+
 p.section8-p {
   font-size: 1.5rem;
   font-weight: normal;
   position: relative;
   text-align: center;
   bottom: 1.6em;
+  text-transform: capitalize;
 }
- 
-ul.section8-ul,li.section8-li{
-  list-style:none;
+
+ul.section8-ul,
+li.section8-li {
+  list-style: none;
 }
-ul.section8-ul{
+ul.section8-ul {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
- a.section8-a{
-  text-decoration:none;
-  color:#000;
-  background:#ffc;
-  display:block;
-  height:15em;
-  width:20em;
-  padding:1em;
+a.section8-a {
+  text-decoration: none;
+  color: #000;
+  background: #ffc;
+  display: block;
+  height: 15em;
+  width: 20em;
+  padding: 1em;
 }
-ul.section8-ul, li.section8-li{
-  margin:1em;
+ul.section8-ul,
+li.section8-li {
+  margin: 1em;
 }
-.graphs{
+.graphs {
   margin: auto;
   height: 20vh;
   width: 50vw;

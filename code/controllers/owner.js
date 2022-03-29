@@ -7,7 +7,6 @@ const {
   get_users_all,
   get_orders_left,
   get_orders_to_serve,
-  get_acc_info,
   get_order_history,
   get_orders_by_date,
   get_max_prof,
@@ -18,7 +17,6 @@ const {
   get_min_exp,
   get_avg_exp,
   get_avg_waste,
-  get_max_exp,
   ing_to_be_ordered,
 } = require("./../models/owner");
 
@@ -84,10 +82,6 @@ module.exports = {
       })
       .then((value10) => {
         m = value10;
-        return get_acc_info();
-      })
-      .then((value9) => {
-        h = value9;
         return get_orders_to_serve();
       })
       .then((value11) => {
@@ -106,7 +100,6 @@ module.exports = {
           serves_all: e.rows,
           users_all: f.rows,
           orders_left: g.rows,
-          accs: h.rows,
           hist: m.rows,
           orders_to_serve: orders_to_serve.rows,
           ing_to_order: value8.rows,
@@ -432,7 +425,6 @@ module.exports = {
       get_users_all(),
       get_orders_left(),
       get_orders_by_date(s_date, e_date),
-      get_acc_info(),
       get_orders_to_serve(),
       ing_to_be_ordered(),
     ];
@@ -451,8 +443,8 @@ module.exports = {
           orders_left: resp[6].rows,
           accs: resp[8].rows,
           hist: resp[7].rows,
-          ing_to_order: resp[10].rows,
-          orders_to_serve: resp[9].rows,
+          ing_to_order: resp[9].rows,
+          orders_to_serve: resp[8].rows,
           moment: moment,
         });
       })

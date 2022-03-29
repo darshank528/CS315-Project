@@ -308,43 +308,6 @@
       <button class="btn" style="margin-left:20em;" type="submit"><marquee>Get Analytics_Report</marquee></button>
     </form>
   </div>
-  
-
-  <div class="grid">
-    <a id= "acc_info1">
-      <br>
-      <br>
-      <br>
-      <br><h1 class="product__title"> Restaurant Details
-    </h1></a>
-
-    <table class="w3-table w3-striped w3-bordered">
-        <thead>
-          <tr style="background-color:coral;">
-            <th scope="col">Date (in yyyy-mm-dd)</th>
-            <th scope="col">Profit</th>
-            <th scope="col">Expenditure</th>
-            <th scope="col">Wastage</th>
-          </tr>
-        </thead>
-
-        <tbody>
-
-        <% for (var i = 0; i < accs.length; i++) { %>
-        <% var acc = accs[i]; %>
-        <tr>
-            <th scope="row"><%= moment(acc.work_date).format('YYYY-MM-DD') %></th>
-            <td> <%= acc.restaurant_profit %></td>
-            <td> <%= acc.expenditure %></td>
-            <td> <%= acc.total_food_wasted %></td>
-
-            </tr>
-
-
-        <% } %>
-      </table>
-  </div>
-
 
   <div class="grid">
     <a id="hist">
