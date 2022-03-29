@@ -54,10 +54,12 @@ p.section8-p {
 }
 
 ul.section8-ul,
-li.section8-li {
+li.section8-li,
+.section8-ul form {
   list-style: none;
 }
-ul.section8-ul {
+ul.section8-ul,
+.section8-ul form {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -72,11 +74,30 @@ a.section8-a {
   padding: 1em;
 }
 ul.section8-ul,
-li.section8-li {
+li.section8-li,
+.section8-ul form {
   margin: 1em;
 }
 .graphs {
   margin: auto;
   height: 20vh;
   width: 50vw;
+}
+
+.order_form_submit{
+  width: 100%;
+  text-align: center;
+  margin-bottom: 7vh;
+}
+
+.order_form_submit button{
+  background: white;
+  box-shadow: none;
+  border: 1px solid black;
+  padding: 4px 20px;
+}
+
+.order_form_submit button:hover{
+  color: white;
+  background: black;
 }

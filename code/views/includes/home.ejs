@@ -25,13 +25,13 @@
 					</tr>
 				</thead>
 				<tbody>
-					<% for (var i = 0; i < topds.length; i++) { %>
+					<form action="/order" method="post" id="quick_order">
+						<% for (var i = 0; i < topds.length; i++) { %>
 						<% var topd = topds[i]; %>
 							<tr>
 							<th scope="row"><%= topd.dish %></th>
 							<td> <%= topd.num_ordered %></td>
 							<td>
-							<form action="/order" method="post" >
 								<input type="hidden" name="id" value="<%= topd.dish_id %>">
 								
 								<div class="col-sm-2" style="display:flex">
@@ -50,11 +50,11 @@
 										</span>
 									</div>
 								</div>
-								  <button class="order_btn" type="submit">Order</button>
-							  </form>
+								  <button class="order_btn" type="submit" form="quick_order">Order</button>
 							</td>
 						</tr>
 						<% } %>
+					</form>
 				</tbody>
 			</table>
 		
@@ -68,7 +68,8 @@
 
 	</a>
  <ul class="section8-ul">
-	<% for (var i = 0; i < menu.length; i++) { %>
+	<form action="/order" id="order_form" method="post" >
+		<% for (var i = 0; i < menu.length; i++) { %>
 
 	<li class="section8-li">
 
@@ -76,10 +77,10 @@
 	<img src="<%= menu[i].image_link %>" style="height:10em; width:15em; display:block;margin:auto;object-fit: cover;">
 	  <h2 class="section8-h2"> <%= menu[i].name %> </h2>
 	  <p class="section8-p"><%= menu[i].cuisine %>, <%= menu[i].category %>, <%= menu[i].cost %></p>
-	  <form action="/order" method="post" >
 		<input type="hidden" name="id" value="<%= menu[i].dish_id %>">
+	</a>
 		
-		<div class="col-sm-2" style="display:flex">
+		<div style="display:flex;justify-content: center;margin-right:50px">
 			
 			<div class="input-group">
 				<span class="input-group-btn">
@@ -87,7 +88,7 @@
 					<span class="glyphicon glyphicon-minus"></span>
 					</button>
 				</span>
-				<input type="text" style="width:4em;height:2.5em; margin-bottom:1em" id="quantity_<%= menu[i].dish_id %>" name="quantity" class="form-control input-number" value="0">
+				<input type="text" style="width:4em;height:2.5em; margin-bottom:1em;text-align:center" id="quantity_<%= menu[i].dish_id %>" name="quantity" class="form-control input-number" value="0">
 				<span class="input-group-btn">
 					<button onclick="increment('quantity_<%= menu[i].dish_id %>')" type="button" class="quantity-right-plus btn btn-success btn-number" data-type="plus" data-field="">
 						<span class="glyphicon glyphicon-plus"></span>
@@ -95,13 +96,13 @@
 				</span>
 			</div>
 		</div>
-	  	<button class="order_btn" type="submit">Order</button>
-	  </form>
-	  </a>
 		</li>
 	<% } %>
-
+</form>
 </ul>
+	<div class="order_form_submit">
+		<button type="submit" form="order_form">Order</button>
+	</div>
 </div>
 <div>
 	<!-- {forlopp}
