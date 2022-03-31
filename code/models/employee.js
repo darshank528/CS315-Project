@@ -30,6 +30,14 @@ module.exports = {
     }
   },
 
+  async get_pending_payments() {
+    const order_list = await db.query(
+      `SELECT orders.order_id as order_id, SUM(cost) FROM ordered_dishes, orders WHERE ordered_dishes.order_id=orders.order_id and orders.order_id not in (SELECT order_id FROM payment) 
+      GROUP BY orders.order_id HAVING (SELECT COUNT(*) as c FROM delivers WHERE completed=1 and delivers.order_id=orders.order_id)=COUNT(DISTINCT ordered_dishes.dish_id)`
+    );
+    return order_list;
+  },
+
   async update_cookserve(staff_id, order_id, dish_id, cook) {
     //var order_list = await db.query('SELECT order_id, delivers.dish_id as dish_id, completed, dishes.name as dish  FROM Delivers, dishes where id = $1 and dishes.dish_id = delivers.dish_id;', [staff_id]);
     if (cook) {
@@ -43,7 +51,10 @@ module.exports = {
         [staff_id, order_id, dish_id]
       );
     }
-
-    //return order_list;
   },
+
+  async paymentConfirm(order_id, remarks, waiter_id, mode_of_payment){
+    const d = new Date().toLocaleDateString();
+    return await db.query(`INSERT INTO payment VALUES($1,$2,$3,$4,$5)`, [order_id, d, waiter_id, remarks, mode_of_payment]);
+  }
 };

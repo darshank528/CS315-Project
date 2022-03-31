@@ -27,7 +27,7 @@
 <main>
 	
 	
-	<div style="margin-top:2em; right: 30em" class="owner_navbar">
+	<div class="owner_navbar">
 		<div class="dropdown">
 		
 		  <div>
@@ -101,6 +101,37 @@
 				</form>
         <% } %>
 	</div>
+
+	<% if (isAuth == 2) { %>
+		<div class="grid" style="margin-bottom:9vh">
+			<h1 class="product__title">Pending Payments</h1>
+			<table class="w3-table w3-striped w3-bordered" style = "border: 2px single brown;">
+				<thead>
+					<tr style="background-color: coral;">
+						<th scope="col">Order ID</th>
+						<th scope="col">Cost</th>
+						<th scope="col">Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% for (var i = 0; i < pending_payments.length; i++) { %>
+						<tr style = "border: 2px single brown;">
+							<td><%= pending_payments[i].order_id %></td>	
+							<td><%= pending_payments[i].sum %></td>
+							<td>
+								<form action="/employee/payment" method="POST">
+									<input type="hidden" name="order_id" value="<%= pending_payments[i].order_id %>">
+									<input type="hidden" name="cost" value="<%= pending_payments[i].sum %>">
+									<button type="submit">Payment Received</button>
+								</form>
+							</td>
+						</tr>
+					<% } %>
+					</tbody>
+			</table>
+		</div>
+	<% } %>
+
 	<div class="grid">
 		<h1 class="product__title"> My Orders
 		</h1>
@@ -129,7 +160,7 @@
 				</td>
 				<td>
 					<form action="/employee" method="post">
-						<button class="btn" type="submit">Cook/Serve</button> 
+						<button class="btn" type="submit" <% if (order.completed == 1) { %>disabled <%} %>><%= cta %></button> 
 						<input type="hidden" name="id" value="<%= order.id %>">
 						<input type="hidden" name="order_id" value="<%= order.order_id %>">
 					   <input type="hidden" name="dish_id" value="<%= order.dish_id %>">

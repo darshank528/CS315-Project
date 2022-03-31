@@ -18,6 +18,7 @@ const {
   get_avg_exp,
   get_avg_waste,
   ing_to_be_ordered,
+  get_pending_payments,
 } = require("./../models/owner");
 
 var Owner = require("./../models/owner");
@@ -39,15 +40,16 @@ module.exports = {
       });
   },
   loadhome: function (req, res) {
-    var a = 0;
-    var b = 0;
-    var c = 0;
-    var d = 0;
-    var e = 0;
-    var f = 0;
-    var g = 0;
-    var h = 0;
-    var uname = req.cookies.user;
+    let a = 0;
+    let b = 0;
+    let c = 0;
+    let d = 0;
+    let e = 0;
+    let f = 0;
+    let g = 0;
+    let h = 0;
+    let p = 0;
+    const uname = req.cookies.user;
     if (!uname) {
       return res.redirect("/login");
     }
@@ -82,6 +84,10 @@ module.exports = {
       })
       .then((value10) => {
         m = value10;
+        return get_pending_payments();
+      })
+      .then((value12) => {
+        p = value12;
         return get_orders_to_serve();
       })
       .then((value11) => {
@@ -104,6 +110,7 @@ module.exports = {
           orders_to_serve: orders_to_serve.rows,
           ing_to_order: value8.rows,
           moment: moment,
+          pending_payment: p.rows,
           isAuth: req.cookies.isAuth,
         });
       })

@@ -51,7 +51,5 @@ app.use('/rangequery',rang);
 app.use('/accountrange',accrang);
 app.use('/analreport1',analrep1);
 
-
-
 // app.use(session({secret: 'secret pass', store: sessionStore})); 
 app.listen(3000);

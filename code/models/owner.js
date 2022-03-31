@@ -27,7 +27,7 @@ module.exports = {
 
   async get_orders_all() {
     var inv_list = await db.query(
-      "SELECT name, count(*) as num_orders FROM orders, dishes where dishes.dish_id = orders.dish_id group by dishes.dish_id ORDER BY Num_orders desc;"
+      "SELECT name, count(*) as num_orders FROM dishes, ordered_dishes where dishes.dish_id = ordered_dishes.dish_id group by dishes.dish_id ORDER BY Num_orders desc;"
     );
 
     return inv_list;
@@ -43,7 +43,7 @@ module.exports = {
 
   async get_cooks_all() {
     var inv_list = await db.query(
-      "SELECT staff.name_FN as name, count(*) as num_orders FROM orders, cooks, staff where cooks.dish_id = orders.dish_id and cooks.order_id = orders.order_id and cooks.id = staff.id group by staff.name_FN order by num_orders DESC;"
+      "SELECT staff.name_FN as name, count(*) as num_orders FROM ordered_dishes, cooks, staff where cooks.dish_id = ordered_dishes.dish_id and cooks.order_id = ordered_dishes.order_id and cooks.id = staff.id group by staff.name_FN order by num_orders DESC;"
     );
 
     return inv_list;
@@ -51,7 +51,7 @@ module.exports = {
 
   async get_serves_all() {
     var inv_list = await db.query(
-      "SELECT staff.name_FN as name, count(*) as num_orders FROM orders, delivers, staff where delivers.dish_id = orders.dish_id and delivers.order_id = orders.order_id and delivers.id = staff.id group by staff.name_FN order by num_orders DESC;"
+      "SELECT staff.name_FN as name, count(*) as num_orders FROM ordered_dishes, delivers, staff where delivers.dish_id = ordered_dishes.dish_id and delivers.order_id = ordered_dishes.order_id and delivers.id = staff.id group by staff.name_FN order by num_orders DESC;"
     );
 
     return inv_list;
@@ -67,23 +67,31 @@ module.exports = {
 
   async get_orders_left() {
     var inv_list = await db.query(
-      "SELECT order_ID as order_id, dishes.dish_ID as dish_id, name as dish, quantity_ordered as qty, dishes.cost as cost FROM orders, dishes where dishes.dish_id = orders.dish_id and (order_ID, dishes.dish_ID) not in (select order_id, dishes.dish_ID from cooks) order by order_id, dishes.dish_ID;"
+      "SELECT order_ID as order_id, dishes.dish_ID as dish_id, name as dish, quantity as qty, ordered_dishes.cost as cost FROM ordered_dishes, dishes where dishes.dish_id = ordered_dishes.dish_id and (order_id, dishes.dish_id) not in (select order_id, dishes.dish_id from cooks) order by order_id, dishes.dish_id;"
     );
 
     return inv_list;
   },
 
   async get_orders_to_serve() {
-    var inv_list = await db.query(
-      "SELECT orders.order_ID as order_id, name as dish, orders.dish_ID as dish_id, quantity_ordered as qty FROM orders,cooks, dishes where dishes.dish_id = orders.dish_id and (orders.order_ID, orders.dish_ID) = (cooks.order_ID,cooks.dish_ID) and cooks.completed = 1 and (orders.order_ID, orders.dish_ID) not in (select order_id, dish_ID from delivers) order by order_id, dish_ID;"
+    const inv_list = await db.query(
+      "SELECT orders.order_ID as order_id, name as dish, ordered_dishes.dish_ID as dish_id, quantity as qty FROM orders,cooks, dishes, ordered_dishes where dishes.dish_id = ordered_dishes.dish_id and ordered_dishes.order_id=orders.order_id and (orders.order_ID, ordered_dishes.dish_ID) = (cooks.order_ID,cooks.dish_ID) and cooks.completed = 1 and (orders.order_ID, ordered_dishes.dish_ID) not in (select order_id, dish_ID from delivers) order by order_id, dish_ID;"
     );
 
     return inv_list;
   },
 
+  async get_pending_payments() {
+    const order_list = await db.query(
+      `SELECT orders.order_id as order_id, SUM(cost) FROM ordered_dishes, orders WHERE ordered_dishes.order_id=orders.order_id and orders.order_id not in (SELECT order_id FROM payment) 
+      GROUP BY orders.order_id HAVING (SELECT COUNT(*) as c FROM delivers WHERE completed=1 and delivers.order_id=orders.order_id)=COUNT(DISTINCT ordered_dishes.dish_id)`
+    );
+    return order_list;
+  },
+
   async get_order_history() {
     var inv_list = await db.query(
-      "SELECT work_date, name, sum(quantity_ordered) as qty, cast(avg(review) as decimal(4,2)) as rev from orders, dishes where orders.dish_id=dishes.dish_id group by work_date, orders.dish_id, dishes.name order by work_date desc;"
+      "SELECT work_date, name, sum(quantity) as qty, cast(avg(review) as decimal(4,2)) as rev from orders,ordered_dishes, dishes where ordered_dishes.dish_id=dishes.dish_id and ordered_dishes.order_id=orders.order_id group by work_date, ordered_dishes.dish_id, dishes.name order by work_date desc;"
     );
 
     return inv_list;

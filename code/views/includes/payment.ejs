@@ -1,0 +1,32 @@
+<%- include('base.ejs') %>
+<link
+  rel="stylesheet"
+  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+/>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="/css/home.css" />
+<link rel="stylesheet" href="/css/forms.css" />
+<link rel="stylesheet" href="/css/product.css" />
+<link rel="stylesheet" href="/css/table.css" />
+<link rel="stylesheet" href="/css/nav.css" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+<form class="product-form" action="/employee/payment/confirm" method="POST">
+  <h1>Payment for <%= order_id %> of <%= cost %></h1>
+  <input type="hidden" name="order_id" id="order_id" value="<%= order_id %>" />
+  <div class="form-group row">
+    <label for="remarks" class="col-sm-6 col-form-label">Remarks</label>
+    <div class="col-sm-6">
+      <input type="text" name="remarks" id="remarks" />
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="mode_of_payment" class="col-sm-6 col-form-label"
+      >Mode of Payment</label
+    >
+    <div class="col-sm-6">
+      <input type="text" name="mode_of_payment" id="mode_of_payment" />
+    </div>
+  </div>
+  <button type="submit">Submit</button>
+</form>
