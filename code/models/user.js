@@ -21,6 +21,13 @@ module.exports = {
     return order_list;
   },
 
+  async getUnreviewedOrders(user_id) {
+    return db.query(
+      `SELECT orders.order_id, work_date as date FROM orders LEFT JOIN payment b ON orders.order_id=b.order_id WHERE id=$1 and review IS NULL and b.order_id IS NOT NULL`,
+      [user_id]
+    );
+  },
+
   async getTopDishes(user_id) {
     var order_list = await db.query(
       "SELECT dishes.dish_id as dish_id, dishes.name as dish, SUM(quantity) as num_ordered FROM orders, dishes, ordered_dishes WHERE orders.id=$1 and dishes.dish_id=ordered_dishes.dish_id and ordered_dishes.order_id=orders.order_id GROUP BY dishes.dish_id, dish ORDER BY num_ordered DESC LIMIT 5",
@@ -71,7 +78,9 @@ module.exports = {
       const curr = new Date();
       const time = curr.toLocaleTimeString();
       const date = curr.toLocaleDateString();
-      const day = curr.toLocaleTimeString('en-US', {weekday: 'long'}).split(' ')[0];
+      const day = curr
+        .toLocaleTimeString("en-US", { weekday: "long" })
+        .split(" ")[0];
       const r = await db.query(
         `SELECT order_id FROM orders ORDER BY order_id DESC LIMIT 1`
       );
@@ -103,12 +112,18 @@ module.exports = {
           [dish.quant, dish.id]
         );
       }
-      await db.query('COMMIT');
+      await db.query("COMMIT");
       return `Order Placed with id ${newId}`;
     } catch (e) {
       console.log(e);
       await db.query("ROLLBACK");
       throw "Order could not be processed. Please try again";
     }
+  },
+  async updateReview(order_id, review) {
+    return db.query(`UPDATE orders SET review=$2 WHERE order_id=$1`, [
+      order_id,
+      review,
+    ]);
   },
 };

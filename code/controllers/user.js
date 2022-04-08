@@ -28,7 +28,6 @@ module.exports = {
     var cuisine = !req.body.cui ? null : req.body.cui;
     var category = !req.body.cat ? null : req.body.cat;
     var cost = !req.body.cost ? null : req.body.cost;
-    console.log(cuisine, category, cost);
 
     User1.getProfile(uname)
       .then((proff) => {
@@ -38,16 +37,24 @@ module.exports = {
               .then((value) => {
                 User1.getMenu(cuisine, category, cost)
                   .then((menu) => {
-                    return res.render("./includes/home", {
-                      pageTitle: "My Profile",
-                      path: "/includes/home",
-                      editing: false,
-                      orders: value.rows,
-                      menu: menu.rows,
-                      topds: topd.rows,
-                      prof: proff.rows,
-                      isAuth: req.cookies.isAuth,
-                    });
+                    User1.getUnreviewedOrders(uname).then(urorders => {
+                      console.log(urorders);
+                      return res.render("./includes/home", {
+                        pageTitle: "My Profile",
+                        path: "/includes/home",
+                        editing: false,
+                        orders: value.rows,
+                        menu: menu.rows,
+                        topds: topd.rows,
+                        prof: proff.rows,
+                        isAuth: req.cookies.isAuth,
+                        urorders: urorders.rows.map(s => {
+                          const d = new Date(s.date);
+                          s.date =`${d.getDate()}/${d.getMonth()+1}/${d.getFullYear()}`
+                          return s;
+                        })
+                      });  
+                    })
                   })
                   .catch((err) => console.log(err));
               })
@@ -139,7 +146,6 @@ module.exports = {
   PlaceOrder: function (req, res) {
     const id = req.cookies.user; //req.body.user_id
     const dishes = [];
-    console.log(req.body);
     for (let i = 0; i < req.body.id.length; i++) {
       const quant = parseInt(req.body.quantity[i]);
       if (quant > 0) {
@@ -157,6 +163,11 @@ module.exports = {
     res.clearCookie("isAuth");
     return res.redirect("/login");
     return Promise.resolve(0);
+  },
+  review: function (req, res)  {
+    User1.updateReview(req.body.order_id, req.body.rating).then(r => {
+      res.redirect('/');
+    })
   },
   user_prof_get: function (req, res) {},
 

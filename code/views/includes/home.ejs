@@ -61,6 +61,45 @@
 			
 			</div>
 	</div>
+	<% if (urorders.length > 0) { %>
+	<div style="margin:auto; left: 5vw;position: relative">
+		<h1 class="product__title"> Review Orders
+		</h1>
+		
+		<div class="grid" id="auto">
+			
+
+		<table class="table table-bordered table-dark">
+			<thead>
+				<tr>
+				<th scope="col">Order ID</th>
+				<th scope="col">Order Date</th>
+				<th scope="col">Review</th>
+				<th scope="col">Submit</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% for (var i = 0; i < urorders.length; i++) { %>
+					<% var topd = urorders[i]; %>
+						<tr>
+						<th scope="row"><%= topd.order_id %></th>
+						<td> <%= topd.date %></td>
+						<form action="/review" method="post" id="quick_order">
+							<td>
+								<input type="hidden" value="<%= topd.order_id %>" name="order_id">
+								<input type="number" min="1" max="5" name="rating">
+							</td>
+							<td>
+								<button type="submit">Sumbit</button>
+							</td>
+						</form>
+				<% } %>
+			</tbody>
+		</table>
+		</div>
+	</div>
+	<% } %>
+					
 
 
 <div>
