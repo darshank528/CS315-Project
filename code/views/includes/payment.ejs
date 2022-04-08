@@ -12,7 +12,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
 <form class="product-form" action="/employee/payment/confirm" method="POST">
-  <h1>Payment for <%= order_id %> of <%= cost %></h1>
+  <h1>Payment for Order ID <%= order_id %> of Rs. <%= cost %></h1>
+  <br>
   <input type="hidden" name="order_id" id="order_id" value="<%= order_id %>" />
   <div class="form-group row">
     <label for="remarks" class="col-sm-6 col-form-label">Remarks</label>

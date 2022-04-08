@@ -43,7 +43,7 @@ module.exports = {
           orders: value2.rows,
           pending_payments: b.rows,
           isAuth: req.cookies.isAuth,
-          cta: isAuth === 3 ? "Cooked" : "Served",
+          cta: isAuth === '3' ? "Cooked" : "Served",
         });
       })
       .catch((err) => console.log(err));

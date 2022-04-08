@@ -67,7 +67,7 @@ module.exports = {
 
   async get_orders_left() {
     var inv_list = await db.query(
-      "SELECT order_ID as order_id, dishes.dish_ID as dish_id, name as dish, quantity as qty, ordered_dishes.cost as cost FROM ordered_dishes, dishes where dishes.dish_id = ordered_dishes.dish_id and (order_id, dishes.dish_id) not in (select order_id, dishes.dish_id from cooks) order by order_id, dishes.dish_id;"
+      "SELECT order_ID as order_id, dishes.dish_ID as dish_id, name as dish, quantity as qty, ordered_dishes.cost as cost FROM ordered_dishes, dishes where dishes.dish_id = ordered_dishes.dish_id and (order_id, dishes.dish_id) not in (select order_id, dish_id from cooks) order by order_id, dishes.dish_id;"
     );
 
     return inv_list;
