@@ -17,6 +17,7 @@ router.get('/',ownerCon.OrderHistory);
 router.post('/',ownerCon.UpdateInventory);
 router.post('/',invCon.UpdateInventory);
 router.get('/',invCon.Add_Inv);
+router.post('/customer', invCon.addCustomer)
 
 // post - how to have multiple ?
 

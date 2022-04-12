@@ -35,7 +35,7 @@ module.exports = {
 
   async get_orders_by_date(s, e) {
     var orders_list_by_date = await db.query(
-      "SELECT work_date, name, sum(quantity_ordered) as qty, cast(avg(review) as decimal(4,2)) as rev from orders, dishes where orders.dish_id=dishes.dish_id and $1<=work_date and work_Date<=$2 group by work_date, orders.dish_id, dishes.name order by work_date desc;",
+      "SELECT work_date, name, sum(quantity) as qty, cast(avg(review) as decimal(4,2)) as rev from orders, dishes, ordered_dishes where  $1<=work_date and work_Date<=$2 and orders.order_id=ordered_dishes.order_id and dishes.dish_id=ordered_dishes.dish_id group by work_date, dishes.name order by work_date desc;",
       [s, e]
     );
     return orders_list_by_date;
@@ -92,23 +92,6 @@ module.exports = {
   async get_order_history() {
     var inv_list = await db.query(
       "SELECT work_date, name, sum(quantity) as qty, cast(avg(review) as decimal(4,2)) as rev from orders,ordered_dishes, dishes where ordered_dishes.dish_id=dishes.dish_id and ordered_dishes.order_id=orders.order_id group by work_date, ordered_dishes.dish_id, dishes.name order by work_date desc;"
-    );
-
-    return inv_list;
-  },
-
-  async get_acc_info() {
-    var inv_list = await db.query(
-      "SELECT * from accounts order by work_date desc;"
-    );
-
-    return inv_list;
-  },
-
-  async get_acc_range_info(s, e) {
-    var inv_list = await db.query(
-      "SELECT * from accounts where $1 <= work_date AND work_date<=$2 order by work_date asc;",
-      [s, e]
     );
 
     return inv_list;
@@ -175,85 +158,22 @@ module.exports = {
     return idd;
   },
 
-  async add_empl(id, aname, gender, age, salary, role, exp, occ, tcdm) {
+  async add_empl(id, aname, gender, age, salary, role, occ) {
     await db.query(
-      "INSERT INTO STAFF (id, NAME_fn, gender, age, salary, role, experience, occupied, tcdm) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9);",
-      [id, aname, gender, age, salary, role, exp, occ, tcdm]
+      "INSERT INTO STAFF (id, NAME_fn, gender, age, salary, role, occupied) VALUES ($1, $2, $3, $4, $5, $6, $7);",
+      [id, aname, gender, age, salary, role, occ]
     );
 
     return Promise.resolve(0);
   },
 
-  async up_empl(id, aname, gender, age, salary, role, exp, occ, tcdm) {
+  async up_empl(id, aname, gender, age, salary, role, occ) {
     await db.query(
-      "UPDATE STAFF SET NAME_fn=$2, gender=$3, age=$4, salary=$5, role=$6, experience=$7, occupied=$8, tcdm=$9 WHERE ID=$1;",
-      [id, aname, gender, age, salary, role, exp, occ, tcdm]
+      "UPDATE STAFF SET NAME_fn=$2, gender=$3, age=$4, salary=$5, role=$6, occupied=$7 WHERE ID=$1;",
+      [id, aname, gender, age, salary, role, occ]
     );
 
     return Promise.resolve(0);
-  },
-
-  async get_max_exp() {
-    var expmax = await db.query(
-      "SELECT * from accounts where expenditure in (select max(expenditure) from accounts);"
-    );
-    return expmax;
-  },
-
-  async get_min_exp() {
-    var expmax = await db.query(
-      "SELECT * from accounts where expenditure in (select min(expenditure) from accounts);"
-    );
-    return expmax;
-  },
-
-  async get_avg_exp() {
-    var expmax = await db.query(
-      "SELECT cast(avg(expenditure) as decimal(8,2)) as avg_exp, cast(stddev(expenditure) as decimal(8,2)) as sd_exp from accounts;"
-    );
-    return expmax;
-  },
-
-  async get_max_prof() {
-    var expmax = await db.query(
-      "SELECT * from accounts where restaurant_profit in (select max(restaurant_profit) from accounts);"
-    );
-    return expmax;
-  },
-
-  async get_min_prof() {
-    var expmax = await db.query(
-      "SELECT * from accounts where restaurant_profit in (select min(restaurant_profit) from accounts);"
-    );
-    return expmax;
-  },
-
-  async get_avg_prof() {
-    var expmax = await db.query(
-      "SELECT cast(avg(restaurant_profit) as decimal(8,2)) as avg_prof, cast(stddev(restaurant_profit) as decimal(8,2)) as sd_prof from accounts;"
-    );
-    return expmax;
-  },
-
-  async get_max_waste() {
-    var expmax = await db.query(
-      "SELECT * from accounts where Total_food_wasted in (select max(Total_food_wasted) from accounts);"
-    );
-    return expmax;
-  },
-
-  async get_min_waste() {
-    var expmax = await db.query(
-      "SELECT * from accounts where Total_food_wasted in (select min(Total_food_wasted) from accounts);"
-    );
-    return expmax;
-  },
-
-  async get_avg_waste() {
-    var expmax = await db.query(
-      "SELECT cast(avg(Total_food_wasted) as decimal(8,2)) as avg_waste, cast(stddev(Total_food_wasted) as decimal(8,2)) as sd_waste from accounts;"
-    );
-    return expmax;
   },
 
   async get_cook_id() {
@@ -268,5 +188,18 @@ module.exports = {
       "SELECT distinct delivers.ID as id, name_fn, name_ln from staff, delivers where delivers.id = staff.id;"
     );
     return waiter_id;
+  },
+  async addCustomer(customer) {
+    return db.query(
+      `INSERT INTO customers(name_fn,name_mn,name_ln,gender,age,contact) VALUES($1,$2,$3,$4,$5,$6)`,
+      [
+        customer.name_fn,
+        customer.name_mn,
+        customer.name_ln,
+        customer.gender,
+        customer.age,
+        customer.contact,
+      ]
+    );
   },
 };

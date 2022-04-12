@@ -131,9 +131,8 @@ module.exports = {
     const role = req.body.role;
     const exp = req.body.exp;
     const occ = req.body.occ;
-    const tcdm = req.body.tcdm;
 
-    Owner.add_empl(id, name, gender, age, salary, role, exp, occ, tcdm)
+    Owner.add_empl(id, name, gender, age, salary, role, exp, occ)
       .then(() => {
         setTimeout(function () {
           res.redirect("/owner");
@@ -165,9 +164,8 @@ module.exports = {
     const role = req.body.role[0];
     const exp = req.body.exp[0];
     const occ = req.body.occ[0];
-    const tcdm = req.body.tcdm[0];
 
-    Owner.up_empl(id, name, gender, age, salary, role, exp, occ, tcdm)
+    Owner.up_empl(id, name, gender, age, salary, role, exp, occ)
       .then(() => {
         setTimeout(function () {
           res.redirect("/owner");
@@ -404,6 +402,12 @@ module.exports = {
       .catch((err) => console.log(err));
   },
 
+  addCustomer: function (req, res) {
+    Owner.addCustomer(req.body).then((response) => {
+      res.redirect("/owner");
+    });
+  },
+
   AllotOrderToChef: function (req, res) {},
 
   AllotOrderToWaiter: function (req, res) {},
@@ -434,6 +438,7 @@ module.exports = {
       get_orders_by_date(s_date, e_date),
       get_orders_to_serve(),
       ing_to_be_ordered(),
+      get_pending_payments()
     ];
     Promise.all(promiseList)
       .then((resp) => {
@@ -453,6 +458,7 @@ module.exports = {
           ing_to_order: resp[9].rows,
           orders_to_serve: resp[8].rows,
           moment: moment,
+          pending_payment: resp[10].rows
         });
       })
       .catch((err) => console.log(err));

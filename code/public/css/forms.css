@@ -10,6 +10,10 @@
   margin-bottom: 0.25rem;
 }
 
+.form-group label {
+  color: #040303e3;
+}
+
 .form-control input,
 .form-control textarea {
   border: 1px solid #a1a1a1;

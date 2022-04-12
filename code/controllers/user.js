@@ -37,7 +37,7 @@ module.exports = {
               .then((value) => {
                 User1.getMenu(cuisine, category, cost)
                   .then((menu) => {
-                    User1.getUnreviewedOrders(uname).then(urorders => {
+                    User1.getUnreviewedOrders(uname).then((urorders) => {
                       console.log(urorders);
                       return res.render("./includes/home", {
                         pageTitle: "My Profile",
@@ -48,13 +48,15 @@ module.exports = {
                         topds: topd.rows,
                         prof: proff.rows,
                         isAuth: req.cookies.isAuth,
-                        urorders: urorders.rows.map(s => {
+                        urorders: urorders.rows.map((s) => {
                           const d = new Date(s.date);
-                          s.date =`${d.getDate()}/${d.getMonth()+1}/${d.getFullYear()}`
+                          s.date = `${d.getDate()}/${
+                            d.getMonth() + 1
+                          }/${d.getFullYear()}`;
                           return s;
-                        })
-                      });  
-                    })
+                        }),
+                      });
+                    });
                   })
                   .catch((err) => console.log(err));
               })
@@ -85,16 +87,18 @@ module.exports = {
                 // console.log("ORDERS",value.rows);
                 User1.getMenu(cuisine, category, cost)
                   .then((menu) => {
-                    console.log("homemenu", menu.rows);
-                    return res.render("./includes/home", {
-                      pageTitle: "My Profile",
-                      path: "/includes/home",
-                      editing: false,
-                      orders: value.rows,
-                      menu: menu.rows,
-                      topds: topd.rows,
-                      prof: proff.rows,
-                      isAuth: req.cookies.isAuth,
+                    User1.getUnreviewedOrders(uname).then((urorders) => {
+                      return res.render("./includes/home", {
+                        pageTitle: "My Profile",
+                        path: "/includes/home",
+                        editing: false,
+                        orders: value.rows,
+                        menu: menu.rows,
+                        topds: topd.rows,
+                        prof: proff.rows,
+                        isAuth: req.cookies.isAuth,
+                        urorders: urorders,
+                      });
                     });
                   })
                   .catch((err) => console.log(err));
@@ -139,7 +143,9 @@ module.exports = {
           return res.redirect("/owner");
         } else {
           console.log("Invalid email id/passwd");
-          res.render("./includes/login");
+          res.render("./includes/login", {
+            message: "Invalid email id/password"
+          });
         }
       });
   },
@@ -164,10 +170,10 @@ module.exports = {
     return res.redirect("/login");
     return Promise.resolve(0);
   },
-  review: function (req, res)  {
-    User1.updateReview(req.body.order_id, req.body.rating).then(r => {
-      res.redirect('/');
-    })
+  review: function (req, res) {
+    User1.updateReview(req.body.order_id, req.body.rating).then((r) => {
+      res.redirect("/");
+    });
   },
   user_prof_get: function (req, res) {},
 

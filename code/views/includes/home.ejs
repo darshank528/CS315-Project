@@ -19,9 +19,10 @@
 	
 			<table class="table table-bordered table-dark">
 				<thead>
-					<tr>
+					<tr style="background-color:coral">
 					<th scope="col">Dish </th>
 					<th scope="col">#Orders</th>
+					<th scope="col"></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -154,7 +155,7 @@
 
 		<table class="table table-bordered table-dark">
 			<thead>
-				<tr>
+				<tr style="background-color:coral">
 				<th scope="col">Order No.</th>
 				<th scope="col">Order ID</th>
 				<th scope="col">Date</th>
@@ -230,6 +231,14 @@
 						<label for="age" class="col-sm-6 col-form-label">Age</label>
 						<div class="col-sm-6">
 						<input type="text" disabled="disabled" name="age" id="age" value="<%= pro.age %>">
+						</div>
+					
+					</div>
+					<div class="form-group row">
+		
+						<label for="contact" class="col-sm-6 col-form-label">Contact</label>
+						<div class="col-sm-6">
+						<input type="text" disabled="disabled" name="contact" id="contact" value="<%= pro.contact %>">
 						</div>
 					
 					</div>

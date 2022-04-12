@@ -42,13 +42,12 @@
 
     <table class="w3-table w3-striped w3-bordered">
         <thead>
-          <tr style="background-color:coral;">
+          <tr style="background-color:coral">
             <th scope="col">Employee ID</th>
             <th scope="col">Name</th>
             <th scope="col">Gender</th>
             <th scope="col">Age</th>
             <th scope="col">Salary</th>
-            <th scope="col">Experience</th>
             <th scope="col">Role</th>
             <th scope="col">Update</th>
             <th scope="col">Delete</th>
@@ -65,7 +64,6 @@
             <td> <%= emp.gender %></td>
             <td> <%= emp.age %></td>
             <td> <%= emp.salary %></td>
-            <td> <%= emp.experience %></td>
             <td> <%= emp.role %></td>
             <td>
                 <form action="/upp_empl" method="post">
@@ -99,7 +97,7 @@
 
     <table class="w3-table w3-striped w3-bordered">
         <thead>
-          <tr style="background-color:coral;">
+          <tr style="background-color:coral">
             <th scope="col">Ing ID</th>
             <th scope="col">Ing Name</th>
             <th scope="col">Quantity</th>
@@ -133,7 +131,7 @@
 
     <table class="w3-table w3-striped w3-bordered">
         <thead>
-          <tr style="background-color:coral;">
+          <tr style="background-color:coral">
             <th scope="col">Order_ID</th>
             <th scope="col">Dish_ID</th>
             <th scope="col">Dish Name</th>
@@ -178,7 +176,7 @@
 
     <table class="w3-table w3-striped w3-bordered">
         <thead>
-          <tr style="background-color:coral;">
+          <tr style="background-color:coral">
             <th scope="col">Order_ID</th>
             <th scope="col">Dish_ID</th>
             <th scope="col">Dish Name</th>
@@ -219,7 +217,7 @@
 
     <table class="w3-table w3-striped w3-bordered">
         <thead>
-          <tr style="background-color:coral;">
+          <tr style="background-color:coral">
             <th scope="col">Order_ID</th>
             <th scope="col">Cost</th>
           </tr>
@@ -251,7 +249,7 @@
 
     <table class="w3-table w3-striped w3-bordered">
         <thead>
-          <tr style="background-color:coral;">
+          <tr style="background-color:coral">
             <th scope="col">ID</th>
             <th scope="col">Name</th>
             <th scope="col">Quantity</th>
@@ -336,11 +334,11 @@
 
     <table class="w3-table w3-striped w3-bordered">
         <thead>
-          <tr style="background-color:coral;">
+          <tr style="background-color:coral">
             <th scope="col">Date (in yyyy-mm-dd)</th>
             <th scope="col">Dish Name</th>
             <th scope="col">Total quantity</th>
-            <th scope="col">Avg Review (out of 5)</th>
+            <th scope="col">Review (out of 5)</th>
           </tr>
         </thead>
 
@@ -359,6 +357,51 @@
 
         <% } %>
       </table>
+  </div>
+  <div class="grid">
+    <h1 class="product__title">Create Customer</h1>
+    <form class="product-form" action="/owner/customer" method="POST">
+      <div class="form-group row">
+        <label for="name_fn" class="col-sm-6 col-form-label">First Name</label>
+        <div class="col-sm-6">
+        <input type="text" name="name_fn" id="name_fn">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="name_mn" class="col-sm-6 col-form-label">Middle Name</label>
+        <div class="col-sm-6">
+          <input type="text" name="name_mn" id="name_mn">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="name_ln" class="col-sm-6 col-form-label">Last Name</label>
+        <div class="col-sm-6">
+          <input type="text" name="name_ln" id="name_ln">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="gender" class="col-sm-6 col-form-label">Gender</label>
+        <div class="col-sm-6">
+          <select name="gender" id="gender">
+            <option value="m">Male</option>
+            <option value="f">Female</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="age" class="col-sm-6 col-form-label">Age</label>
+        <div class="col-sm-6">
+          <input type="number" min="1" name="age" id="age">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="contact" class="col-sm-6 col-form-label">Contact</label>
+        <div class="col-sm-6">
+          <input type="number" name="contact" id="contact">
+        </div>
+      </div>
+      <button type="submit">Add Customer</button>
+    </form>
   </div>
 
 </main>

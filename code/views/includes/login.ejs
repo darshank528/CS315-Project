@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 <body>
 <div style="background-color: black; height:13vh;">
-	<h1 style="font-style: Arvo; color:white; text-align: center; padding-top: 1em;">Welcome to Restaurant RAPiD!</h1>
+	<h1 style="font-style: Arvo; color:white; text-align: center; padding-top: 1em;">Welcome to our Restaurant!!</h1>
 </div>
 <div class="container">
 	
@@ -40,7 +40,9 @@
 					</div>
 				</form>
 			</div>
-			
+			<% if (locals.message) { %>
+				<p><%= message %></p>
+			<% } %>
 		</div>
 	</div>
 </div>
