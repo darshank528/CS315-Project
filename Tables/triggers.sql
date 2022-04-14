@@ -5,13 +5,6 @@ BEGIN
 	END IF;
 END$$
 
-create trigger Add_Chef before INSERT on Staff for each row 
-BEGIN
-	IF(Staff.TCDM IS NULL) THEN
-		set Staff.TCDM = 0;
-	END IF;
-END$$
-
 -- create trigger Add_Ingredient before INSERT on Ingredients for each row 
 -- BEGIN
 -- 	IF(Ingredients.Quality IS NULL) THEN
@@ -62,18 +55,6 @@ BEGIN
     ELSE
     	INSERT INTO Customers(ID, Name_FN, Name_MN, Name_LN, Gender, Age, Order_Frequency)
         VALUES(NEW.ID, NEW.Name_FN, NEW.Name_MN, NEW.Name_LN, NEW.Gender, NEW.Age, NEW.Order_Frequency);
-    END IF;
-END$$
-
-create trigger after_nw_customer_insert after INSERT on Non_waiting_customer 
-Referencing Old As "OLD" New As "NEW" for each row
-BEGIN
-    IF NEW.Payment_Method IS NULL THEN
-        INSERT INTO Non_waiting_customer(ID, Amount_Spent, Payment_Method)
-        VALUES(NEW.ID, NEW.Amount_Spent, "please enter your mode of payment");
-    ELSE
-    	INSERT INTO Non_waiting_customer(ID, Amount_Spent, Payment_Method)
-        VALUES(NEW.ID, NEW.Amount_Spent, NEW.Payment_Method);
     END IF;
 END$$
 
