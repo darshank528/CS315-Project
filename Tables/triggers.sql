@@ -19,13 +19,6 @@ BEGIN
 	END IF;
 END$$
 
-create trigger Add_Table_Status before INSERT on Sit_Table for each row 
-BEGIN
-	IF(Sit_Table.Status IS NULL) THEN
-		set Sit_Table.Status = "Ordering";
-	END IF;
-END$$
-
 create trigger after_dish_insert after INSERT on Dishes 
 Referencing Old As "OLD" New As "NEW" for each row
 BEGIN

@@ -195,16 +195,6 @@ with open("cooks.sql",'w') as file:
 		sql = sql1+"cooks"+sql2+s+sql3
 		file.write(sql)
 
-with open("pay_by.sql",'w') as file:
-	for i in range(num_orders):
-		p = np.random.choice(pay)
-		i_id = 10000+i
-		i_des = "lorem ipsum"
-		status = np.random.choice(["paid","paid","paid","paid","paid","paid","paid","in progress","in progress","in progress","in progress","failed"])
-		s = "'%s','%s','%s','%s','%s','%s'" % (str(gbl[i]),str(i+1),p,str(i_id),i_des,status)
-		sql = sql1+"pay_by"+sql2+s+sql3
-		file.write(sql)
-
 with open("payment.sql",'w') as file:
 	for i in range(num_orders):
 		delt = int(np.random.uniform()*365)

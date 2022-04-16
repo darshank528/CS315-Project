@@ -21,7 +21,6 @@ const delinv = require('./routes/del_inv');
 const incinv = require('./routes/inc_inv');
 const rang = require('./routes/rangequery');
 const accrang = require('./routes/accountrange');
-const analrep1 = require('./routes/analreport1')
 var moment = require('moment');
 
 const app = express();

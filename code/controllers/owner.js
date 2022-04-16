@@ -1,5 +1,4 @@
 const {
-  get_acc_range_info,
   get_all,
   get_orders_all,
   get_cooks_all,
@@ -9,14 +8,6 @@ const {
   get_orders_to_serve,
   get_order_history,
   get_orders_by_date,
-  get_max_prof,
-  get_min_prof,
-  get_avg_prof,
-  get_max_waste,
-  get_min_waste,
-  get_min_exp,
-  get_avg_exp,
-  get_avg_waste,
   ing_to_be_ordered,
   get_pending_payments,
 } = require("./../models/owner");
