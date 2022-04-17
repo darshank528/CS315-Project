@@ -178,14 +178,14 @@ module.exports = {
 
   async get_cook_id() {
     var cook_id = await db.query(
-      "SELECT distinct cooks.ID as id, name_fn, name_ln from staff, cooks where cooks.id = staff.id;"
+      "SELECT id, name_fn, name_ln from staff where role='chef';"
     );
     return cook_id;
   },
 
   async get_waiter_id() {
     var waiter_id = await db.query(
-      "SELECT distinct delivers.ID as id, name_fn, name_ln from staff, delivers where delivers.id = staff.id;"
+      "SELECT id, name_fn, name_ln from staff where role='waiter';"
     );
     return waiter_id;
   },
