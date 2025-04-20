@@ -1,12 +1,14 @@
 DROP TABLE IF EXISTS Contains CASCADE;
 DROP TABLE IF EXISTS Cooks CASCADE;
 DROP TABLE IF EXISTS Customers CASCADE;
+DROP TABLE IF EXISTS Customers_contact CASCADE;
 DROP TABLE IF EXISTS Delivers CASCADE;
 DROP TABLE IF EXISTS Dishes CASCADE;
 DROP TABLE IF EXISTS Ingredients CASCADE;
 DROP TABLE IF EXISTS Orders CASCADE;
 DROP TABLE IF EXISTS Payment CASCADE;
 DROP TABLE IF EXISTS Staff CASCADE;
+DROP TABLE IF EXISTS Staff_contact CASCADE;
 
 CREATE Table Staff (
 	ID int PRIMARY KEY CHECK(ID>=1),
@@ -17,8 +19,14 @@ CREATE Table Staff (
 	Age int CHECK(Age>=1),
 	Salary bigint CHECK(Salary>=0),
 	Occupied int CHECK(Occupied<=1 and Occupied>=0),
-	Role varchar(20),
-	Contact bigint CHECK(Contact>=1000000000 and Contact<=9999999999)
+	Role varchar(20)
+);
+
+CREATE TABLE Staff_contact (
+    Contact_number varchar(10),
+    ID int, 
+	PRIMARY KEY (Contact_number, ID),
+	foreign key (ID) references Staff on delete cascade
 );
 
 CREATE Table Dishes (
@@ -51,8 +59,14 @@ CREATE Table Customers (
 	Name_LN varchar(100),
 	Gender varchar(20),
 	Age int CHECK(Age>=1),
-	Order_Frequency int CHECK(Order_Frequency>=0),
-	Contact bigint CHECK(Contact>=1000000000 and Contact<=9999999999)
+	Order_Frequency int CHECK(Order_Frequency>=0)
+);
+
+CREATE TABLE Customers_contact (
+    Contact_number varchar(10),
+    ID int, 
+	PRIMARY KEY (Contact_number, ID),
+	foreign key (ID) references Customers on delete cascade
 );
 
 CREATE Table Orders (

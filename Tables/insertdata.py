@@ -207,18 +207,6 @@ with open("payment.sql",'w') as file:
 		sql = sql1+"payment"+sql2+s+sql3
 		file.write(sql)
 
-
-delta = datetime.timedelta(days = 1)
-with open("tracks.sql",'w') as file:
-	stdt = sdate
-	while stdt<=end_date:
-		ids = random.sample(list(np.arange(num_staff)+1),4)
-		for i in range(4):
-			s = "'%s','%s'"%(str(ids[i]),str(stdt))
-			sql = sql1+"tracks"+sql2+s+sql3
-			file.write(sql)
-		stdt+=delta
-
 with open("delivers.sql",'w') as file:
 	for i in range(num_orders):
 		# d_id = np.random.choice(list(np.arange(num_dishes)+1))
