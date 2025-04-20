@@ -14,22 +14,6 @@ FOR EACH ROW
 EXECUTE FUNCTION set_default_order_frequency();
 
 
-CREATE OR REPLACE FUNCTION set_default_ingredient_quality()
-RETURNS TRIGGER AS $$
-BEGIN
-    IF NEW.Quality IS NULL THEN
-        NEW.Quality := 5;
-    END IF;
-    RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
-
-CREATE TRIGGER add_ingredient
-BEFORE INSERT ON Ingredients
-FOR EACH ROW
-EXECUTE FUNCTION set_default_ingredient_quality();
-
-
 CREATE OR REPLACE FUNCTION set_default_order_review()
 RETURNS TRIGGER AS $$
 BEGIN

@@ -39,8 +39,7 @@ CREATE Table Dishes (
 
 CREATE Table Ingredients (
 	Ingredient_ID int PRIMARY KEY,
-	Ingredient_Name varchar(50),
-	Quantity int CHECK(Quantity>=0)
+	Ingredient_Name varchar(50)
 );
 
 CREATE Table Contains (

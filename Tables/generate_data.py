@@ -139,22 +139,6 @@ with open("staff_contact.sql",'w') as file:
 		sql = sql1 + "staff_contact" + sql2 + contact + ',' + str(i+1) + sql3
 		file.write(sql)
 
-gbl = []
-num_waiting = 30
-num_not_waiting = 200
-pay = [ "credit card","upi","debit card" ,"cash" ,"other"]
-with open("customers.sql",'a') as file:
-	ids = random.sample(list(np.arange(num_customers)+1),num_waiting+num_not_waiting)
-	gbl = ids[num_waiting:]
-	for i in range(num_waiting+num_not_waiting):
-		if(i<num_waiting):
-			sql = sql1 + "waiting_customer" + sql2 + str(ids[i]) + ',' + str(i+1) + sql3
-			file.write(sql)
-		else:
-			p = np.random.choice(pay)
-			sql = sql1 + "non_waiting_customer" + sql2 + str(ids[i]) + ',' + str(i+1) + ',\'' + p + '\'' +sql3
-			file.write(sql)
-
 with open("contains.sql", 'w') as file:
 	for i in range(num_dishes):
 		item_per_dish = int(np.random.uniform(5,10))
@@ -172,6 +156,7 @@ sdate = datetime.date(2021, 1, 1)
 end_date = datetime.date(2021, 12, 31)
 
 d_id = np.random.choice(list(np.arange(num_dishes)+1))
+gbl = list(np.arange(1, num_customers + 1))
 with open("orders.sql",'w') as file:
 	for i in range(num_orders):
 		rev = np.random.choice([1,2,3,4,5])
