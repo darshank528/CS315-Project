@@ -42,7 +42,7 @@ m_name = np.loadtxt("male_name.txt", dtype = str)
 f_name = np.loadtxt("female_name.txt", dtype = str)
 s_name = np.loadtxt("surname.txt", dtype = str)
 num_customers = 1000
-with open("customer_contact.sql",'w') as f2:
+with open("customers_contact.sql",'w') as f2:
 	with open("customers.sql",'w') as file:
 		for i in range(num_customers):
 			g = np.random.uniform()
