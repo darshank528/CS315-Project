@@ -3,17 +3,21 @@
 DB_NAME="hotel_management"
 DB_USER="postgres"
 
+# psql -U postgres -d hotel_management -f tables.sql
+# psql -U postgres -d hotel_management -f triggers.sql
+# python3 generate_data.py
+
 # echo "Running ingredients.sql..."
 # psql -U "$DB_USER" -d "$DB_NAME" -f "ingredients.sql"
 
 # echo "Running dishes.sql..."
 # psql -U "$DB_USER" -d "$DB_NAME" -f "dishes.sql"
 
-echo "Running customers.sql..."
-psql -U "$DB_USER" -d "$DB_NAME" -f "customers.sql"
+# echo "Running customers.sql..."
+# psql -U "$DB_USER" -d "$DB_NAME" -f "customers.sql"
 
-# echo "Running staff.sql..."
-# psql -U "$DB_USER" -d "$DB_NAME" -f "staff.sql"
+echo "Running staff.sql..."
+psql -U "$DB_USER" -d "$DB_NAME" -f "staff.sql"
 
 # echo "Running customers_contact.sql..."
 # psql -U "$DB_USER" -d "$DB_NAME" -f "customers_contact.sql"

@@ -18,6 +18,7 @@ CREATE Table Staff (
 	Gender varchar(20),
 	Age int CHECK(Age>=1),
 	Salary bigint CHECK(Salary>=0),
+	Experience int CHECK (Experience>=0),
 	Occupied int CHECK(Occupied<=1 and Occupied>=0),
 	Role varchar(20)
 );
