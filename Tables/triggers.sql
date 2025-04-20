@@ -1,64 +1,99 @@
-create trigger Add_Customer before INSERT on Customers for each row 
+CREATE OR REPLACE FUNCTION set_default_order_frequency()
+RETURNS TRIGGER AS $$
 BEGIN
-	IF(Customers.Order_Frequency IS NULL) THEN
-		set Customers.Order_Frequency = 0;
-	END IF;
-END$$
+    IF NEW.Order_Frequency IS NULL THEN
+        NEW.Order_Frequency := 0;
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
 
--- create trigger Add_Ingredient before INSERT on Ingredients for each row 
--- BEGIN
--- 	IF(Ingredients.Quality IS NULL) THEN
--- 		set Ingredients.Quality = 5;
--- 	END IF;
--- END$$
+CREATE TRIGGER add_customer
+BEFORE INSERT ON Customers
+FOR EACH ROW
+EXECUTE FUNCTION set_default_order_frequency();
 
-create trigger Add_Orders before INSERT on Orders for each row 
+
+CREATE OR REPLACE FUNCTION set_default_ingredient_quality()
+RETURNS TRIGGER AS $$
 BEGIN
-	IF(Orders.Review IS NULL) THEN
-		set Orders.Review = 3;
-	END IF;
-END$$
+    IF NEW.Quality IS NULL THEN
+        NEW.Quality := 5;
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
 
-create trigger after_dish_insert after INSERT on Dishes 
-Referencing Old As "OLD" New As "NEW" for each row
+CREATE TRIGGER add_ingredient
+BEFORE INSERT ON Ingredients
+FOR EACH ROW
+EXECUTE FUNCTION set_default_ingredient_quality();
+
+
+CREATE OR REPLACE FUNCTION set_default_order_review()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF NEW.Review IS NULL THEN
+        NEW.Review := 3;
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER add_orders
+BEFORE INSERT ON Orders
+FOR EACH ROW
+EXECUTE FUNCTION set_default_order_review();
+
+
+CREATE OR REPLACE FUNCTION fill_dish_defaults()
+RETURNS TRIGGER AS $$
 BEGIN
     IF NEW.Cuisine IS NULL THEN
-        INSERT INTO Dishes(Dish_id, Cuisine, Category, Cost, Name)
-        VALUES(NEW.Dish_id, "please enter Dish Cuisine type", NEW.Category, NEW.Cost, NEW.Name);
-    ELSE
-    	INSERT INTO Dishes(Dish_id, Cuisine, Category, Cost, Name)
-        VALUES(NEW.Dish_id, NEW.Cuisine, NEW.Category, NEW.Cost, NEW.Name);
+        NEW.Cuisine := 'please enter Dish Cuisine type';
     END IF;
 
     IF NEW.Category IS NULL THEN
-        INSERT INTO Dishes(Dish_id, Cuisine, Category, Cost, Name)
-        VALUES(NEW.Dish_id, NEW.Cuisine, "please enter Dish Category type", NEW.Cost, NEW.Name);
-    ELSE
-    	INSERT INTO Dishes(Dish_id, Cuisine, Category, Cost, Name)
-        VALUES(NEW.Dish_id, NEW.Cuisine, NEW.Category, NEW.Cost, NEW.Name);
+        NEW.Category := 'please enter Dish Category type';
     END IF;
-END$$
 
-create trigger after_customer_insert after INSERT on Customers 
-Referencing Old As "OLD" New As "NEW" for each row
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER before_dish_insert
+BEFORE INSERT ON Dishes
+FOR EACH ROW
+EXECUTE FUNCTION fill_dish_defaults();
+
+
+CREATE OR REPLACE FUNCTION fill_customer_defaults()
+RETURNS TRIGGER AS $$
 BEGIN
     IF NEW.Gender IS NULL THEN
-        INSERT INTO Customers(ID, Name_FN, Name_MN, Name_LN, Gender, Age, Order_Frequency)
-        VALUES(NEW.ID, NEW.Name_FN, NEW.Name_MN, NEW.Name_LN, "please enter your Gender", NEW.Age, NEW.Order_Frequency);
-    ELSE
-    	INSERT INTO Customers(ID, Name_FN, Name_MN, Name_LN, Gender, Age, Order_Frequency)
-        VALUES(NEW.ID, NEW.Name_FN, NEW.Name_MN, NEW.Name_LN, NEW.Gender, NEW.Age, NEW.Order_Frequency);
+        NEW.Gender := 'please enter your Gender';
     END IF;
-END$$
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
 
-create trigger after_order_insert after INSERT on Orders 
-Referencing Old As "OLD" New As "NEW" for each row
+CREATE TRIGGER before_customer_insert
+BEFORE INSERT ON Customers
+FOR EACH ROW
+EXECUTE FUNCTION fill_customer_defaults();
+
+
+CREATE OR REPLACE FUNCTION fill_order_day()
+RETURNS TRIGGER AS $$
 BEGIN
     IF NEW.Day IS NULL THEN
-        INSERT INTO Orders(ID, Dish_id, Work_Date, Work_Time, Day, Quantity_Ordered, Review, Cost)
-        VALUES(NEW.ID, NEW.Dish_id, NEW.Work_Date, NEW.Work_Time, "please enter day of order", NEW.Quantity_Ordered, NEW.Review, NEW.Cost);
-    ELSE
-    	INSERT INTO Orders(ID, Dish_id, Work_Date, Work_Time, Day, Quantity_Ordered, Review, Cost)
-        VALUES(NEW.ID, NEW.Dish_id, NEW.Work_Date, NEW.Work_Time, NEW.Day, NEW.Quantity_Ordered, NEW.Review, NEW.Cost);
+        NEW.Day := 'please enter day of order';
     END IF;
-END$$
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER before_order_insert
+BEFORE INSERT ON Orders
+FOR EACH ROW
+EXECUTE FUNCTION fill_order_day();

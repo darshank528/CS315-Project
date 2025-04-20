@@ -99,7 +99,7 @@ with open("staff.sql",'w') as file:
 		else:
 			mn = np.random.choice(m_name)
 
-		exp = str(int(np.random.uniform(0,age-18,1)))
+		exp = str(int(np.random.uniform(0,age-18)))
 		sal = 0
 		occ = 0
 		role = "unspecified"
@@ -118,9 +118,9 @@ with open("staff.sql",'w') as file:
 			role = "chef"
 			sal = np.random.choice([20000, 40000, 50000, 100000, 150000, 200000])
 			if sal<100000:
-				exp = str(int(np.random.uniform(1,5,1)))
+				exp = str(int(np.random.uniform(1,5)))
 			else:
-				exp = str(int(np.random.uniform(5,10,1)))
+				exp = str(int(np.random.uniform(5,10)))
 
 
 		s = "'%s','%s','%s','%s','%s','%s','%s','%s','%s','%s'" % (str(i+1),fn,mn,sn, sex, str(age),str(sal),str(exp),str(occ),role)
@@ -157,7 +157,7 @@ with open("customers.sql",'a') as file:
 
 with open("contains.sql", 'w') as file:
 	for i in range(num_dishes):
-		item_per_dish = int(np.random.uniform(5,10,1))
+		item_per_dish = int(np.random.uniform(5,10))
 		ids = random.sample(list(np.arange(num_ingredients)+1),item_per_dish)
 		for j in range(len(ids)):
 			q = np.random.choice([1,2,3,4,5])
@@ -168,10 +168,12 @@ num_orders = 100
 dic = {0:'monday',1:'tuesday',2:'wednesday',3:'thursday',4:'friday',5:'saturday',6:'sunday'}
 custs = random.sample(list(np.arange(num_customers)+1),num_orders)
 
+sdate = datetime.date(2021, 1, 1)
+end_date = datetime.date(2021, 12, 31)
+
 d_id = np.random.choice(list(np.arange(num_dishes)+1))
 with open("orders.sql",'w') as file:
 	for i in range(num_orders):
-		
 		rev = np.random.choice([1,2,3,4,5])
 		quan = np.random.choice([1,2,3,4])
 		cost = np.random.choice(list(np.arange(40,500,10)))
@@ -225,10 +227,3 @@ with open("delivers.sql",'w') as file:
 		s = "'%s','%s','%s','%s'" % (str(j),str(i+1),str(d_id),completed)
 		sql = sql1+"delivers"+sql2+s+sql3
 		file.write(sql)
-
-
-
-
-
-
-

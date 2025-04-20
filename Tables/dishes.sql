@@ -9,4 +9,4 @@ insert into dishes values (8,'indian','starter','170','paneer chilli');
 insert into dishes values (9,'indian','main','420','tandoori chicken');
 insert into dishes values (10,'indian','dessert','200','jalebi');
 insert into dishes values (11,'indian','dessert','200','gulab jamun');
-insert into dishes values (12,'indian','dessert','200','kheer');
+insert into dishes values (12,'indian','dessert','20','kheer');
